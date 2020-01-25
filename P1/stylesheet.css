@@ -6,6 +6,7 @@ body {
   background-image: url(https://t.ipadizate.es/2017/03/nfn-labs-sunset-iphone-wallpaper-576x1024.jpg);
   background-repeat: no-repeat;
   background-size: cover;
+  font-family: serif;
   color: black;
 }
 
@@ -14,29 +15,43 @@ h5 {
   color: lightgray
 }
 
-.intro {
+.item2 {
+  grid-area: menu;
   width: 225px;
-  height: 550px;
-  float: left;
+  height: 575px;
+  border: 1px solid lightgrey;
+  background-color: white;
+  margin-top: 25px;
+}
+
+.item3 {
+  grid-area: main;
+  margin-top: 25px;
+}
+
+.item4 {
+  grid-area: right;
+  margin-top: 25px;
+}
+
+.item5 {
+  grid-area: footer;
+}
+
+.item5, .item4, .item3, .item2 {
   padding: 15px;
-  border: 1px solid grey;
-  background-color: honeydew;
-  /* shadows */
+  background-color: white;
+  /*shadows*/
   -webkit-box-shadow: 10px 10px 5px -5px rgba(0, 0, 0, 0.75);
   -moz-box-shadow: 10px 10px 5px -5px rgba(0, 0, 0, 0.75);
   box-shadow: 10px 10px 5px -5px rgba(0, 0, 0, 0.75);
 }
 
-.main {
-  width: 77%;
-  height: 675px;
-  padding: 15px;
-  border: 1px solid grey;
-  background-color: honeydew;
-  margin-top: 25px;
-  margin-left: 250px;
-  /*shadows*/
-  -webkit-box-shadow: 10px 10px 5px -5px rgba(0, 0, 0, 0.75);
-  -moz-box-shadow: 10px 10px 5px -5px rgba(0, 0, 0, 0.75);
-  box-shadow: 10px 10px 5px -5px rgba(0, 0, 0, 0.75);
+.grid-container {
+  display: grid;
+  grid-template-areas:
+    'menu main main main right right'
+    'menu footer footer footer footer footer';
+  grid-gap: 0px;
+  padding: 10px;
 }
