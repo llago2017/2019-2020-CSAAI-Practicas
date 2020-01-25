@@ -1,0 +1,47 @@
+@font-face {
+  font-family: simpsonfont;
+  src: url(simpsonfont.otf);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  background-image: url(https://t.ipadizate.es/2017/03/nfn-labs-sunset-iphone-wallpaper-576x1024.jpg);
+  background-repeat: no-repeat;
+  background-size: cover;
+  color: black;
+}
+
+h5 {
+  text-align: center;
+  color: lightgray
+}
+
+.intro {
+  width: 225px;
+  height: 550px;
+  float: left;
+  padding: 15px;
+  border: 1px solid grey;
+  background-color: honeydew;
+  margin-top: 25px;
+  /* shadows */
+  -webkit-box-shadow: 10px 10px 5px -5px rgba(0, 0, 0, 0.75);
+  -moz-box-shadow: 10px 10px 5px -5px rgba(0, 0, 0, 0.75);
+  box-shadow: 10px 10px 5px -5px rgba(0, 0, 0, 0.75);
+}
+
+.main {
+  width: 675px;
+  height: 700px;
+  float: right;
+  padding: 15px;
+  border: 1px solid grey;
+  background-color: honeydew;
+  margin-top: 25px;
+  -webkit-box-shadow: 10px 10px 5px -5px rgba(0, 0, 0, 0.75);
+  -moz-box-shadow: 10px 10px 5px -5px rgba(0, 0, 0, 0.75);
+  box-shadow: 10px 10px 5px -5px rgba(0, 0, 0, 0.75);
+}
