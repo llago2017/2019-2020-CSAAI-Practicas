@@ -15,6 +15,10 @@ h5 {
   color: lightgray
 }
 
+li {
+  font-family: sans-serif;
+  font-size: 15px;
+}
 .item2 {
   grid-area: menu;
   width: 225px;
@@ -50,8 +54,7 @@ h5 {
 .grid-container {
   display: grid;
   grid-template-areas:
-    'menu main main main right right'
+    'menu main main right right right'
     'menu footer footer footer footer footer';
-  grid-gap: 0px;
   padding: 10px;
 }
