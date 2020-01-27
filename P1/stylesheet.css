@@ -6,7 +6,8 @@ body {
   background-image: url(https://t.ipadizate.es/2017/03/nfn-labs-sunset-iphone-wallpaper-576x1024.jpg);
   background-repeat: no-repeat;
   background-size: cover;
-  font-family: serif;
+  font-family: Montserrat;
+  font-size: 14px;
   color: black;
 }
 
@@ -15,10 +16,12 @@ h5 {
   color: lightgray
 }
 
-li {
-  font-family: sans-serif;
-  font-size: 15px;
+figcaption{
+  text-align: center;
+  color: #ff80ff;
+  font-weight: bold;
 }
+
 .item2 {
   grid-area: menu;
   width: 225px;
@@ -40,6 +43,7 @@ li {
 
 .item5 {
   grid-area: footer;
+  margin-top: -15px;
 }
 
 .item5, .item4, .item3, .item2 {
@@ -57,4 +61,33 @@ li {
     'menu main main main main right'
     'menu footer footer footer footer footer';
   padding: 10px;
+}
+
+textarea {
+  width: 55%;
+  margin-top: 10px;
+  background-color: whitesmoke;
+  border: none;
+  margin-left: 225px;
+  /* Letras del interior */
+  font-weight: bold;
+  line-height: 1.5;
+  color: #666666;
+  padding: 12px;
+  /* Hace redonda la caja */
+  border-radius: 20px;
+  /* No se puede modificar el tamaño de la caja */
+  resize: none;
+}
+
+button {
+  height: 50px;
+  border-radius: 25px;
+  border: none;
+  background: lightpink;
+  font-size: 15px;
+  line-height: 1.5;
+  color: #fff;
+  padding: 0 25px;
+  margin-left: 225px;
 }

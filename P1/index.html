@@ -5,6 +5,7 @@
   <meta charset="utf-8">
   <link rel="stylesheet" href="stylesheet.css">
   <link href="https://fonts.googleapis.com/css?family=Rock+Salt&display=swap" rel="stylesheet">
+  <link href='https://fonts.googleapis.com/css?family=Montserrat' rel='stylesheet'>
   <title>CV</title>
 </head>
 
@@ -27,7 +28,8 @@
         <img src="gorro.png" align="left" style="width: 10%;"> &nbsp;Springfield Elementary &nbsp;School <br>
 
       </p>
-      <img src="email.png" align="left" style="width: 10%;"> &nbsp;smartgirl63@yahoo.com <br>
+      <img src="email.png" align="left" style="width: 10%;">
+      <span style="font-size: 13px;">&nbsp;smartgirl63@yahoo.com</span> <br>
       </p>
 
       <p>
@@ -46,8 +48,20 @@
         <li>Founder of SpringFace</li>
         <li>Kids News anchor</li>
       </ul>
-      <br>&nbsp;
-      <br>&nbsp;
+      <ul>
+        <li style="list-style-type:square;">
+          See my work on Github
+        </li>
+        <ol>
+          <li style="list-style-type:circle;">
+            <a href="https://github.com/llago2017?tab=repositories">
+              Repositories
+            </a>
+          </li>
+        </ol>
+      </ul>
+      <!-- br con altura modificada para igualar los hr -->
+      <br style="display: block; content: ''; margin-top: 30px;">
       <hr>
     </div>
     <div class="item4">
@@ -92,12 +106,14 @@
           </td>
         </tr>
       </table>
+      <br>
       <hr>
     </div>
 
     <div class="item5">
-      <img src="asterisk.png" align="left" style="width: 45px;">
-      <h1 style="margin-top: 10px;"> &nbsp; Extra information</h1>
+      <img src="asterisk.png" align="left" style="width: 40px;">
+      <h1 style="margin-top: 0px;"> &nbsp; Extra information</h1>
+      <hr>
       <table style="border-spacing: 75px 5px;">
         <tr>
           <td>
@@ -128,6 +144,19 @@
           </td>
         </tr>
       </table>
+      <hr>
+      <h1 style="text-align:center;">Contact me</h1>
+      <hr>
+      <form id="message">
+        <textarea placeholder="Name"></textarea>
+        <textarea placeholder="Email"></textarea>
+        <textarea style="resize: vertical;" placeholder="Message"></textarea>
+        <br>
+        <button onclick="alert('Message sumbited succesfully')">
+          Sumbit!
+        </button>
+      </form>
+
 
     </div>
 </body>
