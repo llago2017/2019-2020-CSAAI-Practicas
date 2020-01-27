@@ -54,7 +54,7 @@ li {
 .grid-container {
   display: grid;
   grid-template-areas:
-    'menu main main right right right'
+    'menu main main main main right'
     'menu footer footer footer footer footer';
   padding: 10px;
 }
