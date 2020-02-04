@@ -90,6 +90,11 @@ figcaption{
   padding: 10px;
 }
 
+.ico {
+  align: "left";
+  width: 10%;
+}
+
 textarea {
   width: 55%;
   margin-top: 10px;
