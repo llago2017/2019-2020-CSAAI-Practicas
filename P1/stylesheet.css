@@ -22,6 +22,11 @@ figcaption{
   font-weight: bold;
 }
 
+ul.timeline li
+{
+    height: 20px;
+}
+
 .center_ast {
   margin-left: 325px;
   margin-top: -5px;
