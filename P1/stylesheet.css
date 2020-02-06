@@ -47,7 +47,7 @@ figcaption{
 .item2 {
   grid-area: menu;
   width: 225px;
-  height: 500px;
+  height: 525px;
   border: 1px solid lightgrey;
   background-color: white;
   margin-top: 25px;
