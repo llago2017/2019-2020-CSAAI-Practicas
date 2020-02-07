@@ -69,7 +69,7 @@ ul.timeline li
 .item4 {
   grid-area: right;
   margin-top: 25px;
-  margin-right: 418px;
+  margin-right: -115px;
   width: 500px;
 }
 
