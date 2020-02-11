@@ -12,9 +12,9 @@
 <body>
   <div class="grid-container">
     <div class="item2">
-      <img src="lisa.png" style="width:95%">
+      <img id="prof_pic" src="lisa.png">
 
-      <h2 align="center" style="font-family:'Rock Salt';"> Lisa Simpson</h2>
+      <h2 id="prof_name"> Lisa Simpson</h2>
       <h5>Student | Vegan</h5>
 
       <hr>
@@ -33,12 +33,12 @@
       </p>
 
       <p>
-        <img src="phone.png" align="left" style="width: 10%;"> &nbsp;(939)-555-0113 <br>
+        <img src="phone.png" align="left" id="phone"> &nbsp;(939)-555-0113 <br>
       </p>
     </div>
 
     <div class="item3">
-      <img src="suitcase.png" align="left" style="width: 50px;">
+      <img src="suitcase.png" align="left" id="suitcase">
       <h1 style="margin-top: 10px;"> &nbsp; Work Experience</h1>
       <hr>
       <ul class="timeline">
@@ -67,7 +67,7 @@
       <hr>
     </div>
     <div class="item4">
-      <img src="skill.png" align="left" style="width: 50px;">
+      <img src="skill.png" align="left" id="skill">
       <h1 style="margin-top: 10px;"> &nbsp; Skills</h1>
       <hr>
       <table style="border-spacing: 25px -20px; float: center;">
@@ -114,7 +114,7 @@
 
     <div class="item5">
       <img class="center_ast" src="asterisk.png">
-      <h1 style="margin-top: 0px; text-align: center;"> &nbsp; Extra information</h1>
+      <h1 id="h_footer"> &nbsp; Extra information</h1>
       <hr>
       <table style="border-spacing: 75px 5px;">
         <tr>
@@ -153,7 +153,7 @@
       <form id="message">
         <textarea placeholder="Name"></textarea>
         <textarea placeholder="Email"></textarea>
-        <textarea style="resize: vertical;" placeholder="Message"></textarea>
+        <textarea id="content" placeholder="Message"></textarea>
         <br>
         <button onclick="alert('Message submited succesfully')">
           Submit!

@@ -128,3 +128,29 @@ button {
   padding: 0 25px;
   margin-left: 225px;
 }
+
+#content {
+  resize: vertical;
+}
+
+#prof_pic {
+  width:95%;
+}
+
+#prof_name {
+  font-family:'Rock Salt';
+  text-align: center;
+}
+
+#phone {
+  width: 10%;
+}
+
+#suitcase, #skill {
+  width: 50px;
+}
+
+#h_footer {
+  margin-top: 0px;
+  text-align: center;
+}
