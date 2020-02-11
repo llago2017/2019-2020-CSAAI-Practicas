@@ -62,22 +62,19 @@ ul.timeline li
 .item3 {
   grid-area: main;
   margin-top: 25px;
-  margin-right: -1000px;
-  width: 500px;
+  margin-right: -10px;
 }
 
 .item4 {
   grid-area: right;
   margin-top: 25px;
-  margin-right: -115px;
-  width: 500px;
+  margin-right: -10px;
 }
 
 .item5 {
   grid-area: footer;
   margin-top: -15px;
   margin-right: -10px;
-  width: 1000px;
 }
 
 .item5, .item4, .item3, .item2 {
