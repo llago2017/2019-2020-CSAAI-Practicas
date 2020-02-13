@@ -1,0 +1,14 @@
+body{
+  padding: 10px;
+  /*! border: solid; */
+  margin: 10px;
+  border-color: red;
+}
+
+p{
+  padding: 10px;
+  border: solid;
+  border-color: green;
+  margin: 20px;
+
+}

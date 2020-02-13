@@ -1,0 +1,13 @@
+body {
+  background-color: lightblue;
+}
+
+h1 {
+  color: white;
+  /* La P al poner color es de Propiedad */
+  /* <> significa que es una etiqueta */
+}
+
+p {
+  background-color: yellow;
+}
