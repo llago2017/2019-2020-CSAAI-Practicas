@@ -12,7 +12,7 @@ body{
   color: white;
 }
 
-button, .igual, .mas {
+button{
   width: 60px;
   padding: 15px;
   margin-top: 20px;
@@ -22,6 +22,17 @@ button, .igual, .mas {
   margin: 5px;
   border: 1px solid white;
   color: white;
+}
+
+/* Hover al pasar por encima */
+button:hover {
+  background-color: rgba(0, 0, 0, 0.25);
+}
+
+/* Active es para cuando pulso el botón */
+button:active {
+  background-color: rgba(255, 255, 255, 0.5);
+  transform: translateY(2px);
 }
 
 .calculadora {
@@ -57,6 +68,7 @@ button, .igual, .mas {
   text-align: right;
   padding: 10px;
   padding-top: 15px;
+  width: 290px;
   height: 60px;
   border-radius: 5px;
   margin-top: -0.5px;
@@ -69,7 +81,7 @@ button, .igual, .mas {
   border: none;
 }
 
-.igual, .mas {
+#igual, #suma {
   display: block;
   height: 125px;
   float: left;
