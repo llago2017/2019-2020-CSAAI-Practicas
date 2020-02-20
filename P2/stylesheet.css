@@ -3,57 +3,61 @@
 }
 
 body{
-  background-color: lightblue;
+  background-color: crimson;
+  color: white;
 }
 
-button, .igual {
-  width: 50px;
-  border-radius: 25px;
-  padding: 10px;
-  background: lightblue;
-  color: whitesmoke;
+button, .igual, .mas {
+  width: 60px;
+  padding: 15px;
   margin-top: 20px;
   font-size: 20px;
   font-weight: bold;
+  background-color: transparent;
+  margin: 5px;
+  border: 1px solid white;
+  color: white;
 }
 
 .calculadora {
   padding: 20px;
-  width: 300px;
+  width: 334px;
   height: 450px;
-  background-color: white;
-
+  background-color: rgba(255, 255, 255, 0.40);
   /* Borde */
-  border-style: solid;
-  border-radius: 20px;
-  border-color: deepskyblue;
-  border-width: thin;
+  border-radius: 2.5px;
 
   /* Centro */
   margin-left: auto;
   margin-right: auto;
 }
 
+
 .opciones {
-  position: relative;
-  float: right;
-  width: 50px;
-  height: 200px;
+  position: fixed;
+    float: right;
+    width: 50px;
+    height: 200px;
+    margin-left: 223px;
 }
 
 #display {
-  background-color: lightgrey;
-  border-style: solid;
-  border-width: thin;
-  border-color: ghostwhite;
-  border-radius: 5px;
+  background-color: black;
   text-align: right;
   padding: 10px;
-  height: 40px;
+  height: 50px;
+  border-radius: 5px;
 }
 
-.igual {
+#resta, #divide, #multiplica, #reset {
+  background-color: rgba(0, 0, 0, 0.75);
+  border: none;
+}
+
+.igual, .mas {
   display: block;
-  width: 200px;
+  height: 125px;
   float: left;
+  border: none;
+  background-color: rgba(0, 0, 0, 0.75);
 }
