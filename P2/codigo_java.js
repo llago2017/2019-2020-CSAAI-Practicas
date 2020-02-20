@@ -16,6 +16,12 @@ const resta = document.getElementById("resta")
 const multiplica = document.getElementById("multiplica")
 const divide = document.getElementById("divide")
 const igual = document.getElementById("igual")
+const reset = document.getElementById("reset")
+
+reset.onclick = () => {
+    console.log("Click!!");
+    display.innerHTML = "";
+}
 
 n9.onclick = () => {
     console.log("Click!!");
