@@ -6,7 +6,7 @@ body{
   background-color: lightblue;
 }
 
-button {
+button, .igual {
   width: 50px;
   border-radius: 25px;
   padding: 10px;
@@ -14,11 +14,12 @@ button {
   color: whitesmoke;
   margin-top: 20px;
   font-size: 20px;
+  font-weight: bold;
 }
 
 .calculadora {
   padding: 20px;
-  width: 400px;
+  width: 300px;
   height: 450px;
   background-color: white;
 
@@ -33,6 +34,13 @@ button {
   margin-right: auto;
 }
 
+.opciones {
+  position: relative;
+  float: right;
+  width: 50px;
+  height: 200px;
+}
+
 #display {
   background-color: lightgrey;
   border-style: solid;
@@ -42,4 +50,12 @@ button {
   text-align: right;
   padding: 10px;
   height: 40px;
+}
+
+.igual {
+  display: block;
+  width: 200px;
+  /* Centro */
+    margin-left: auto;
+    margin-right: auto;
 }
