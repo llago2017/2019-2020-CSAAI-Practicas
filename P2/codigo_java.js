@@ -143,5 +143,23 @@ igual.onclick = () => {
     console.log(opera);
   }
 
+  // Division
+  if (operacion.includes('÷')) {
+    opera = operacion.split('÷');
+    console.log(opera);
+
+    if (opera.length > 2) {
+      resultado = parseInt(opera[0]) / parseInt(opera[1]);
+      console.log("resultado -->" + resultado);
+      for (var i = 0; i < (opera.length - 2); i++) {
+        console.log("Voy a sumar --> " + opera[i + 2]);
+        resultado = resultado / (parseInt(opera[i + 2]));
+      }
+    } else {
+      resultado = parseInt(opera[0]) / parseInt(opera[1]);
+    }
+    console.log(opera);
+  }
+
   display.innerHTML = resultado;
 }
