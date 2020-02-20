@@ -15,6 +15,7 @@ const suma = document.getElementById("suma")
 const resta = document.getElementById("resta")
 const multiplica = document.getElementById("multiplica")
 const divide = document.getElementById("divide")
+const igual = document.getElementById("igual")
 
 n9.onclick = () => {
     console.log("Click!!");
@@ -62,11 +63,44 @@ suma.onclick = () => {
     console.log("Click!!");
     display.innerHTML += "+";
 }
-n0.onclick = () => {
+
+resta.onclick = () => {
     console.log("Click!!");
-    display.innerHTML = "0";
+    display.innerHTML += "-";
 }
-n0.onclick = () => {
+
+multiplica.onclick = () => {
     console.log("Click!!");
-    display.innerHTML = "0";
+    display.innerHTML += "*";
 }
+
+divide.onclick = () => {
+    console.log("Click!!");
+    display.innerHTML += "÷";
+}
+
+igual.onclick = () => {
+    console.log("Click!!");
+    operacion = display.innerHTML;
+
+    if (operacion.includes('+')) {
+      opera = operacion.split('+');
+      console.log(opera);
+
+      if (opera.length > 2) {
+        resultado = parseInt(opera[0]) + parseInt(opera[1]);
+        console.log("resultado -->" + resultado);
+        for (var i = 0; i < (opera.length - 2); i++) {
+        console.log("Voy a sumar --> " + opera[i + 2] );
+        resultado += parseInt(opera[i + 2]);
+      }
+    } else {
+        resultado = parseInt(opera[0]) + parseInt(opera[1]);
+      }
+
+      console.log(opera);
+
+      display.innerHTML = resultado;
+      }
+
+    }
