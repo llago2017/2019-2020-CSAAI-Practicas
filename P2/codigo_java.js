@@ -17,6 +17,12 @@ const multiplica = document.getElementById("multiplica")
 const divide = document.getElementById("divide")
 const igual = document.getElementById("igual")
 const reset = document.getElementById("reset")
+const coma = document.getElementById("coma")
+
+coma.onclick = () => {
+  console.log("Click!!");
+  display.innerHTML += ".";
+}
 
 reset.onclick = () => {
   console.log("Click!!");
@@ -95,12 +101,12 @@ igual.onclick = () => {
     console.log(opera);
 
     if (opera.length > 2) {
-      resultado = parseInt(opera[0]) + parseInt(opera[1]);
+      resultado = parseFloat(opera[0]) + parseFloat(opera[1]);
       for (var i = 0; i < (opera.length - 2); i++) {
-        resultado += parseInt(opera[i + 2]);
+        resultado += parseFloat(opera[i + 2]);
       }
     } else {
-      resultado = parseInt(opera[0]) + parseInt(opera[1]);
+      resultado = parseFloat(opera[0]) + parseFloat(opera[1]);
     }
     console.log(opera);
   }
@@ -111,12 +117,12 @@ igual.onclick = () => {
     console.log(opera);
 
     if (opera.length > 2) {
-      resultado = parseInt(opera[0]) - parseInt(opera[1]);
+      resultado = parseFloat(opera[0]) - parseFloat(opera[1]);
       for (var i = 0; i < (opera.length - 2); i++) {
-        resultado += -(parseInt(opera[i + 2]));
+        resultado += -(parseFloat(opera[i + 2]));
       }
     } else {
-      resultado = parseInt(opera[0]) - parseInt(opera[1]);
+      resultado = parseFloat(opera[0]) - parseFloat(opera[1]);
     }
     console.log(opera);
   }
@@ -127,12 +133,12 @@ igual.onclick = () => {
     console.log(opera);
 
     if (opera.length > 2) {
-      resultado = parseInt(opera[0]) * parseInt(opera[1]);
+      resultado = parseFloat(opera[0]) * parseFloat(opera[1]);
       for (var i = 0; i < (opera.length - 2); i++) {
-        resultado = resultado * (parseInt(opera[i + 2]));
+        resultado = resultado * (parseFloat(opera[i + 2]));
       }
     } else {
-      resultado = parseInt(opera[0]) * parseInt(opera[1]);
+      resultado = parseFloat(opera[0]) * parseFloat(opera[1]);
     }
     console.log(opera);
   }
@@ -143,12 +149,12 @@ igual.onclick = () => {
     console.log(opera);
 
     if (opera.length > 2) {
-      resultado = parseInt(opera[0]) / parseInt(opera[1]);
+      resultado = parseFloat(opera[0]) / parseFloat(opera[1]);
       for (var i = 0; i < (opera.length - 2); i++) {
-        resultado = resultado / (parseInt(opera[i + 2]));
+        resultado = resultado / (parseFloat(opera[i + 2]));
       }
     } else {
-      resultado = parseInt(opera[0]) / parseInt(opera[1]);
+      resultado = parseFloat(opera[0]) / parseFloat(opera[1]);
     }
     console.log(opera);
   }
