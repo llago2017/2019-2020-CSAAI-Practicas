@@ -172,11 +172,11 @@ function init() {
 
       case 48: // n0
         display.innerHTML += "0";
-        n9.id = "active";
+        n0.id = "active";
         /*
-                    Esta parte se activa 20ms más tarde, para volver al estilo
-                    anterior, donde el botón no estaba pulsado
-                   */
+        Esta parte se activa 20ms más tarde, para volver al estilo
+        anterior, donde el botón no estaba pulsado
+       */
         setTimeout(function() {
           active.id = "n0";
         }, 175);
@@ -185,10 +185,7 @@ function init() {
       case 49: // n1
         display.innerHTML += "1";
         n1.id = "active";
-        /*
-        Esta parte se activa 20ms más tarde, para volver al estilo
-        anterior, donde el botón no estaba pulsado
-       */
+
         setTimeout(function() {
           active.id = "id";
         }, 175);
@@ -197,10 +194,6 @@ function init() {
       case 50: // n2
         display.innerHTML += "2";
         n2.id = "active";
-        /*
-              Esta parte se activa 20ms más tarde, para volver al estilo
-              anterior, donde el botón no estaba pulsado
-             */
         setTimeout(function() {
           active.id = "n2";
         }, 175);
@@ -209,10 +202,6 @@ function init() {
       case 51: // n3
         display.innerHTML += "3";
         n3.id = "active";
-        /*
-                Esta parte se activa 20ms más tarde, para volver al estilo
-                anterior, donde el botón no estaba pulsado
-               */
         setTimeout(function() {
           active.id = "n3";
         }, 175);
@@ -221,10 +210,6 @@ function init() {
       case 52: // n4
         display.innerHTML += "4";
         n4.id = "active";
-        /*
-                  Esta parte se activa 20ms más tarde, para volver al estilo
-                  anterior, donde el botón no estaba pulsado
-                 */
         setTimeout(function() {
           active.id = "n4";
         }, 175);
@@ -233,10 +218,6 @@ function init() {
       case 53: // n5
         display.innerHTML += "5";
         n5.id = "active";
-        /*
-                    Esta parte se activa 20ms más tarde, para volver al estilo
-                    anterior, donde el botón no estaba pulsado
-                   */
         setTimeout(function() {
           active.id = "n5";
         }, 175);
@@ -245,50 +226,51 @@ function init() {
       case 54: // n6
         display.innerHTML += "6";
         n6.id = "active";
-        /*
-                    Esta parte se activa 20ms más tarde, para volver al estilo
-                    anterior, donde el botón no estaba pulsado
-                   */
         setTimeout(function() {
           active.id = "n6";
         }, 175);
         break;
 
-        case 55: // n7
-          display.innerHTML += "7";
-          n7.id = "active";
-          /*
-                      Esta parte se activa 20ms más tarde, para volver al estilo
-                      anterior, donde el botón no estaba pulsado
-                     */
-          setTimeout(function() {
-            active.id = "n7";
-          }, 175);
-          break;
+      case 55: // n7
+        display.innerHTML += "7";
+        n7.id = "active";
+        setTimeout(function() {
+          active.id = "n7";
+        }, 175);
+        break;
 
-          case 56: // n8
-            display.innerHTML += "8";
-            n8.id = "active";
-            /*
-                        Esta parte se activa 20ms más tarde, para volver al estilo
-                        anterior, donde el botón no estaba pulsado
-                       */
-            setTimeout(function() {
-              active.id = "n8";
-            }, 175);
-            break;
+      case 56: // n8
+        display.innerHTML += "8";
+        n8.id = "active";
+        setTimeout(function() {
+          active.id = "n8";
+        }, 175);
+        break;
 
-            case 57: // n7
-              display.innerHTML += "9";
-              n9.id = "active";
-              /*
-                          Esta parte se activa 20ms más tarde, para volver al estilo
-                          anterior, donde el botón no estaba pulsado
-                         */
-              setTimeout(function() {
-                active.id = "n9";
-              }, 175);
-              break;
+      case 57: // n7
+        display.innerHTML += "9";
+        n9.id = "active";
+        setTimeout(function() {
+          active.id = "n9";
+        }, 175);
+        break;
+
+        // opciones
+      case 187: // Suma
+        display.innerHTML += "+";
+        suma.id = "si_activa";
+        setTimeout(function() {
+          si_activa.id = "suma";
+        }, 175);
+        break;
+
+      case (16): // igual
+        display.innerHTML += "=";
+        igual.id = "si_activa";
+        setTimeout(function() {
+          si_activa.id = "igual";
+        }, 175);
+        break;
     }
   }
 }

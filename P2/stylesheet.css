@@ -81,10 +81,14 @@ button:hover {
   border: none;
 }
 
-#igual, #suma {
+#igual, #suma, #si_activa {
   display: block;
   height: 125px;
   float: left;
   border: none;
   background-color: rgba(0, 0, 0, 0.75);
+}
+
+#si_activa {
+  transform: translateY(2px);
 }
