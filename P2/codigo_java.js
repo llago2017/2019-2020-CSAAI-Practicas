@@ -1,6 +1,8 @@
 console.log("Ejecutando JS...")
 
 const display = document.getElementById("display")
+
+// Números
 const n9 = document.getElementById("n9")
 const n8 = document.getElementById("n8")
 const n7 = document.getElementById("n7")
@@ -11,6 +13,8 @@ const n3 = document.getElementById("n3")
 const n2 = document.getElementById("n2")
 const n1 = document.getElementById("n1")
 const n0 = document.getElementById("n0")
+
+// Operaciones
 const suma = document.getElementById("suma")
 const resta = document.getElementById("resta")
 const multiplica = document.getElementById("multiplica")
@@ -160,4 +164,23 @@ igual.onclick = () => {
   }
 
   display.innerHTML = resultado;
+}
+
+function init() {
+  document.onkeydown = function(ev) {
+    switch (ev.keyCode) {
+
+      case 49: // n1
+        display.innerHTML += "1";
+        n1.id = "active";
+        setTimeout(function() {
+          active.id = "id";
+        }, 20);      
+
+
+
+        break;
+
+    }
+  }
 }
