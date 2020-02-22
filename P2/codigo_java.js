@@ -98,6 +98,7 @@ divide.onclick = () => {
 igual.onclick = () => {
   console.log("Click!!");
   operacion = display.innerHTML;
+  console.log(display.length);
 
   // Suma
   if (operacion.includes('+')) {
@@ -264,8 +265,7 @@ function init() {
         }, 175);
         break;
 
-      case (16): // igual
-        display.innerHTML += "=";
+      case 13: // igual
         igual.id = "si_activa";
         setTimeout(function() {
           si_activa.id = "igual";

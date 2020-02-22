@@ -74,6 +74,11 @@ button:hover {
   margin-top: -0.5px;
   font-family: 'Digital';
   font-size: 30px;
+
+  /* Prueba para que no haya overflow */
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 #resta, #divide, #multiplica, #reset {
