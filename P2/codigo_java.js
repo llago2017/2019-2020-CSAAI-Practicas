@@ -111,10 +111,10 @@ divide.onclick = () => {
 }
 
 function calc() {
+
   // Suma
   if (operacion.includes('+')) {
     opera = operacion.split('+');
-    console.log(opera);
 
     if (opera.length > 2) {
       resultado = parseFloat(opera[0]) + parseFloat(opera[1]);

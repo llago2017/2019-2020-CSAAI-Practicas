@@ -85,12 +85,17 @@ button:hover {
 }
 
 #formula_activa {
+/* Hago transicion para todas las variables que cambian */
+  transition-property: all;
+  transition-duration: 0.5s;
   font-size: 20px;
   color: lightgrey;
   background-color: transparent;
 }
 
 #display_activo {
+  transition-property: padding-top;
+  transition-duration: 0.5s;
   padding-top: 5px;
 }
 
