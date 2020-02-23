@@ -25,27 +25,29 @@ const igual = document.getElementById("igual")
 const reset = document.getElementById("reset")
 const coma = document.getElementById("coma")
 
+function vueltaA0() {
+  // Pongo las variables del display a 0
+  display_resultado.innerHTML = "";
+  formula.innerHTML = "";
+  if (document.getElementById("formula_activa")) {
+    const formula_activa = document.getElementById("formula_activa");
+    formula_activa.innerHTML = "";
+    formula_activa.id = "formula";
+  }
+
+  if (document.getElementById("display_activo")) {
+    const display_activo = document.getElementById("display_activo");
+    display_activo.id = "display";
+  }
+}
+
 coma.onclick = () => {
   console.log("Click!!");
   formula.innerHTML += ".";
 }
 
 reset.onclick = () => {
-  console.log("Click!!");
-  // Pongo las variables del display a 0
-    display_resultado.innerHTML = "";
-    formula.innerHTML = "";
-    if (document.getElementById("formula_activa")) {
-        const formula_activa = document.getElementById("formula_activa");
-        formula_activa.innerHTML = "";
-        formula_activa.id = "formula";
-    }
-
-    if (document.getElementById("display_activo")) {
-        const display_activo = document.getElementById("display_activo");
-        display_activo.id = "display";
-    }
-
+  vueltaA0();
 }
 
 n9.onclick = () => {
@@ -178,7 +180,6 @@ function calc() {
   display.id = "display_activo";
   formula.id = "formula_activa";
   display_resultado.innerHTML = resultado;
-
 }
 
 igual.onclick = () => {
@@ -286,6 +287,14 @@ function init() {
         }, 175);
         break;
 
+      case 189: // Resta
+        formula.innerHTML += "-";
+        resta.id = "opcion_activa";
+        setTimeout(function() {
+          opcion_activa.id = "resta";
+        }, 175);
+        break;
+
       case 13: // igual
         igual.id = "si_activa";
         setTimeout(function() {
@@ -293,6 +302,31 @@ function init() {
         }, 175);
         operacion = formula.innerHTML;
         calc();
+        break;
+
+      case 106: // Multiplicacion
+        formula.innerHTML += "*";
+        multiplica.id = "opcion_activa";
+        setTimeout(function() {
+          opcion_activa.id = "multiplica";
+        }, 175);
+        break;
+
+      case 189: // divide
+        formula.innerHTML += "÷";
+        divide.id = "opcion_activa";
+        setTimeout(function() {
+          opcion_activa.id = "divide";
+        }, 175);
+        break;
+
+      case 67: // Reset (c)
+        formula.innerHTML += "";
+        reset.id = "opcion_activa";
+        setTimeout(function() {
+          opcion_activa.id = "reset";
+        }, 175);
+        vueltaA0();
         break;
     }
   }

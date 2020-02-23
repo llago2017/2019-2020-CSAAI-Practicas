@@ -104,7 +104,7 @@ button:hover {
   background-color: transparent;
 }
 
-#resta, #divide, #multiplica, #reset {
+#resta, #divide, #multiplica, #reset, #opcion_activa {
   background-color: rgba(0, 0, 0, 0.75);
   border: none;
 }
@@ -117,6 +117,6 @@ button:hover {
   background-color: rgba(0, 0, 0, 0.75);
 }
 
-#si_activa {
+#si_activa, #opcion_activa {
   transform: translateY(2px);
 }
