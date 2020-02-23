@@ -63,7 +63,7 @@ button:hover {
     margin-left: 222px;
 }
 
-#display {
+#display, #display_activo, #display_resultado {
   background-color: black;
   text-align: right;
   padding: 10px;
@@ -79,6 +79,16 @@ button:hover {
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
+}
+
+#display_activo {
+  font-size: 20px;
+  padding-top: 10px;
+}
+
+#display_resultado {
+  font-size: 20px;
+  padding-top: 10px;  
 }
 
 #resta, #divide, #multiplica, #reset {

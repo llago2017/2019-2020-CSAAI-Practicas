@@ -1,6 +1,7 @@
 console.log("Ejecutando JS...")
 
 const display = document.getElementById("display")
+const display_resultado = document.getElementById("display_resultado")
 
 // Números
 const n9 = document.getElementById("n9")
@@ -95,11 +96,7 @@ divide.onclick = () => {
   display.innerHTML += "÷";
 }
 
-igual.onclick = () => {
-  console.log("Click!!");
-  operacion = display.innerHTML;
-  console.log(display.length);
-
+function calc() {
   // Suma
   if (operacion.includes('+')) {
     opera = operacion.split('+');
@@ -165,6 +162,14 @@ igual.onclick = () => {
   }
 
   display.innerHTML = resultado;
+
+}
+
+igual.onclick = () => {
+  console.log("Click!!");
+  operacion = display.innerHTML;
+  console.log(display.length);
+  calc();
 }
 
 function init() {
@@ -270,7 +275,10 @@ function init() {
         setTimeout(function() {
           si_activa.id = "igual";
         }, 175);
+        operacion = display.innerHTML;
+        calc();
         break;
     }
   }
+
 }
