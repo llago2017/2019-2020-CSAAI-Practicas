@@ -25,6 +25,7 @@ const igual = document.getElementById("igual")
 const reset = document.getElementById("reset")
 const coma = document.getElementById("coma")
 
+// Borra todo lo que haya en el display
 function vueltaA0() {
   // Pongo las variables del display a 0
   display_resultado.innerHTML = "";
@@ -39,11 +40,15 @@ function vueltaA0() {
     const display_activo = document.getElementById("display_activo");
     display_activo.id = "display";
   }
+  init();
 }
 
+// Mi array para guardar lo que Pongo
+var array = [];
+
 coma.onclick = () => {
-  console.log("Click!!");
   formula.innerHTML += ".";
+  array.push('.');
 }
 
 reset.onclick = () => {
@@ -51,139 +56,107 @@ reset.onclick = () => {
 }
 
 n9.onclick = () => {
-  console.log("Click!!");
   formula.innerHTML += "9";
+  array.push('9');
 }
 
 n8.onclick = () => {
-  console.log("Click!!");
   formula.innerHTML += "8";
+  array.push('8');
 }
 n7.onclick = () => {
-  console.log("Click!!");
   formula.innerHTML += "7";
+  array.push('7');
 }
 n6.onclick = () => {
-  console.log("Click!!");
   formula.innerHTML += "6";
+  array.push('6');
 }
 n5.onclick = () => {
-  console.log("Click!!");
   formula.innerHTML += "5";
+  array.push('5');
 }
 n4.onclick = () => {
-  console.log("Click!!");
   formula.innerHTML += "4";
+  array.push('4');
 }
 n3.onclick = () => {
-  console.log("Click!!");
   formula.innerHTML += "3";
+  array.push('3');
 }
 n2.onclick = () => {
-  console.log("Click!!");
   formula.innerHTML += "2";
+  array.push('2');
 }
 n1.onclick = () => {
-  console.log("Click!!");
   formula.innerHTML += "1";
+  array.push('1');
 }
 n0.onclick = () => {
-  console.log("Click!!");
   formula.innerHTML += "0";
+  array.push('0');
 }
 
 suma.onclick = () => {
-  console.log("Click!!");
   formula.innerHTML += "+";
+  array.push('+');
 }
 
 resta.onclick = () => {
-  console.log("Click!!");
   formula.innerHTML += "-";
+  array.push('-');
 }
 
 multiplica.onclick = () => {
-  console.log("Click!!");
   formula.innerHTML += "*";
+  array.push('*');
 }
 
 divide.onclick = () => {
-  console.log("Click!!");
   formula.innerHTML += "÷";
+  array.push("÷");
 }
 
 function calc() {
-
-  // Suma
-  if (operacion.includes('+')) {
-    opera = operacion.split('+');
-
-    if (opera.length > 2) {
-      resultado = parseFloat(opera[0]) + parseFloat(opera[1]);
-      for (var i = 0; i < (opera.length - 2); i++) {
-        resultado += parseFloat(opera[i + 2]);
-      }
-    } else {
-      resultado = parseFloat(opera[0]) + parseFloat(opera[1]);
-    }
-    console.log(opera);
+  // SUMA
+  // Cuando no existe el signo me da -1
+  var sig_mas = this.array.indexOf("+");
+  console.log(sig_mas);
+  console.log(array);
+  // En el caso de que exista el operador de suma
+  while (sig_mas > 0) {
+    operacion = (parseFloat(this.array[sig_mas - 1]) + parseFloat(this.array[sig_mas + 1]));
+    console.log(operacion);
+    // Cambio el resultado por la operacion en el array
+    this.array[sig_mas] = operacion;
+    this.array.splice(sig_mas - 1, 1);
+    this.array.splice(sig_mas, 1);
+    // Vuelvo a buscar la posicion de +
+    sig_mas = this.array.indexOf("+");
+    console.log(array);
   }
+  // RESTA
+  var sig_menos = this.array.indexOf("-");
+  while (sig_menos > 0) {
+    operacion = (parseFloat(this.array[sig_menos - 1]) - parseFloat(this.array[sig_menos + 1]));
 
-  // Resta
-  if (operacion.includes('-')) {
-    opera = operacion.split('-');
-    console.log(opera);
-
-    if (opera.length > 2) {
-      resultado = parseFloat(opera[0]) - parseFloat(opera[1]);
-      for (var i = 0; i < (opera.length - 2); i++) {
-        resultado += -(parseFloat(opera[i + 2]));
-      }
-    } else {
-      resultado = parseFloat(opera[0]) - parseFloat(opera[1]);
-    }
-    console.log(opera);
+    this.array[sig_menos] = operacion;
+    this.array.splice(sig_menos - 1, 1);
+    this.array.splice(sig_menos, 1);
+    sig_menos = this.array.indexOf("-");
+    console.log(array);
   }
-
-  // Multiplicacion
-  if (operacion.includes('*')) {
-    opera = operacion.split('*');
-    console.log(opera);
-
-    if (opera.length > 2) {
-      resultado = parseFloat(opera[0]) * parseFloat(opera[1]);
-      for (var i = 0; i < (opera.length - 2); i++) {
-        resultado = resultado * (parseFloat(opera[i + 2]));
-      }
-    } else {
-      resultado = parseFloat(opera[0]) * parseFloat(opera[1]);
-    }
-    console.log(opera);
+  if (operacion != null) {
+    resultado = operacion;
   }
-
-  // Division
-  if (operacion.includes('÷')) {
-    opera = operacion.split('÷');
-    console.log(opera);
-
-    if (opera.length > 2) {
-      resultado = parseFloat(opera[0]) / parseFloat(opera[1]);
-      for (var i = 0; i < (opera.length - 2); i++) {
-        resultado = resultado / (parseFloat(opera[i + 2]));
-      }
-    } else {
-      resultado = parseFloat(opera[0]) / parseFloat(opera[1]);
-    }
-    console.log(opera);
-  }
-
+  array = [resultado];
   display.id = "display_activo";
   formula.id = "formula_activa";
   display_resultado.innerHTML = resultado;
+
 }
 
 igual.onclick = () => {
-  console.log("Click!!");
   operacion = formula.innerHTML;
   console.log(formula.length);
   calc();
@@ -195,6 +168,7 @@ function init() {
 
       case 48: // n0
         formula.innerHTML += "0";
+        array.push("0");
         n0.id = "active";
         /*
         Esta parte se activa 20ms más tarde, para volver al estilo
@@ -207,6 +181,7 @@ function init() {
 
       case 49: // n1
         formula.innerHTML += "1";
+        array.push("1");
         n1.id = "active";
 
         setTimeout(function() {
@@ -216,6 +191,7 @@ function init() {
 
       case 50: // n2
         formula.innerHTML += "2";
+        array.push("2");
         n2.id = "active";
         setTimeout(function() {
           active.id = "n2";
@@ -224,6 +200,7 @@ function init() {
 
       case 51: // n3
         formula.innerHTML += "3";
+        array.push("3");
         n3.id = "active";
         setTimeout(function() {
           active.id = "n3";
@@ -232,6 +209,7 @@ function init() {
 
       case 52: // n4
         formula.innerHTML += "4";
+        array.push("4");
         n4.id = "active";
         setTimeout(function() {
           active.id = "n4";
@@ -240,6 +218,7 @@ function init() {
 
       case 53: // n5
         formula.innerHTML += "5";
+        array.push("5");
         n5.id = "active";
         setTimeout(function() {
           active.id = "n5";
@@ -248,6 +227,7 @@ function init() {
 
       case 54: // n6
         formula.innerHTML += "6";
+        array.push("6");
         n6.id = "active";
         setTimeout(function() {
           active.id = "n6";
@@ -256,6 +236,7 @@ function init() {
 
       case 55: // n7
         formula.innerHTML += "7";
+        array.push("7");
         n7.id = "active";
         setTimeout(function() {
           active.id = "n7";
@@ -264,6 +245,7 @@ function init() {
 
       case 56: // n8
         formula.innerHTML += "8";
+        array.push("8");
         n8.id = "active";
         setTimeout(function() {
           active.id = "n8";
@@ -272,6 +254,7 @@ function init() {
 
       case 57: // n7
         formula.innerHTML += "9";
+        array.push("9");
         n9.id = "active";
         setTimeout(function() {
           active.id = "n9";
@@ -281,6 +264,7 @@ function init() {
         // opciones
       case 187: // Suma
         formula.innerHTML += "+";
+        array.push("+");
         suma.id = "si_activa";
         setTimeout(function() {
           si_activa.id = "suma";
@@ -289,6 +273,7 @@ function init() {
 
       case 189: // Resta
         formula.innerHTML += "-";
+        array.push("-");
         resta.id = "opcion_activa";
         setTimeout(function() {
           opcion_activa.id = "resta";
@@ -306,6 +291,7 @@ function init() {
 
       case 106: // Multiplicacion
         formula.innerHTML += "*";
+        array.push("*");
         multiplica.id = "opcion_activa";
         setTimeout(function() {
           opcion_activa.id = "multiplica";
@@ -314,6 +300,7 @@ function init() {
 
       case 189: // divide
         formula.innerHTML += "÷";
+        array.push("÷");
         divide.id = "opcion_activa";
         setTimeout(function() {
           opcion_activa.id = "divide";
