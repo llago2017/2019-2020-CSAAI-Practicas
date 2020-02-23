@@ -118,6 +118,31 @@ divide.onclick = () => {
 }
 
 function calc() {
+
+  // Multiplicacion
+  var sig_mult = this.array.indexOf("*");
+  while (sig_mult > 0) {
+    operacion = (parseFloat(this.array[sig_mult - 1]) * parseFloat(this.array[sig_mult + 1]));
+
+    this.array[sig_mult] = operacion;
+    this.array.splice(sig_mult - 1, 1);
+    this.array.splice(sig_mult, 1);
+    sig_mult = this.array.indexOf("*");
+    console.log(array);
+  }
+
+  // Division
+  var sig_div = this.array.indexOf("÷");
+  while (sig_div > 0) {
+    operacion = (parseFloat(this.array[sig_div - 1]) / parseFloat(this.array[sig_div + 1]));
+
+    this.array[sig_div] = operacion;
+    this.array.splice(sig_div - 1, 1);
+    this.array.splice(sig_div, 1);
+    sig_div = this.array.indexOf("÷");
+    console.log(array);
+  }
+
   // SUMA
   // Cuando no existe el signo me da -1
   var sig_mas = this.array.indexOf("+");
