@@ -67,13 +67,12 @@ button:hover {
   background-color: black;
   text-align: right;
   padding: 10px;
-  padding-top: 15px;
+  padding-top: 22px;
   width: 290px;
   height: 80px;
   border-radius: 5px;
   margin-top: -0.5px;
   font-family: 'Digital';
-  font-size: 30px;
 
   /* Prueba para que no haya overflow */
   white-space: nowrap;
@@ -81,18 +80,22 @@ button:hover {
   text-overflow: ellipsis;
 }
 
+#formula {
+  font-size: 40px;
+}
+
 #formula_activa {
-  font-size: 10px;
+  font-size: 20px;
   color: lightgrey;
   background-color: transparent;
 }
 
 #display_activo {
-  padding-top: 0px;
+  padding-top: 5px;
 }
 
 #display_resultado {
-  font-size: 30px;
+  font-size: 45px;
   background-color: transparent;
 }
 
@@ -103,7 +106,7 @@ button:hover {
 
 #igual, #suma, #si_activa {
   display: block;
-  height: 125px;
+  height: 120px;
   float: left;
   border: none;
   background-color: rgba(0, 0, 0, 0.75);
