@@ -63,13 +63,13 @@ button:hover {
     margin-left: 222px;
 }
 
-#display, #display_activo, #display_resultado {
+#display, #display_activo, #display_resultado, #formula {
   background-color: black;
   text-align: right;
   padding: 10px;
   padding-top: 15px;
   width: 290px;
-  height: 60px;
+  height: 80px;
   border-radius: 5px;
   margin-top: -0.5px;
   font-family: 'Digital';
@@ -81,14 +81,19 @@ button:hover {
   text-overflow: ellipsis;
 }
 
+#formula_activa {
+  font-size: 10px;
+  color: lightgrey;
+  background-color: transparent;
+}
+
 #display_activo {
-  font-size: 20px;
-  padding-top: 10px;
+  padding-top: 0px;
 }
 
 #display_resultado {
-  font-size: 20px;
-  padding-top: 10px;  
+  font-size: 30px;
+  background-color: transparent;
 }
 
 #resta, #divide, #multiplica, #reset {
