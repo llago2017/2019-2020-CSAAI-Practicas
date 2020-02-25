@@ -121,8 +121,19 @@ divide.onclick = () => {
 function calc() {
 
   // Multiplicacion
+  var sig_menos = this.array.indexOf("-");
+  console.log("array actual --> " + array);
+
+  if (sig_menos == 0) {
+  // Hago que el numero siguiente al del signo sea negativo
+  nuevo = this.array[sig_menos] + this.array[sig_menos + 1];
+  this.array[sig_menos] = nuevo;
+  this.array.splice(sig_menos + 1, 1);
+  console.log("array arreglado --> " + array);
+  }
   var sig_mult = this.array.indexOf("*");
   while (sig_mult > 0) {
+    operacion = (parseFloat(this.array[sig_mult - 1]) * parseFloat(this.array[sig_mult + 1]));
     if (this.array[sig_mult + 1] != "-") {
       operacion = (parseFloat(this.array[sig_mult - 1]) * parseFloat(this.array[sig_mult + 1]));
 
@@ -148,8 +159,8 @@ function calc() {
       this.array.splice(sig_mult, 1);
       sig_mult = this.array.indexOf("*");
     }
-
   }
+
 
   // Division
   var sig_div = this.array.indexOf("÷");
