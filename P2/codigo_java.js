@@ -123,13 +123,32 @@ function calc() {
   // Multiplicacion
   var sig_mult = this.array.indexOf("*");
   while (sig_mult > 0) {
-    operacion = (parseFloat(this.array[sig_mult - 1]) * parseFloat(this.array[sig_mult + 1]));
+    if (this.array[sig_mult + 1] != "-") {
+      operacion = (parseFloat(this.array[sig_mult - 1]) * parseFloat(this.array[sig_mult + 1]));
 
-    this.array[sig_mult] = operacion;
-    this.array.splice(sig_mult - 1, 1);
-    this.array.splice(sig_mult, 1);
-    sig_mult = this.array.indexOf("*");
-    console.log(array);
+      this.array[sig_mult] = operacion;
+      this.array.splice(sig_mult - 1, 1);
+      this.array.splice(sig_mult, 1);
+      sig_mult = this.array.indexOf("*");
+      console.log(array);
+
+    } else {
+      console.log("Entro en parte negativa");
+      nuevo = this.array[sig_mult + 1] + this.array[sig_mult + 2];
+      console.log("mi nuevo numero negativo --> " + nuevo);
+      // Ejemplo --> [8,*,-,1]
+      this.array[sig_mult + 1] = nuevo;
+      this.array.splice(sig_mult + 2, 1);
+      // Ejemplo --> [8,*,-1]
+      operacion = (parseFloat(this.array[sig_mult - 1]) * parseFloat(this.array[sig_mult + 1]));
+
+      // Elimino lo que he utilizado y dejo el resultado
+      this.array[sig_mult] = operacion;
+      this.array.splice(sig_mult - 1, 1);
+      this.array.splice(sig_mult, 1);
+      sig_mult = this.array.indexOf("*");
+    }
+
   }
 
   // Division
