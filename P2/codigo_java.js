@@ -118,7 +118,27 @@ divide.onclick = () => {
   array.push("÷");
 }
 
+function isNumeric(n) {
+  return !isNaN(parseFloat(n)) && isFinite(n);
+}
+
 function calc() {
+
+  // Este es mi array
+  console.log(array);
+  // Quiero juntar los numeros que están separados
+  for (var i = -1; i < array.length; i++) {
+    count = i;
+    count += 1;
+    if (isNumeric(array[i])) {
+      while (isNumeric(array[count])) {
+        console.log("Voy a juntar --> " + array[i] + " y " + array[count]);
+        array[i] += array[count]
+        array.splice(count, 1);
+        console.log("mi nuevo array --> " + array);
+      }
+    }
+  }
 
   // Multiplicacion
   var sig_menos = this.array.indexOf("-");
@@ -134,6 +154,7 @@ function calc() {
   var sig_mult = this.array.indexOf("*");
   while (sig_mult > 0) {
     operacion = (parseFloat(this.array[sig_mult - 1]) * parseFloat(this.array[sig_mult + 1]));
+    // Compruebo si el operando 2 es un signo o un numero
     if (this.array[sig_mult + 1] != "-") {
       operacion = (parseFloat(this.array[sig_mult - 1]) * parseFloat(this.array[sig_mult + 1]));
 
