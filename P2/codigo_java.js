@@ -30,6 +30,7 @@ function vueltaA0() {
   // Pongo las variables del display a 0
   display_resultado.innerHTML = "";
   formula.innerHTML = "";
+  array = [];
   if (document.getElementById("formula_activa")) {
     const formula_activa = document.getElementById("formula_activa");
     formula_activa.innerHTML = "";
@@ -148,12 +149,12 @@ function calc() {
   console.log("El signo está en la posicion -->" + sig_menos);
 
   if (sig_menos == 0) {
-  // Hago que el numero siguiente al del signo sea negativo 
+  // Hago que el numero siguiente al del signo sea negativo
   nuevo = this.array[sig_menos] + this.array[sig_menos + 1];
   this.array[sig_menos] = nuevo;
   this.array.splice(sig_menos + 1, 1);
-
   }
+
   while (sig_menos > 0) {
     operacion = (parseFloat(this.array[sig_menos - 1]) - parseFloat(this.array[sig_menos + 1]));
 
