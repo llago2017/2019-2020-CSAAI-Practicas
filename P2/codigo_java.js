@@ -191,7 +191,7 @@ function init() {
   document.onkeydown = function(ev) {
     switch (ev.keyCode) {
 
-      case 48: // n0
+      case 96: // n0
         formula.innerHTML += "0";
         array.push("0");
         n0.id = "active";
@@ -204,7 +204,7 @@ function init() {
         }, 175);
         break;
 
-      case 49: // n1
+      case 97: // n1
         formula.innerHTML += "1";
         array.push("1");
         n1.id = "active";
@@ -214,7 +214,7 @@ function init() {
         }, 175);
         break;
 
-      case 50: // n2
+      case 98: // n2
         formula.innerHTML += "2";
         array.push("2");
         n2.id = "active";
@@ -223,7 +223,7 @@ function init() {
         }, 175);
         break;
 
-      case 51: // n3
+      case 99: // n3
         formula.innerHTML += "3";
         array.push("3");
         n3.id = "active";
@@ -232,7 +232,7 @@ function init() {
         }, 175);
         break;
 
-      case 52: // n4
+      case 100: // n4
         formula.innerHTML += "4";
         array.push("4");
         n4.id = "active";
@@ -241,7 +241,7 @@ function init() {
         }, 175);
         break;
 
-      case 53: // n5
+      case 101: // n5
         formula.innerHTML += "5";
         array.push("5");
         n5.id = "active";
@@ -250,7 +250,7 @@ function init() {
         }, 175);
         break;
 
-      case 54: // n6
+      case 102: // n6
         formula.innerHTML += "6";
         array.push("6");
         n6.id = "active";
@@ -259,7 +259,7 @@ function init() {
         }, 175);
         break;
 
-      case 55: // n7
+      case 103: // n7
         formula.innerHTML += "7";
         array.push("7");
         n7.id = "active";
@@ -268,7 +268,7 @@ function init() {
         }, 175);
         break;
 
-      case 56: // n8
+      case 104: // n8
         formula.innerHTML += "8";
         array.push("8");
         n8.id = "active";
@@ -277,7 +277,7 @@ function init() {
         }, 175);
         break;
 
-      case 57: // n7
+      case 105: // n9
         formula.innerHTML += "9";
         array.push("9");
         n9.id = "active";
@@ -287,7 +287,7 @@ function init() {
         break;
 
         // opciones
-      case 187: // Suma
+      case 107: // Suma
         formula.innerHTML += "+";
         array.push("+");
         suma.id = "si_activa";
@@ -296,7 +296,7 @@ function init() {
         }, 175);
         break;
 
-      case 189: // Resta
+      case 109: // Resta
         formula.innerHTML += "-";
         array.push("-");
         resta.id = "opcion_activa";
@@ -323,7 +323,7 @@ function init() {
         }, 175);
         break;
 
-      case 189: // divide
+      case 111: // divide
         formula.innerHTML += "÷";
         array.push("÷");
         divide.id = "opcion_activa";
