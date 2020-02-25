@@ -11,7 +11,9 @@
 }
 
 body{
-  background-color: ghostwhite;
+  background-image: url("background.jpg");
+  background-repeat: no-repeat;
+  background-size: cover;
   color: white;
 }
 
@@ -42,11 +44,7 @@ button:hover {
   padding: 20px;
   width: 338px;
   height: 450px;
-<<<<<<< HEAD
   background: linear-gradient(#0099ff, #5C258D);
-=======
-  background: linear-gradient(#4389A2, #5C258D);
->>>>>>> 32f5969a9ffd7892934aa267cdc82494b63c0e25
   /* background-color: rgba(77, 19, 209, 1); */
   /* Borde */
   border-radius: 2.5px;
