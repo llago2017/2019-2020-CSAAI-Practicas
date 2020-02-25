@@ -130,12 +130,24 @@ function calc() {
   for (var i = -1; i < array.length; i++) {
     count = i;
     count += 1;
-    if (isNumeric(array[i])) {
+    if ((isNumeric(array[i]) || array[i] == ".")) {
+      console.log(array[i] + "Es un numero");
       while (isNumeric(array[count])) {
         console.log("Voy a juntar --> " + array[i] + " y " + array[count]);
         array[i] += array[count]
         array.splice(count, 1);
         console.log("mi nuevo array --> " + array);
+      }
+      while (array[count] == ".") {
+        array[i] += array[count]
+        array.splice(count, 1);
+        if (isNumeric(array[count])) {
+          console.log("Me falta un numero");
+          console.log("El siguiente --> " + array[count]);
+          array[i] += array[count]
+          array.splice(count, 1);
+        }
+        console.log("mi nuevo array --> " + array);  
       }
     }
   }
