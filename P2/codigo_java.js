@@ -143,11 +143,14 @@ function calc() {
         array.splice(count, 1);
         if (isNumeric(array[count])) {
           console.log("Me falta un numero");
-          console.log("El siguiente --> " + array[count]);
-          array[i] += array[count]
-          array.splice(count, 1);
+          while (isNumeric(array[count])) {
+            console.log("El siguiente --> " + array[count]);
+            array[i] += array[count]
+            array.splice(count, 1);
+            console.log("Mi array count --> " + array[count]);
+          }
         }
-        console.log("mi nuevo array --> " + array);  
+        console.log("mi nuevo array --> " + array);
       }
     }
   }
