@@ -143,6 +143,27 @@ function calc() {
     console.log(array);
   }
 
+  // RESTA
+  var sig_menos = this.array.indexOf("-");
+  console.log("El signo está en la posicion -->" + sig_menos);
+
+  if (sig_menos == 0) {
+  // Hago que el numero siguiente al del signo sea negativo 
+  nuevo = this.array[sig_menos] + this.array[sig_menos + 1];
+  this.array[sig_menos] = nuevo;
+  this.array.splice(sig_menos + 1, 1);
+
+  }
+  while (sig_menos > 0) {
+    operacion = (parseFloat(this.array[sig_menos - 1]) - parseFloat(this.array[sig_menos + 1]));
+
+    this.array[sig_menos] = operacion;
+    this.array.splice(sig_menos - 1, 1);
+    this.array.splice(sig_menos, 1);
+    sig_menos = this.array.indexOf("-");
+    console.log(array);
+  }
+
   // SUMA
   // Cuando no existe el signo me da -1
   var sig_mas = this.array.indexOf("+");
@@ -160,17 +181,7 @@ function calc() {
     sig_mas = this.array.indexOf("+");
     console.log(array);
   }
-  // RESTA
-  var sig_menos = this.array.indexOf("-");
-  while (sig_menos > 0) {
-    operacion = (parseFloat(this.array[sig_menos - 1]) - parseFloat(this.array[sig_menos + 1]));
 
-    this.array[sig_menos] = operacion;
-    this.array.splice(sig_menos - 1, 1);
-    this.array.splice(sig_menos, 1);
-    sig_menos = this.array.indexOf("-");
-    console.log(array);
-  }
   if (operacion != null) {
     resultado = operacion;
   }
