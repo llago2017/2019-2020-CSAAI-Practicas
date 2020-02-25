@@ -2,6 +2,9 @@
   box-sizing: border-box;
 }
 
+@purple: #5C258D;
+@blue: #4389A2;
+
 @font-face {
   font-family: 'Digital';
   src: url(DS-DIGI.TTF);
@@ -39,7 +42,8 @@ button:hover {
   padding: 20px;
   width: 338px;
   height: 450px;
-  background-color: rgba(77, 19, 209, 1);
+  background: linear-gradient(#4389A2, #5C258D);
+  /* background-color: rgba(77, 19, 209, 1); */
   /* Borde */
   border-radius: 2.5px;
   border: 1px solid whitesmoke;
