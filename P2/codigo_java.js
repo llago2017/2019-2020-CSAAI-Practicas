@@ -47,6 +47,20 @@ function vueltaA0() {
 // Mi array para guardar lo que Pongo
 var array = [];
 
+// Creará un array con todos los c digitos que hay en el html
+let digitos = document.getElementsByClassName("cdigito")
+
+for (var i = 0; i < digitos.length; i++) {
+  digitos[i].onclick = (ev) => {
+  digito(ev.target);
+  }
+}
+
+function digito(boton) {
+    formula.innerHTML += boton.value;
+    array.push(boton.value);
+}
+
 coma.onclick = () => {
   formula.innerHTML += ".";
   array.push('.');
@@ -54,48 +68,6 @@ coma.onclick = () => {
 
 reset.onclick = () => {
   vueltaA0();
-}
-
-n9.onclick = () => {
-  formula.innerHTML += "9";
-  array.push('9');
-}
-
-n8.onclick = () => {
-  formula.innerHTML += "8";
-  array.push('8');
-}
-n7.onclick = () => {
-  formula.innerHTML += "7";
-  array.push('7');
-}
-n6.onclick = () => {
-  formula.innerHTML += "6";
-  array.push('6');
-}
-n5.onclick = () => {
-  formula.innerHTML += "5";
-  array.push('5');
-}
-n4.onclick = () => {
-  formula.innerHTML += "4";
-  array.push('4');
-}
-n3.onclick = () => {
-  formula.innerHTML += "3";
-  array.push('3');
-}
-n2.onclick = () => {
-  formula.innerHTML += "2";
-  array.push('2');
-}
-n1.onclick = () => {
-  formula.innerHTML += "1";
-  array.push('1');
-}
-n0.onclick = () => {
-  formula.innerHTML += "0";
-  array.push('0');
 }
 
 suma.onclick = () => {
@@ -114,7 +86,7 @@ multiplica.onclick = () => {
 }
 
 divide.onclick = () => {
-  formula.innerHTML += "÷";
+  formula.innerHTML += "/";
   array.push("÷");
 }
 
@@ -123,6 +95,9 @@ function isNumeric(n) {
 }
 
 function calc() {
+
+  prueba = eval(formula.innerHTML);
+  console.log("Prueba --> " + prueba);
 
   // Este es mi array
   console.log(array);
@@ -231,13 +206,6 @@ function calc() {
   // RESTA
   var sig_menos = this.array.indexOf("-");
   console.log("El signo está en la posicion -->" + sig_menos);
-
-  if (sig_menos == 0) {
-  // Hago que el numero siguiente al del signo sea negativo
-  nuevo = this.array[sig_menos] + this.array[sig_menos + 1];
-  this.array[sig_menos] = nuevo;
-  this.array.splice(sig_menos + 1, 1);
-  }
 
   while (sig_menos > 0) {
     operacion = (parseFloat(this.array[sig_menos - 1]) - parseFloat(this.array[sig_menos + 1]));
