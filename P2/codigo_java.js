@@ -32,9 +32,20 @@ function vueltaA0() {
   init();
 }
 
-// Mi array para guardar lo que Pongo
-var array = [];
+// Cases tiene los codigos de las teclas para los digitos
 var cases = [];
+
+
+// Creo un array con todos los keyCode de los digitos
+ for (var i = 0; i < 10; i++) {
+   inic = 96;
+   inic += i;
+   cases.push(inic);
+ }
+/* Invierto cases para que coincidan los codigos con los numeros que se
+   almacenan en digitos
+*/
+ var new_cases = cases.reverse();
 
 // Creará un array con todos los c digitos que hay en el html
 let digitos = document.getElementsByClassName("cdigito")
@@ -103,118 +114,29 @@ igual.onclick = () => {
 
 
 function init() {
-  // IDEA: CAMBIAR LA ANIMACION, TENGO QUE CAMBIAR COMO COGE LA ID
-
- // Creo un array con todos los keyCode de los digitos
-  for (var i = 0; i < 10; i++) {
-    inic = 96;
-    inic += i;
-    cases.push(inic);
-    console.log("array de casos --> " + cases);
-  }
 
   document.onkeydown = function(ev) {
+
+    // Para los numeros
+    if (cases.includes(ev.keyCode)) {
+      /* Busca en el array de codigos para los digitos y con el indice
+        decide la tecla que se ha pulsado, ya que están en el mismo orden,
+        lo muestra en el display y activa la animacion
+      */
+      var lugar = new_cases.indexOf(ev.keyCode);
+
+      formula.innerHTML += digitos[lugar].value;
+      digitos[lugar].id = "active";
+
+      setTimeout(function() {
+        active.id = "id";
+      }, 175);
+    }
+
     switch (ev.keyCode) {
-
-      case 96: // n0
-        formula.innerHTML += "0";
-        array.push("0");
-        digitos[9].id = "active";
-        /*
-        Esta parte se activa 20ms más tarde, para volver al estilo
-        anterior, donde el botón no estaba pulsado
-       */
-        setTimeout(function() {
-          active.id = "n0";
-        }, 175);
-        break;
-
-      case 97: // n1
-        formula.innerHTML += "1";
-        array.push("1");
-        digitos[8].id = "active";
-
-        setTimeout(function() {
-          active.id = "id";
-        }, 175);
-        break;
-
-      case 98: // n2
-        formula.innerHTML += "2";
-        array.push("2");
-        digitos[7].id = "active";
-        setTimeout(function() {
-          active.id = "n2";
-        }, 175);
-        break;
-
-      case 99: // n3
-        formula.innerHTML += "3";
-        array.push("3");
-        digitos[6].id = "active";
-        setTimeout(function() {
-          active.id = "n3";
-        }, 175);
-        break;
-
-      case 100: // n4
-        formula.innerHTML += "4";
-        array.push("4");
-        digitos[5].id = "active";
-        setTimeout(function() {
-          active.id = "n4";
-        }, 175);
-        break;
-
-      case 101: // n5
-        formula.innerHTML += "5";
-        array.push("5");
-        digitos[4].id = "active";
-        setTimeout(function() {
-          active.id = "n5";
-        }, 175);
-        break;
-
-      case 102: // n6
-        formula.innerHTML += "6";
-        array.push("6");
-        digitos[3].id = "active";
-        setTimeout(function() {
-          active.id = "n6";
-        }, 175);
-        break;
-
-      case 103: // n7
-        formula.innerHTML += "7";
-        array.push("7");
-        digitos[2].id = "active";
-        setTimeout(function() {
-          active.id = "n7";
-        }, 175);
-        break;
-
-      case 104: // n8
-        formula.innerHTML += "8";
-        array.push("8");
-        digitos[1].id = "active";
-        setTimeout(function() {
-          active.id = "n8";
-        }, 175);
-        break;
-
-      case 105: // n9
-        formula.innerHTML += "9";
-        array.push("9");
-        digitos[0].id = "active";
-        setTimeout(function() {
-          active.id = "n9";
-        }, 175);
-        break;
-
-        // opciones
+        // Para los casos especiales
       case 107: // Suma
         formula.innerHTML += "+";
-        array.push("+");
         suma.id = "si_activa";
         setTimeout(function() {
           si_activa.id = "suma";
@@ -223,7 +145,6 @@ function init() {
 
       case 109: // Resta
         formula.innerHTML += "-";
-        array.push("-");
         resta.id = "opcion_activa";
         setTimeout(function() {
           opcion_activa.id = "resta";
@@ -241,7 +162,6 @@ function init() {
 
       case 106: // Multiplicacion
         formula.innerHTML += "*";
-        array.push("*");
         multiplica.id = "opcion_activa";
         setTimeout(function() {
           opcion_activa.id = "multiplica";
@@ -250,7 +170,6 @@ function init() {
 
       case 111: // divide
         formula.innerHTML += "/";
-        array.push("÷");
         divide.id = "opcion_activa";
         setTimeout(function() {
           opcion_activa.id = "divide";
