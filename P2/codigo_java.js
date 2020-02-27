@@ -155,10 +155,8 @@ function calc() {
     }
   }
 
-  // Multiplicacion
+  // Numero negativo al principio
   var sig_menos = this.array.indexOf("-");
-  console.log("array actual --> " + array);
-
   if (sig_menos == 0) {
   // Hago que el numero siguiente al del signo sea negativo
   nuevo = this.array[sig_menos] + this.array[sig_menos + 1];
@@ -166,13 +164,16 @@ function calc() {
   this.array.splice(sig_menos + 1, 1);
   console.log("array arreglado --> " + array);
   }
+
+  // Multiplicacion
+  console.log("array actual --> " + array);
+
   var sig_mult = this.array.indexOf("*");
   while (sig_mult > 0) {
     operacion = (parseFloat(this.array[sig_mult - 1]) * parseFloat(this.array[sig_mult + 1]));
     // Compruebo si el operando 2 es un signo o un numero
     if (this.array[sig_mult + 1] != "-") {
       operacion = (parseFloat(this.array[sig_mult - 1]) * parseFloat(this.array[sig_mult + 1]));
-
       this.array[sig_mult] = operacion;
       this.array.splice(sig_mult - 1, 1);
       this.array.splice(sig_mult, 1);
@@ -201,13 +202,30 @@ function calc() {
   // Division
   var sig_div = this.array.indexOf("÷");
   while (sig_div > 0) {
-    operacion = (parseFloat(this.array[sig_div - 1]) / parseFloat(this.array[sig_div + 1]));
+    if (this.array[sig_div + 1] != "-") {
+      console.log("Todo es positivo");
+      operacion = (parseFloat(this.array[sig_div - 1]) / parseFloat(this.array[sig_div + 1]));
 
-    this.array[sig_div] = operacion;
-    this.array.splice(sig_div - 1, 1);
-    this.array.splice(sig_div, 1);
-    sig_div = this.array.indexOf("÷");
-    console.log(array);
+      this.array[sig_div] = operacion;
+      this.array.splice(sig_div - 1, 1);
+      this.array.splice(sig_div, 1);
+      sig_div = this.array.indexOf("÷");
+      console.log(array);
+    } else {
+      console.log("Hay un numero negativo");
+      nuevo = this.array[sig_div + 1] + this.array[sig_div + 2];
+      console.log("mi nuevo numero -->" + nuevo);
+      this.array[sig_div + 1] = nuevo;
+      this.array.splice(sig_div + 2, 1);
+
+      operacion = (parseFloat(this.array[sig_div - 1]) / parseFloat(this.array[sig_div + 1]));
+
+      this.array[sig_div] = operacion;
+      this.array.splice(sig_div - 1, 1);
+      this.array.splice(sig_div, 1);
+      sig_div = this.array.indexOf("÷");
+    }
+
   }
 
   // RESTA
