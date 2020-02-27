@@ -152,11 +152,11 @@ function init() {
         break;
 
       case 13: // igual
+      // IDEA: resta desaparece??
         igual.id = "si_activa";
         setTimeout(function() {
           si_activa.id = "igual";
         }, 175);
-        operacion = formula.innerHTML;
         calc();
         break;
 
