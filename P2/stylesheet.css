@@ -18,6 +18,7 @@ body{
 
 button{
   width: 60px;
+  height: 55px;
   padding: 15px;
   margin-top: 20px;
   font-size: 20px;
@@ -41,8 +42,8 @@ button:hover {
 
 .calculadora {
   padding: 20px;
-  width: 338px;
-  height: 450px;
+  width: 405px;
+  height: 400px;
   background: linear-gradient(#0099ff, #5C258D);
   /* background-color: rgba(77, 19, 209, 1); */
   /* Borde */
@@ -61,9 +62,9 @@ button:hover {
 
 
 .opciones {
-  position: fixed;
+  position: absolute;
     float: right;
-    width: 50px;
+    width: 200px;
     height: 200px;
     margin-left: 222px;
 }
@@ -73,7 +74,7 @@ button:hover {
   text-align: right;
   padding: 10px;
   padding-top: 22px;
-  width: 290px;
+  width: 365px;
   height: 80px;
   border-radius: 5px;
   margin-top: -0.5px;
@@ -109,17 +110,13 @@ button:hover {
   background-color: transparent;
 }
 
-#resta, #divide, #multiplica, #reset, #opcion_activa {
+#resta, #del, #divide, #multiplica, #reset, #opcion_activa , #igual, #suma, #si_activa{
   background-color: rgba(0, 0, 0, 0.75);
   border: none;
 }
 
-#igual, #suma, #si_activa {
-  display: block;
-  height: 120px;
-  float: left;
-  border: none;
-  background-color: rgba(0, 0, 0, 0.75);
+#igual {
+  width: 135px;
 }
 
 #si_activa, #opcion_activa {

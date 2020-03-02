@@ -12,13 +12,13 @@ const divide = document.getElementById("divide")
 const igual = document.getElementById("igual")
 const reset = document.getElementById("reset")
 const coma = document.getElementById("coma")
+const del = document.getElementById("del")
 
 // Borra todo lo que haya en el display
 function vueltaA0() {
   // Pongo las variables del display a 0
   display_resultado.innerHTML = "";
   formula.innerHTML = "";
-  array = [];
   if (document.getElementById("formula_activa")) {
     const formula_activa = document.getElementById("formula_activa");
     formula_activa.innerHTML = "";
@@ -58,12 +58,15 @@ for (var i = 0; i < digitos.length; i++) {
 
 function digito(boton) {
     formula.innerHTML += boton.value;
-    array.push(boton.value);
+}
+
+del.onclick = () => {
+  borrado = formula.innerHTML.slice(0,-1);
+  formula.innerHTML = borrado;
 }
 
 coma.onclick = () => {
   formula.innerHTML += ".";
-  array.push('.');
 }
 
 reset.onclick = () => {
@@ -72,26 +75,18 @@ reset.onclick = () => {
 
 suma.onclick = () => {
   formula.innerHTML += "+";
-  array.push('+');
 }
 
 resta.onclick = () => {
   formula.innerHTML += "-";
-  array.push('-');
 }
 
 multiplica.onclick = () => {
   formula.innerHTML += "*";
-  array.push('*');
 }
 
 divide.onclick = () => {
   formula.innerHTML += "/";
-  array.push("÷");
-}
-
-function isNumeric(n) {
-  return !isNaN(parseFloat(n)) && isFinite(n);
 }
 
 function calc() {
