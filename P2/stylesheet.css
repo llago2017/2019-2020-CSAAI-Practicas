@@ -110,7 +110,7 @@ button:hover {
   background-color: transparent;
 }
 
-#resta, #del, #divide, #multiplica, #reset, #opcion_activa , #igual, #suma, #si_activa{
+ #del, #reset, #opcion_activa , #igual, .operando, #si_activa{
   background-color: rgba(0, 0, 0, 0.75);
   border: none;
 }

@@ -5,10 +5,6 @@ const formula = document.getElementById("formula")
 const display_resultado = document.getElementById("display_resultado")
 
 // Operaciones
-const suma = document.getElementById("suma")
-const resta = document.getElementById("resta")
-const multiplica = document.getElementById("multiplica")
-const divide = document.getElementById("divide")
 const igual = document.getElementById("igual")
 const reset = document.getElementById("reset")
 const coma = document.getElementById("coma")
