@@ -52,6 +52,14 @@ let digitos = document.getElementsByClassName("cdigito")
 
 for (var i = 0; i < digitos.length; i++) {
   digitos[i].onclick = (ev) => {
+  console.log("estado de formula --> " + formula.id);
+  if (formula.id == "formula_activa") {
+    formula.id = "formula";
+    display_resultado.innerHTML = "";
+    formula.innerHTML = resultado;
+    display_activo.id = "display";
+
+  }
   digito(ev.target);
   }
 }
