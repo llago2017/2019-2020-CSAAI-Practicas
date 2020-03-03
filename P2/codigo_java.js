@@ -7,7 +7,7 @@ const display_resultado = document.getElementById("display_resultado")
 // Operaciones
 const igual = document.getElementById("igual")
 const reset = document.getElementById("reset")
-const coma = document.getElementById("coma")
+const ans = document.getElementById("ans")
 const del = document.getElementById("del")
 
 // Borra todo lo que haya en el display
@@ -73,6 +73,9 @@ reset.onclick = () => {
   vueltaA0();
 }
 
+ans.onclick = () => {
+  formula.innerHTML += resultado;  
+}
 
 function calc() {
 

@@ -110,9 +110,13 @@ button:hover {
   background-color: transparent;
 }
 
- #del, #reset, #opcion_activa , #igual, .operando, #si_activa{
+ #del, #reset, #opcion_activa , #igual, .operando, #si_activa, #ans{
   background-color: rgba(0, 0, 0, 0.75);
   border: none;
+}
+
+#ans {
+  padding-left: 12px;
 }
 
 #igual {
