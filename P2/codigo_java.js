@@ -65,35 +65,14 @@ del.onclick = () => {
   formula.innerHTML = borrado;
 }
 
-coma.onclick = () => {
-  formula.innerHTML += ".";
-}
-
 reset.onclick = () => {
   vueltaA0();
 }
 
-suma.onclick = () => {
-  formula.innerHTML += "+";
-}
-
-resta.onclick = () => {
-  formula.innerHTML += "-";
-}
-
-multiplica.onclick = () => {
-  formula.innerHTML += "*";
-}
-
-divide.onclick = () => {
-  formula.innerHTML += "/";
-}
 
 function calc() {
 
   resultado = eval(formula.innerHTML);
-  console.log("Prueba --> " + resultado);
-
 
   display.id = "display_activo";
   formula.id = "formula_activa";
