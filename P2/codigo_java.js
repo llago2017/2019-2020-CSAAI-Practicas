@@ -118,7 +118,7 @@ function init() {
         // Para los casos especiales
       case 107: // Suma
         formula.innerHTML += "+";
-        suma.id = "si_activa";
+        digitos[2].id = "si_activa";
         setTimeout(function() {
           si_activa.id = "suma";
         }, 175);
@@ -126,7 +126,7 @@ function init() {
 
       case 109: // Resta
         formula.innerHTML += "-";
-        resta.id = "opcion_activa";
+        digitos[3].id = "opcion_activa";
         setTimeout(function() {
           opcion_activa.id = "resta";
         }, 175);
@@ -143,7 +143,7 @@ function init() {
 
       case 106: // Multiplicacion
         formula.innerHTML += "*";
-        multiplica.id = "opcion_activa";
+        digitos[0].id = "opcion_activa";
         setTimeout(function() {
           opcion_activa.id = "multiplica";
         }, 175);
@@ -151,7 +151,7 @@ function init() {
 
       case 111: // divide
         formula.innerHTML += "/";
-        divide.id = "opcion_activa";
+        digitos[1].id = "opcion_activa";
         setTimeout(function() {
           opcion_activa.id = "divide";
         }, 175);
