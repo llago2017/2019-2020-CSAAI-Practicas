@@ -74,7 +74,7 @@ reset.onclick = () => {
 }
 
 ans.onclick = () => {
-  formula.innerHTML += resultado;  
+  formula.innerHTML += resultado;
 }
 
 function calc() {
@@ -106,8 +106,8 @@ function init() {
       */
       var lugar = new_cases.indexOf(ev.keyCode);
 
-      formula.innerHTML += digitos[lugar].value;
-      digitos[lugar].id = "active";
+      formula.innerHTML += digitos[lugar + 4].value;
+      digitos[lugar + 4].id = "active";
 
       setTimeout(function() {
         active.id = "id";
