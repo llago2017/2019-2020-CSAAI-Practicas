@@ -10,11 +10,24 @@ const reset = document.getElementById("reset")
 const ans = document.getElementById("ans")
 const del = document.getElementById("del")
 
+
+// Variable para asignar ESTADO
+var estado = "";
+
+// Estados de la calculadora
+const ESTADO = {
+  zerostate: 0,
+  accumulatorstate: 1,
+  accumulatordecimal: 2,
+  computedstate: 3,
+}
+
 // Borra todo lo que haya en el display
 function vueltaA0() {
   // Pongo las variables del display a 0
   display_resultado.innerHTML = "";
-  formula.innerHTML = "";
+  formula.innerHTML = " ";
+  estado = ESTADO.zerostate;
   if (document.getElementById("formula_activa")) {
     const formula_activa = document.getElementById("formula_activa");
     formula_activa.innerHTML = "";
@@ -30,7 +43,6 @@ function vueltaA0() {
 
 // Cases tiene los codigos de las teclas para los digitos
 var cases = [];
-
 
 // Creo un array con todos los keyCode de los digitos
  for (var i = 0; i < 10; i++) {
@@ -61,7 +73,17 @@ for (var i = 0; i < digitos.length; i++) {
 }
 
 function digito(boton) {
-    formula.innerHTML += boton.value;
+  console.log("En la formula -->" + formula.innerHTML);
+  if (formula.innerHTML == " ") {
+    console.log("el primer digito es --> " + boton.value);
+    // formula.innerHTML += boton.value;
+    estado = ESTADO.zerostate;
+    number(boton.value);
+  } else {
+    // formula.innerHTML += boton.value;
+    console.log("pulsado --> " + boton.value);
+    accumulate(boton.value)    
+  }
 }
 
 del.onclick = () => {
@@ -76,6 +98,29 @@ reset.onclick = () => {
 ans.onclick = () => {
   formula.innerHTML += resultado;
 }
+
+function accumulate(num) {
+  if (estado == ESTADO.accumulatorstate) {
+    formula.innerHTML += num;
+  }
+}
+
+// Ha llegado un digito
+function number(num) {
+  // Depende del estado en el que estoy hago algo
+  if (estado == ESTADO.zerostate) {
+    if (num == ".") {
+      formula.innerHTML += 0 + num;
+      estado = ESTADO.accumulatordecimal;
+    } else if (num != 0) {
+      formula.innerHTML += num;
+      estado = ESTADO.accumulatorstate;
+      console.log("Estado --> " + estado);
+      estado = ESTADO.accumulatorstate;
+    }
+  }
+}
+
 
 function calc() {
 
