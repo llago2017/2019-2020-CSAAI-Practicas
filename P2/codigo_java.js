@@ -25,12 +25,12 @@ const ESTADO = {
 // Borra todo lo que haya en el display
 function vueltaA0() {
   // Pongo las variables del display a 0
-  display_resultado.innerHTML = "";
+  display_resultado.innerHTML = " ";
   formula.innerHTML = " ";
   estado = ESTADO.zerostate;
   if (document.getElementById("formula_activa")) {
     const formula_activa = document.getElementById("formula_activa");
-    formula_activa.innerHTML = "";
+    formula_activa.innerHTML = " ";
     formula_activa.id = "formula";
   }
 
@@ -74,15 +74,23 @@ for (var i = 0; i < digitos.length; i++) {
 
 function digito(boton) {
   console.log("En la formula -->" + formula.innerHTML);
+  ultimo = formula.innerHTML.length - 1;
+  last = formula.innerHTML.charAt(ultimo);
   if (formula.innerHTML == " ") {
     console.log("el primer digito es --> " + boton.value);
-    // formula.innerHTML += boton.value;
     estado = ESTADO.zerostate;
     number(boton.value);
-  } else {
-    // formula.innerHTML += boton.value;
+    // Compruebo si el ultimo elemento es un operando
+  } else if (isNaN(last)) {
+    if (isNaN(boton.value)) {
+      operando(boton.value);
+    } else {
+      estado = ESTADO.accumulatorstate;
+      accumulate(boton.value)
+    }
+  }else {
     console.log("pulsado --> " + boton.value);
-    accumulate(boton.value)    
+    accumulate(boton.value)
   }
 }
 
@@ -99,9 +107,38 @@ ans.onclick = () => {
   formula.innerHTML += resultado;
 }
 
+function operando(num) {
+  if (estado == ESTADO.computedstate) {
+    ultimo = formula.innerHTML.length - 1;
+    last = formula.innerHTML.charAt(ultimo);
+    anterior = formula.innerHTML.charAt(ultimo - 1);
+    if (isNaN(last) && last != num) {
+      formula.innerHTML += num;
+      estado = ESTADO.accumulatorstate;
+    } else if (!isNaN(num)) {
+      formula.innerHTML += num;
+      estado = ESTADO.accumulatorstate;
+    }
+  }
+}
+
 function accumulate(num) {
   if (estado == ESTADO.accumulatorstate) {
     formula.innerHTML += num;
+    // Es true cuando es un operado
+    if (isNaN(num)) {
+      estado = ESTADO.computedstate;
+    }
+  }
+
+  if (estado == ESTADO.accumulatordecimal) {
+    if (num != ".") {
+      formula.innerHTML += num;
+    }
+    // Es true cuando es un operado
+    if (isNaN(num) && num != ".") {
+      estado = ESTADO.computedstate;
+    }
   }
 }
 
