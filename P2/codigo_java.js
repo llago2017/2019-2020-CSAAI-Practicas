@@ -85,7 +85,11 @@ function digito(boton) {
     if (isNaN(boton.value)) {
       operando(boton.value);
     } else {
-      estado = ESTADO.accumulatorstate;
+      if (last == ".") {
+        estado = ESTADO.accumulatordecimal;
+      } else {
+        estado = ESTADO.accumulatorstate;
+      }
       accumulate(boton.value)
     }
   }else {
@@ -105,6 +109,7 @@ reset.onclick = () => {
 
 ans.onclick = () => {
   formula.innerHTML += resultado;
+  estado = ESTADO.accumulatorstate;
 }
 
 function operando(num) {
@@ -113,21 +118,32 @@ function operando(num) {
     last = formula.innerHTML.charAt(ultimo);
     anterior = formula.innerHTML.charAt(ultimo - 1);
     if (isNaN(last) && last != num) {
-      formula.innerHTML += num;
-      estado = ESTADO.accumulatorstate;
+      if (num == "+" || num == "-") {
+        formula.innerHTML += num;
+        estado = ESTADO.accumulatorstate;
+      }
+
     } else if (!isNaN(num)) {
       formula.innerHTML += num;
+      if (num == ".") {
+        estado = ESTADO.accumulatordecimal;
+      }
       estado = ESTADO.accumulatorstate;
     }
   }
 }
 
 function accumulate(num) {
+
   if (estado == ESTADO.accumulatorstate) {
     formula.innerHTML += num;
     // Es true cuando es un operado
     if (isNaN(num)) {
       estado = ESTADO.computedstate;
+    }
+
+    if (num == ".") {
+      estado = ESTADO.accumulatordecimal;
     }
   }
 
