@@ -45,30 +45,30 @@ function vueltaA0() {
 var cases = [];
 
 // Creo un array con todos los keyCode de los digitos
- for (var i = 0; i < 10; i++) {
-   inic = 96;
-   inic += i;
-   cases.push(inic);
- }
+for (var i = 0; i < 10; i++) {
+  inic = 96;
+  inic += i;
+  cases.push(inic);
+}
 /* Invierto cases para que coincidan los codigos con los numeros que se
    almacenan en digitos
 */
- var new_cases = cases.reverse();
+var new_cases = cases.reverse();
 
 // Creará un array con todos los c digitos que hay en el html
 let digitos = document.getElementsByClassName("cdigito")
 
 for (var i = 0; i < digitos.length; i++) {
   digitos[i].onclick = (ev) => {
-  console.log("estado de formula --> " + formula.id);
-  if (formula.id == "formula_activa") {
-    formula.id = "formula";
-    display_resultado.innerHTML = "";
-    formula.innerHTML = resultado;
-    display_activo.id = "display";
+    console.log("estado de formula --> " + formula.id);
+    if (formula.id == "formula_activa") {
+      formula.id = "formula";
+      display_resultado.innerHTML = "";
+      formula.innerHTML = resultado;
+      display_activo.id = "display";
 
-  }
-  digito(ev.target);
+    }
+    digito(ev.target);
   }
 }
 
@@ -76,6 +76,7 @@ function digito(boton) {
   console.log("En la formula -->" + formula.innerHTML);
   ultimo = formula.innerHTML.length - 1;
   last = formula.innerHTML.charAt(ultimo);
+  // Momento inicial
   if (formula.innerHTML == " ") {
     console.log("el primer digito es --> " + boton.value);
     estado = ESTADO.zerostate;
@@ -92,14 +93,14 @@ function digito(boton) {
       }
       accumulate(boton.value)
     }
-  }else {
+  } else {
     console.log("pulsado --> " + boton.value);
     accumulate(boton.value)
   }
 }
 
 del.onclick = () => {
-  borrado = formula.innerHTML.slice(0,-1);
+  borrado = formula.innerHTML.slice(0, -1);
   formula.innerHTML = borrado;
 }
 
@@ -162,14 +163,17 @@ function accumulate(num) {
 function number(num) {
   // Depende del estado en el que estoy hago algo
   if (estado == ESTADO.zerostate) {
-    if (num == ".") {
-      formula.innerHTML += 0 + num;
-      estado = ESTADO.accumulatordecimal;
-    } else if (num != 0) {
-      formula.innerHTML += num;
-      estado = ESTADO.accumulatorstate;
-      console.log("Estado --> " + estado);
-      estado = ESTADO.accumulatorstate;
+    if (num != "*" && num != "/") {
+      if (num == ".") {
+        formula.innerHTML += 0 + num;
+        estado = ESTADO.accumulatordecimal;
+      } else if (num != 0) {
+        formula.innerHTML += num;
+        estado = ESTADO.accumulatorstate;
+        console.log("Estado --> " + estado);
+        estado = ESTADO.accumulatorstate;
+      }
+
     }
   }
 }
@@ -213,7 +217,7 @@ function init() {
     }
 
     switch (ev.keyCode) {
-        // Para los casos especiales
+      // Para los casos especiales
       case 107: // Suma
         formula.innerHTML += "+";
         digitos[2].id = "si_activa";
@@ -231,7 +235,7 @@ function init() {
         break;
 
       case 13: // igual
-      // IDEA: resta desaparece??
+        // IDEA: resta desaparece??
         igual.id = "si_activa";
         setTimeout(function() {
           si_activa.id = "igual";
