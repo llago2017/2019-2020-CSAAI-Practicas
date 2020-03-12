@@ -263,11 +263,9 @@ function countdown() {
   ctx.font="25px monospace";
   ctx.fillStyle = "white";
   // Contador
-  ctx.fillText(counter, center[0], center[1]);
   setTimeout(function() {
     counter = 1;
   }, 500);
-  ctx.fillText(counter, center[0], center[1]);
   setTimeout(function() {
     counter = 0;
   }, 1000);
