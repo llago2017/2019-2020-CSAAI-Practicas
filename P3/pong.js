@@ -87,7 +87,7 @@ var player1 = new object_construct({
   y: canvas.height / 2 - 40,
   width: 12,
   height: 80,
-  gravity: 6
+  gravity: 10
 })
 
 var player2 = new object_construct({
@@ -96,7 +96,7 @@ var player2 = new object_construct({
   y: canvas.height / 2 - 40,
   width: 12,
   height: 80,
-  gravity: 5
+  gravity: 3
 });
 
 var ball = new object_construct({
