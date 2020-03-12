@@ -10,6 +10,8 @@ var center = [canvas.width / 2, canvas.height / 2];
 var score1 = 0;
 var score2 = 0;
 var counter = 2;
+var link = new Image;
+var active = false;
 
 // Constructor de objetos
 function object_construct(options) {
@@ -125,6 +127,9 @@ function ball_mov() {
           ball.x = (player1.x + ball.width);
           ball.speed *= (-1);
           ball.gravity = Math.random() * 5;
+          active = true;
+          draw_object(player1);
+
       }
 
   }
@@ -166,8 +171,15 @@ function ball_mov() {
 function draw_object(object) {
 
   if (object ==player1) {
-    var link = new Image;
-	  link.src = 'static.png';
+    if (active) {
+      link.src = 'active.png';
+      setTimeout(function() {
+        active = false;
+      }, 200);
+
+    } else {
+      link.src = 'static.png';
+    }
     ctx.drawImage(link, object.x-25, object.y, 70, object.height);
   } else {
     ctx.fillStyle = object.color;
