@@ -7,6 +7,9 @@ var estado = 0;
 // creo un array con las teclas que pulso
 var code = [];
 var center = [canvas.width / 2, canvas.height / 2];
+var score1 = 0;
+var score2 = 0;
+var counter = 2;
 
 // Constructor de objetos
 function object_construct(options) {
@@ -82,7 +85,7 @@ var player1 = new object_construct({
   y: canvas.height / 2 - 40,
   width: 12,
   height: 80,
-  gravity: 4
+  gravity: 6
 })
 
 var player2 = new object_construct({
@@ -91,7 +94,7 @@ var player2 = new object_construct({
   y: canvas.height / 2 - 40,
   width: 12,
   height: 80,
-  gravity: 3
+  gravity: 5
 });
 
 var ball = new object_construct({
@@ -99,7 +102,7 @@ var ball = new object_construct({
   y: (canvas.height / 2),
   width: 12,
   height: 12,
-  speed: 2,
+  speed: 4,
   gravity: 2
 });
 
@@ -117,14 +120,46 @@ function ball_mov() {
   }
 
   // Colision con los jugadores
-  if (ball.x <= player2.x + player2.width && ball.x + ball.width >= player2.x) {
-    ball.x = (player2.x - ball.width); // dirijo la pelota hasta el otro lado
-    ball.speed *= (-1);
+  if (ball.x <= player1.x + player1.width && ball.x + ball.width >= player1.x ) {
+      if (ball.y + ball.height >= player1.y  && ball.y <= player1.y + player1.height) {
+          ball.x = (player1.x + ball.width);
+          ball.speed *= (-1);
+          ball.gravity = Math.random() * 5;
+      }
+
   }
 
-  if (ball.x <= player1.x + player1.width && ball.x + ball.width >= player1.x) {
-    ball.x = (player1.x + ball.width); // dirijo la pelota hasta el otro lado
-    ball.speed *= (-1);
+  if (ball.x + ball.width >= player2.x && ball.x + ball.width <= player2.x + player2.width) {
+      if (ball.y + ball.height >= player2.y  && ball.y <= player2.y + player2.height) {
+          ball.x = (player2.x - ball.width);
+          ball.speed *= (-1);
+      }
+
+  }
+
+  // Marcan punto
+  if (ball.x + ball.width < player1.x - 5) {
+    score2 += 1;
+    estado = 2;
+  } else if (ball.x + ball.width > player2.x + player2.width) {
+    score1 += 1;
+    estado = 2;
+  }
+
+  if (estado == 2) {
+
+    ball.x = (canvas.width / 2 - 6);
+    ball.y = (canvas.height / 2);
+    ball.speed = 0;
+    ball.gravity = 0;
+
+    setTimeout(function() {
+      ball.gravity = Math.random();
+      ball.speed = Math.random()*6 + 3;
+    }, 2000);
+
+
+
   }
 }
 
@@ -197,6 +232,19 @@ function init() {
   resetPlayers();
 }
 
+function countdown() {
+  // Contador
+  ctx.fillText(counter, center[0], center[1]);
+  setTimeout(function() {
+    counter = 1;
+  }, 500);
+  ctx.fillText(counter, center[0], center[1]);
+  setTimeout(function() {
+    counter = 0;
+  }, 1000);
+  ctx.fillText(counter, center[0], center[1]);  
+}
+
 function main() {
   if (estado == 0) {
     init();
@@ -205,14 +253,33 @@ function main() {
   draw();
 
   if (estado == 1) {
+    counter = 2;
     ball_mov();
     input(player1);
     auto_p2();
   } else if (estado == 2) {
-    estado = 1;
+
+    ctx.beginPath();
+    ctx.fillStyle = "black";
+    ctx.strokeStyle="white";
+    ctx.arc(center[0], center[1] - 7, 50, 0, 2 * Math.PI, false);
+    ctx.fill();
+    ctx.stroke();
+    ctx.closePath();
+    ctx.font="25px monospace";
+    ctx.fillStyle = "white";
+    countdown();
+
+    setTimeout(function() {
+      estado = 1;
+    }, 2000);
+
   }
   // Call drawScene again in the next browser repaint
-  requestAnimationFrame(main);
+  var fps = 100;
+    setTimeout(function() {window.requestAnimationFrame(main);
+    }, 1000 / fps);
+
 }
 
 main();
