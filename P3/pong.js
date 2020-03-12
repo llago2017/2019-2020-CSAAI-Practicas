@@ -106,7 +106,7 @@ var ball = new object_construct({
 function ball_mov() {
   // Colision con los bordes
   if (ball.y + ball.gravity < 0 || (ball.y + ball.gravity + ball.height >= canvas.height)) {
-    ball.gravity = (-1) * ball.gravity // Cambia la dirección
+    ball.gravity *= (-1) // Cambia la dirección
     // Movimiento de la pelota
     ball.y += ball.gravity;
     ball.x += ball.speed
@@ -114,6 +114,17 @@ function ball_mov() {
     // En el caso de que no choque
     ball.x += ball.speed;
     ball.y += ball.gravity;
+  }
+
+  // Colision con los jugadores
+  if (ball.x <= player2.x + player2.width && ball.x + ball.width >= player2.x) {
+    ball.x = (player2.x - ball.width); // dirijo la pelota hasta el otro lado
+    ball.speed *= (-1);
+  }
+
+  if (ball.x <= player1.x + player1.width && ball.x + ball.width >= player1.x) {
+    ball.x = (player1.x + ball.width); // dirijo la pelota hasta el otro lado
+    ball.speed *= (-1);
   }
 }
 
