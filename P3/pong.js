@@ -233,6 +233,16 @@ function init() {
 }
 
 function countdown() {
+  //
+  ctx.beginPath();
+  ctx.fillStyle = "black";
+  ctx.strokeStyle="white";
+  ctx.arc(center[0], center[1] - 7, 50, 0, 2 * Math.PI, false);
+  ctx.fill();
+  ctx.stroke();
+  ctx.closePath();
+  ctx.font="25px monospace";
+  ctx.fillStyle = "white";
   // Contador
   ctx.fillText(counter, center[0], center[1]);
   setTimeout(function() {
@@ -242,7 +252,7 @@ function countdown() {
   setTimeout(function() {
     counter = 0;
   }, 1000);
-  ctx.fillText(counter, center[0], center[1]);  
+  ctx.fillText(counter, center[0], center[1]);
 }
 
 function main() {
@@ -259,15 +269,6 @@ function main() {
     auto_p2();
   } else if (estado == 2) {
 
-    ctx.beginPath();
-    ctx.fillStyle = "black";
-    ctx.strokeStyle="white";
-    ctx.arc(center[0], center[1] - 7, 50, 0, 2 * Math.PI, false);
-    ctx.fill();
-    ctx.stroke();
-    ctx.closePath();
-    ctx.font="25px monospace";
-    ctx.fillStyle = "white";
     countdown();
 
     setTimeout(function() {
