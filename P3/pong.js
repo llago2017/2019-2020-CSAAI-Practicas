@@ -103,6 +103,20 @@ var ball = new object_construct({
   gravity: 2
 });
 
+function ball_mov() {
+  // Colision con los bordes
+  if (ball.y + ball.gravity < 0 || (ball.y + ball.gravity + ball.height >= canvas.height)) {
+    ball.gravity = (-1) * ball.gravity // Cambia la dirección
+    // Movimiento de la pelota
+    ball.y += ball.gravity;
+    ball.x += ball.speed
+  } else {
+    // En el caso de que no choque
+    ball.x += ball.speed;
+    ball.y += ball.gravity;
+  }
+}
+
 function draw_object(object) {
   ctx.fillStyle = object.color;
   ctx.fillRect(object.x, object.y, object.width, object.height);
@@ -180,6 +194,7 @@ function main() {
   draw();
 
   if (estado == 1) {
+    ball_mov();
     input(player1);
     auto_p2();
   } else if (estado == 2) {
