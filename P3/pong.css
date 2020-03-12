@@ -6,4 +6,5 @@ body {
 /* Estilo para el canvas: Negro */
 #canvas {
   background-color: black;
+  border: 3px solid white;
 }
