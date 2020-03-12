@@ -87,13 +87,6 @@ var player2 = new object_construct({
   gravity: 3
 });
 
-var separador = new object_construct({
-  x: (canvas.width / 2) - 2.5,
-  y: 20,
-  width: 5,
-  height: canvas.height - 40,
-});
-
 var ball = new object_construct({
   x: (canvas.width / 2),
   y: (canvas.height / 2),
@@ -106,6 +99,16 @@ var ball = new object_construct({
 function draw_object(object) {
   ctx.fillStyle = object.color;
   ctx.fillRect(object.x, object.y, object.width, object.height);
+
+  // Separador
+  ctx.beginPath();
+  ctx.setLineDash([10, 10]);
+  ctx.strokeStyle = 'white';
+  ctx.lineWidth = 2;
+  ctx.moveTo(canvas.width/2, 0);
+  ctx.lineTo(canvas.width/2, canvas.height);
+  ctx.stroke();
+
 }
 
 function displayScore() {
@@ -123,7 +126,6 @@ function draw() {
   displayScore();
   draw_object(player1);
   draw_object(player2);
-  draw_object(separador);
 
   if (estado == 0) {
 
