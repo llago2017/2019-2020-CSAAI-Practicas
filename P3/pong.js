@@ -164,8 +164,15 @@ function ball_mov() {
 }
 
 function draw_object(object) {
-  ctx.fillStyle = object.color;
-  ctx.fillRect(object.x, object.y, object.width, object.height);
+
+  if (object ==player1) {
+    var link = new Image;
+	  link.src = 'static.png';
+    ctx.drawImage(link, object.x-25, object.y, 70, object.height);
+  } else {
+    ctx.fillStyle = object.color;
+    ctx.fillRect(object.x, object.y, object.width, object.height);
+  }
 
   // Separador
   ctx.beginPath();
