@@ -47,10 +47,17 @@ function input() {
   document.onkeydown = function(ev) {
     switch (ev.keyCode) {
       case 38:
-        // Arriba
+        if (player1.y - player1.gravity > 0) { // Para que no salga del cuadro
+          player1.y -= player1.gravity;       // la parte de arriba es (0,0)
+        }
         break;
       case 40:
-        // Abajo
+        /* Para que no salga del cuadro, la parte de abajo viene dada por
+        la longitud del canvas, le sumo el height de la paleta para que choque
+        con la parte de abajo */
+        if (player1.y + player1.gravity + player2.height < canvas.height) {
+          player1.y += player1.gravity;
+        }
         break;
     }
   }
