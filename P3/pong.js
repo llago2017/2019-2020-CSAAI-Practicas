@@ -27,6 +27,26 @@ var grd = ctx.createLinearGradient(0, 0, 750, 0);
 grd.addColorStop('0', "white");
 grd.addColorStop('1', "goldenrod");
 
+var rect = {
+    x:center[0],
+    y:center[1] + 50,
+    width:200,
+    height:50
+};
+var mode = "";
+
+//Function to get the mouse position
+function getMousePos(canvas, event) {
+    var rect = canvas.getBoundingClientRect();
+    return {
+        x: event.clientX - rect.left,
+        y: event.clientY - rect.top
+    };
+}
+//Function to check whether a point is inside a rectangle
+function isInside(pos, rect){
+    return pos.x > rect.x && pos.x < rect.x+rect.width && pos.y < rect.y+rect.height && pos.y > rect.y
+}
 
 // Constructor de objetos
 function object_construct(options) {
@@ -38,6 +58,54 @@ function object_construct(options) {
   this.speed = options.speed || 3;
   this.gravity = options.gravity || 3;
 }
+
+var inicio = {
+    init: function(ctx) {
+      this.ctx = ctx
+      },
+    draw: function(){
+      // Fondo
+      if (mode == 'single') {
+        ctx.fillStyle = 'transparent';
+      } else {
+        ctx.fillStyle = 'black';
+      }
+      ctx.fillRect(0, 0, 800 ,500);
+
+      // Rectangulo
+      if (mode == 'single') {
+        ctx.fillStyle = 'transparent';
+      } else {
+        ctx.fillStyle = 'white';
+      }
+      ctx.fillRect(center[0], center[1] + 50, 200 ,50);
+
+      // Letras
+      ctx.font = "35px Zelda";
+      if (mode == 'single') {
+        ctx.fillStyle = 'transparent';
+      } else {
+        ctx.fillStyle = grd;
+      }
+      ctx.textAlign = "center";
+      // Centro el texto en la mitad
+      ctx.fillText("Single Player", center[0] + 100, center[1] + 85);
+
+      //Binding the click event on the canvas
+      canvas.addEventListener('click', function(evt) {
+        console.log("Hola");
+          var mousePos = getMousePos(canvas, evt);
+
+          if (isInside(mousePos,rect)) {
+              mode ="single";
+          }
+      }, false);
+      if (mode != "") {
+        phrase = "Press the spacebar to start"
+        game_info(phrase);
+      }
+    },
+  }
 
 document.addEventListener('keydown', function(ev) {
   if (32 == ev.onkeydown) {
@@ -67,7 +135,7 @@ document.addEventListener('keydown', function(ev) {
 document.addEventListener('keyup', function(ev) {
   if (32 == ev.onkeydown) {
     init();
-    gameState = 1;
+    estado = 1;
   }
 
   var pos = code.indexOf(ev.keyCode);
@@ -317,8 +385,8 @@ function draw() {
   draw_object(heartp2);
 
   if (estado == 0) {
-    phrase = "Press the spacebar to start"
-    game_info(phrase);
+    inicio.init(ctx);
+    inicio.draw();
   }
   if (estado == 1 || estado == 2) { // running
 
