@@ -275,6 +275,7 @@ function resetPlayers() {
 function init() {
   score1 = 0;
   score2 = 0;
+  code = [];
   resetPlayers();
 }
 
