@@ -125,10 +125,17 @@ var ball = new object_construct({
   gravity: 2
 });
 
-var heart = new object_construct({
+var heartp1 = new object_construct({
   width: 100,
   height: 25,
   x: 0,
+  y: 0
+})
+
+var heartp2 = new object_construct({
+  width: 100,
+  height: 25,
+  x: 700,
   y: 0
 })
 
@@ -213,7 +220,7 @@ function draw_object(object) {
 
     ctx.drawImage(link, object.x - 25, object.y, 70, object.height);
 
-  } else if (object == heart) {
+  } else if (object == heartp1) {
     if (score2 == 0) {
       hearts.src = 'hearts.png';
       ctx.drawImage(hearts, object.x, object.y, object.width, object.height);
@@ -225,6 +232,17 @@ function draw_object(object) {
       ctx.drawImage(hearts, object.x, object.y, object.width, object.height);
     }
 
+  } else if (object == heartp2) {
+    if (score1 == 0) {
+      hearts.src = 'hearts.png';
+      ctx.drawImage(hearts, object.x, object.y, object.width, object.height);
+    } else if (score1 == 1) {
+      hearts.src = 'heart2.png';
+      ctx.drawImage(hearts, object.x, object.y, object.width, object.height);
+    } else if (score1 == 2) {
+      hearts.src = 'heart3.png';
+      ctx.drawImage(hearts, object.x, object.y, object.width, object.height);
+    }
 
   }  else {
     ctx.fillStyle = object.color;
@@ -275,7 +293,8 @@ function draw() {
   displayScore();
   draw_object(player1);
   draw_object(player2);
-  draw_object(heart);
+  draw_object(heartp1);
+  draw_object(heartp2);
 
   if (estado == 0) {
     phrase = "Press the spacebar to start"
