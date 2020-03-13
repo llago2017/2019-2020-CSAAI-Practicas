@@ -176,9 +176,11 @@ function ball_mov() {
   // Marcan punto
   if (ball.x + ball.width < player1.x - 5) {
     score2 += 1;
+    draw_object(heartp1);
     estado = 2;
   } else if (ball.x + ball.width > player2.x + player2.width) {
     score1 += 1;
+    draw_object(heartp2);
     estado = 2;
   }
 
