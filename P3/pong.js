@@ -34,12 +34,14 @@ function object_construct(options) {
 document.addEventListener('keydown', function(ev) {
   if (32 == ev.onkeydown) {
     init();
-    gameState = 1;
+    estado = 1;
   }
   console.log(ev.keyCode);
   if (estado == 0) {
-    if (32 == ev.keyCode)
+    if (32 == ev.keyCode){
       estado = 1;
+      init();
+    }
   }
 
   if (estado == 3 || estado == 4) {
@@ -282,6 +284,7 @@ function game_info(phrase) {
   // Centro el texto en la mitad
   ctx.fillText(phrase, center[0], center[1]);
   if (estado == 3 || estado == 4) {
+    init();
     ctx.clearRect(center[0], center[1] + 40, 20, 60);
     ctx.fillText('Press the spacebar to start', center[0], center[1] + 40);
   }
@@ -330,6 +333,8 @@ function init() {
   score1 = 0;
   score2 = 0;
   code = [];
+  ball.x = center[0];
+  ball.y = center[1];
   resetPlayers();
 }
 
