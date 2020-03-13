@@ -104,7 +104,7 @@ var ball = new object_construct({
   y: (canvas.height / 2),
   width: 12,
   height: 12,
-  speed: 4,
+  speed: 5,
   gravity: 2
 });
 
@@ -149,6 +149,14 @@ function ball_mov() {
   } else if (ball.x + ball.width > player2.x + player2.width) {
     score1 += 1;
     estado = 2;
+  }
+
+  // Fin del juego
+
+  if (score1 == 3) {
+    estado = 4;
+  } else if (score2 == 3) {
+    estado = 3;
   }
 
   if (estado == 2) {
@@ -205,6 +213,21 @@ function displayScore() {
   ctx.fillText(score2, (canvas.width / 2) + 50, 30);
 }
 
+function game_info(phrase) {
+  // Rectangulo para tapar midline
+  ctx.clearRect(center[0]-10,center[1]-40, 20,60);
+  // Opciones del texto
+  var grd = ctx.createLinearGradient(0, 0, 750, 0);
+  grd.addColorStop('0', "white");
+  grd.addColorStop('1', "goldenrod");
+  ctx.font = "35px Zelda";
+  ctx.fillStyle = grd;
+  ctx.textAlign = "center";
+  // Centro el texto en la mitad
+  ctx.fillText(phrase, center[0], center[1]);
+
+}
+
 function draw() {
   // Borro el canvas
   ctx.clearRect(0, 0, canvas.width, canvas.height);
@@ -214,26 +237,20 @@ function draw() {
   draw_object(player2);
 
   if (estado == 0) {
-
-    ctx.font = "25px monospace";
-    ctx.fillStyle = "blue";
-    ctx.textAlign = "center";
-    // Centro el texto en la mitad
-    ctx.fillText("Press the spacebar to start", center[0], center[1]);
+    phrase = "Press the spacebar to start"
+    game_info(phrase);
   }
   if (estado == 1 || estado == 2) { // running
 
     draw_object(ball);
   }
   if (estado == 3) {
-    ctx.font = "35px monospace";
-    ctx.fillStyle = "#ffffff";
-    ctx.fillText("Game Over", center[0], center[1]);
+    phrase = "Game Over"
+    game_info(phrase);
   }
   if (estado == 4) {
-    ctx.font = "25px monospace";
-    ctx.fillStyle = "#ffffff";
-    ctx.fillText("You Win", center[0], center[1]);
+    phrase = "You win"
+    game_info(phrase);
   }
 
 }
