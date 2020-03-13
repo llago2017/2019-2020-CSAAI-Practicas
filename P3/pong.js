@@ -4,6 +4,12 @@ var ctx = canvas.getContext('2d');
 
 // GLOBALES
 var estado = 0;
+// Estado 0 --> inicio
+// Estado 1 --> comienza desde 0
+// Estado 2 --> punto marcado, counter
+// Estado 3 --> game Over
+// Estado 4 --> win
+
 // creo un array con las teclas que pulso
 var code = [];
 var center = [canvas.width / 2, canvas.height / 2];
@@ -281,13 +287,6 @@ function draw_object(object) {
 
 }
 
-function displayScore() {
-  /* play1 score*/
-  ctx.font = "20px Arial";
-  ctx.fillStyle = 'white';
-  ctx.fillText(score2, (canvas.width / 2) + 50, 30);
-}
-
 function game_info(phrase) {
   // Rectangulo para tapar midline
   ctx.clearRect(center[0] - 10, center[1] - 40, 20, 60);
@@ -312,7 +311,6 @@ function draw() {
   // Borro el canvas
   ctx.clearRect(0, 0, canvas.width, canvas.height);
 
-  displayScore();
   draw_object(player1);
   draw_object(player2);
   draw_object(heartp1);
