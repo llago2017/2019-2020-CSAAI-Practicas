@@ -242,10 +242,10 @@ function draw_object(object) {
       ctx.drawImage(hearts, object.x, object.y, object.width, object.height);
     } else if (score1 == 1) {
       hearts.src = 'heart2.png';
-      ctx.drawImage(hearts, object.x, object.y, object.width, object.height);
+      ctx.drawImage(hearts, object.x + 25, object.y, object.width, object.height);
     } else if (score1 == 2) {
       hearts.src = 'heart3.png';
-      ctx.drawImage(hearts, object.x, object.y, object.width, object.height);
+      ctx.drawImage(hearts, object.x + 60, object.y, object.width, object.height);
     }
 
   }  else {
