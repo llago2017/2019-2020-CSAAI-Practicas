@@ -282,16 +282,16 @@ function init() {
 }
 
 function countdown() {
-  //
+  // Estilo
   ctx.beginPath();
   ctx.fillStyle = "black";
-  ctx.strokeStyle="white";
+  ctx.strokeStyle= 'rgba(218, 165, 32, 0.65)';
   ctx.arc(center[0], center[1] - 7, 50, 0, 2 * Math.PI, false);
   ctx.fill();
   ctx.stroke();
   ctx.closePath();
   ctx.font="25px monospace";
-  ctx.fillStyle = "white";
+  ctx.fillStyle = 'rgba(218, 165, 32, 0.65)';
   // Contador
   setTimeout(function() {
     counter = 1;
