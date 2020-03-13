@@ -206,8 +206,8 @@ function draw_object(object) {
 
   // Separador
   ctx.beginPath();
-  ctx.setLineDash([10, 10]);
-  ctx.strokeStyle = 'white';
+  ctx.setLineDash([4, 14, 18]);
+  ctx.strokeStyle = 'rgba(218, 165, 32, 0.3)';
   ctx.lineWidth = 2;
   ctx.moveTo(canvas.width/2, 0);
   ctx.lineTo(canvas.width/2, canvas.height);
@@ -257,7 +257,9 @@ function draw() {
   if (estado == 3) {
     phrase = "Game Over"
     game_info(phrase);
+
   }
+
   if (estado == 4) {
     phrase = "You win"
     game_info(phrase);
