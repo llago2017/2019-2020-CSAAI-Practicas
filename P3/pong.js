@@ -11,8 +11,10 @@ var score1 = 0;
 var score2 = 0;
 var counter = 2;
 var link = new Image;
+var ganon = new Image;
 var hearts = new Image;
 var active = false;
+var active2 = false;
 var t = 0;
 var step = 0.01;
 var grd = ctx.createLinearGradient(0, 0, 750, 0);
@@ -115,7 +117,8 @@ var player2 = new object_construct({
   y: canvas.height / 2 - 40,
   width: 12,
   height: 80,
-  gravity: 3
+  gravity: 3,
+  color: 'transparent'
 });
 
 var ball = new object_construct({
@@ -171,6 +174,8 @@ function ball_mov() {
     if (ball.y + ball.height >= player2.y && ball.y <= player2.y + player2.height) {
       ball.x = (player2.x - ball.width);
       ball.speed *= (-1);
+      active2 = true;
+      draw_object(player2);
     }
 
   }
@@ -210,6 +215,18 @@ function ball_mov() {
 }
 
 function draw_object(object) {
+  if (object == player2) {
+    if (active2) {
+      ganon.src = 'active_dorf.png';
+      setTimeout(function() {
+        active2 = false;
+      }, 200);
+
+    } else {
+      ganon.src = 'dorf.png';
+    }
+    ctx.drawImage(ganon, object.x - 25, object.y, 70, object.height);
+  }
 
   if (object == player1) {
     if (active) {
