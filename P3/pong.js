@@ -26,7 +26,6 @@ var step = 0.01;
 var grd = ctx.createLinearGradient(0, 0, 750, 0);
 grd.addColorStop('0', "white");
 grd.addColorStop('1', "goldenrod");
-
 var rect = {
     x:center[0],
     y:center[1] + 50,
@@ -91,6 +90,9 @@ var inicio = {
       // Centro el texto en la mitad
       ctx.fillText("Single Player", center[0] + 100, center[1] + 85);
 
+      ctx.font = "50px Zelda";
+      ctx.fillText("The Legend of Zelda", center[0], center[1] - 70);
+      ctx.fillText("Breath of the Pong", center[0], center[1] - 20);
       //Binding the click event on the canvas
       canvas.addEventListener('click', function(evt) {
         console.log("Hola");
