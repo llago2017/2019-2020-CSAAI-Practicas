@@ -11,7 +11,14 @@ var score1 = 0;
 var score2 = 0;
 var counter = 2;
 var link = new Image;
+var hearts = new Image;
 var active = false;
+var t = 0;
+var step = 0.01;
+var grd = ctx.createLinearGradient(0, 0, 750, 0);
+grd.addColorStop('0', "white");
+grd.addColorStop('1', "goldenrod");
+
 
 // Constructor de objetos
 function object_construct(options) {
@@ -24,7 +31,7 @@ function object_construct(options) {
   this.gravity = options.gravity || 3;
 }
 
-document.addEventListener('keydown', function (ev) {
+document.addEventListener('keydown', function(ev) {
   if (32 == ev.onkeydown) {
     init();
     gameState = 1;
@@ -47,7 +54,7 @@ document.addEventListener('keydown', function (ev) {
 });
 
 // Cuando una tecla deja de ser pulsada se elimina del array
-document.addEventListener('keyup', function (ev) {
+document.addEventListener('keyup', function(ev) {
   if (32 == ev.onkeydown) {
     init();
     gameState = 1;
@@ -63,7 +70,7 @@ function input() {
     switch (ev.keyCode) {
       case 38:
         if (player1.y - player1.gravity > 0) { // Para que no salga del cuadro
-          player1.y -= player1.gravity;       // la parte de arriba es (0,0)
+          player1.y -= player1.gravity; // la parte de arriba es (0,0)
         }
         break;
       case 40:
@@ -114,9 +121,16 @@ var ball = new object_construct({
   y: (canvas.height / 2),
   width: 12,
   height: 12,
-  speed: 5,
+  speed: 10,
   gravity: 2
 });
+
+var heart = new object_construct({
+  width: 100,
+  height: 25,
+  x: 0,
+  y: 0
+})
 
 function ball_mov() {
   // Colision con los bordes
@@ -132,23 +146,23 @@ function ball_mov() {
   }
 
   // Colision con los jugadores
-  if (ball.x <= player1.x + player1.width && ball.x + ball.width >= player1.x ) {
-      if (ball.y + ball.height >= player1.y  && ball.y <= player1.y + player1.height) {
-          ball.x = (player1.x + ball.width);
-          ball.speed *= (-1);
-          ball.gravity = Math.random() * 5;
-          active = true;
-          draw_object(player1);
+  if (ball.x <= player1.x + player1.width && ball.x + ball.width >= player1.x) {
+    if (ball.y + ball.height >= player1.y && ball.y <= player1.y + player1.height) {
+      ball.x = (player1.x + ball.width);
+      ball.speed *= (-1);
+      ball.gravity = Math.random() * 5;
+      active = true;
+      draw_object(player1);
 
-      }
+    }
 
   }
 
   if (ball.x + ball.width >= player2.x && ball.x + ball.width <= player2.x + player2.width) {
-      if (ball.y + ball.height >= player2.y  && ball.y <= player2.y + player2.height) {
-          ball.x = (player2.x - ball.width);
-          ball.speed *= (-1);
-      }
+    if (ball.y + ball.height >= player2.y && ball.y <= player2.y + player2.height) {
+      ball.x = (player2.x - ball.width);
+      ball.speed *= (-1);
+    }
 
   }
 
@@ -178,17 +192,15 @@ function ball_mov() {
 
     setTimeout(function() {
       ball.gravity = Math.random();
-      ball.speed = Math.random()*6 + 3;
+      ball.speed = Math.random() * 6 + 3;
     }, 2000);
-
-
 
   }
 }
 
 function draw_object(object) {
 
-  if (object ==player1) {
+  if (object == player1) {
     if (active) {
       link.src = 'active.png';
       setTimeout(function() {
@@ -198,8 +210,23 @@ function draw_object(object) {
     } else {
       link.src = 'static.png';
     }
-    ctx.drawImage(link, object.x-25, object.y, 70, object.height);
-  } else {
+
+    ctx.drawImage(link, object.x - 25, object.y, 70, object.height);
+
+  } else if (object == heart) {
+    if (score2 == 0) {
+      hearts.src = 'hearts.png';
+      ctx.drawImage(hearts, object.x, object.y, object.width, object.height);
+    } else if (score2 == 1) {
+      hearts.src = 'heart2.png';
+      ctx.drawImage(hearts, object.x, object.y, object.width, object.height);
+    } else if (score2 == 2) {
+      hearts.src = 'heart3.png';
+      ctx.drawImage(hearts, object.x, object.y, object.width, object.height);
+    }
+
+
+  }  else {
     ctx.fillStyle = object.color;
     ctx.fillRect(object.x, object.y, object.width, object.height);
   }
@@ -209,8 +236,8 @@ function draw_object(object) {
   ctx.setLineDash([4, 14, 18]);
   ctx.strokeStyle = 'rgba(218, 165, 32, 0.3)';
   ctx.lineWidth = 2;
-  ctx.moveTo(canvas.width/2, 0);
-  ctx.lineTo(canvas.width/2, canvas.height);
+  ctx.moveTo(canvas.width / 2, 0);
+  ctx.lineTo(canvas.width / 2, canvas.height);
   ctx.stroke();
 
 }
@@ -219,13 +246,12 @@ function displayScore() {
   /* play1 score*/
   ctx.font = "20px Arial";
   ctx.fillStyle = 'white';
-  ctx.fillText(score1, (canvas.width / 2) - 50, 30);
   ctx.fillText(score2, (canvas.width / 2) + 50, 30);
 }
 
 function game_info(phrase) {
   // Rectangulo para tapar midline
-  ctx.clearRect(center[0]-10,center[1]-40, 20,60);
+  ctx.clearRect(center[0] - 10, center[1] - 40, 20, 60);
   // Opciones del texto
   var grd = ctx.createLinearGradient(0, 0, 750, 0);
   grd.addColorStop('0', "white");
@@ -235,6 +261,10 @@ function game_info(phrase) {
   ctx.textAlign = "center";
   // Centro el texto en la mitad
   ctx.fillText(phrase, center[0], center[1]);
+  if (estado == 3 || estado == 4) {
+    ctx.clearRect(center[0], center[1] + 40, 20, 60);
+    ctx.fillText('Press the spacebar to start', center[0], center[1] + 40);
+  }
 
 }
 
@@ -245,6 +275,7 @@ function draw() {
   displayScore();
   draw_object(player1);
   draw_object(player2);
+  draw_object(heart);
 
   if (estado == 0) {
     phrase = "Press the spacebar to start"
@@ -256,8 +287,8 @@ function draw() {
   }
   if (estado == 3) {
     phrase = "Game Over"
+    start_again = "Press the spacebar to start"
     game_info(phrase);
-
   }
 
   if (estado == 4) {
@@ -285,12 +316,12 @@ function countdown() {
   // Estilo
   ctx.beginPath();
   ctx.fillStyle = "black";
-  ctx.strokeStyle= 'rgba(218, 165, 32, 0.65)';
+  ctx.strokeStyle = 'rgba(218, 165, 32, 0.65)';
   ctx.arc(center[0], center[1] - 7, 50, 0, 2 * Math.PI, false);
   ctx.fill();
   ctx.stroke();
   ctx.closePath();
-  ctx.font="25px monospace";
+  ctx.font = "25px monospace";
   ctx.fillStyle = 'rgba(218, 165, 32, 0.65)';
   // Contador
   setTimeout(function() {
@@ -325,8 +356,9 @@ function main() {
   }
   // Call drawScene again in the next browser repaint
   var fps = 100;
-    setTimeout(function() {window.requestAnimationFrame(main);
-    }, 1000 / fps);
+  setTimeout(function() {
+    window.requestAnimationFrame(main);
+  }, 1000 / fps);
 
 }
 
