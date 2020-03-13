@@ -24,7 +24,12 @@ function object_construct(options) {
   this.gravity = options.gravity || 3;
 }
 
-document.onkeydown = function(ev) {
+document.addEventListener('keydown', function (ev) {
+  if (32 == ev.onkeydown) {
+    init();
+    gameState = 1;
+  }
+  console.log(ev.keyCode);
   if (estado == 0) {
     if (32 == ev.keyCode)
       estado = 1;
@@ -32,21 +37,26 @@ document.onkeydown = function(ev) {
 
   if (estado == 3 || estado == 4) {
     if (32 == ev.keyCode) {
-      // init();
+      init();
       estado = 1;
     }
   }
   code.push(ev.keyCode); // Almacena las teclas pulsadas
   console.log(code);
   ev.preventDefault();
-};
+});
 
 // Cuando una tecla deja de ser pulsada se elimina del array
-document.onkeyup = function(ev) {
+document.addEventListener('keyup', function (ev) {
+  if (32 == ev.onkeydown) {
+    init();
+    gameState = 1;
+  }
+
   var pos = code.indexOf(ev.keyCode);
   code.splice(pos, 1);
   console.log(code);
-};
+});
 
 function input() {
   document.onkeydown = function(ev) {
