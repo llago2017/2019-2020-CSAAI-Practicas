@@ -72,13 +72,18 @@ var inicio = {
       ctx.fillRect(0, 0, 800 ,500);
 
       // Rectangulo
+      ctx.beginPath();
       if (mode == 'single') {
         ctx.fillStyle = 'transparent';
       } else {
         ctx.fillStyle = 'white';
       }
-      ctx.fillRect(center[0], center[1] + 50, 200 ,50);
-
+      ctx.rect(center[0] + 25, center[1] + 50, 200 ,50);
+      ctx.stroke();
+      ctx.closePath();
+      ctx.beginPath();
+      ctx.rect(center[0] - 225, center[1] + 50, 200 ,50);
+      ctx.stroke();
       // Letras
       ctx.font = "35px Zelda";
       if (mode == 'single') {
@@ -88,7 +93,7 @@ var inicio = {
       }
       ctx.textAlign = "center";
       // Centro el texto en la mitad
-      ctx.fillText("Single Player", center[0] + 100, center[1] + 85);
+      ctx.fillText("Single Player", center[0] + 125, center[1] + 85);
 
       ctx.font = "50px Zelda";
       ctx.fillText("The Legend of Zelda", center[0], center[1] - 70);
