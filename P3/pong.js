@@ -68,6 +68,24 @@ function object_construct(options) {
   this.gravity = options.gravity || 3;
 }
 
+function delete_menu (old_color, object) {
+  if (mode != '') {
+    ctx.fillStyle = 'transparent';
+
+    if (object == 'rect') {
+      ctx.strokeStyle = "transparent";
+    }
+
+  } else {
+    if (object == 'rect') {
+      ctx.drawImage(paper, center[0] + 5 , center[1] + 40, 250 ,80);
+      ctx.drawImage(paper, center[0] - 250 , center[1] + 40, 250 ,80);
+    } else {
+      ctx.fillStyle = old_color;
+    }
+  }
+}
+
 var inicio = {
     init: function(ctx) {
       this.ctx = ctx
@@ -75,22 +93,11 @@ var inicio = {
     draw: function(){
       paper.src = 'paper2.png'
       // Fondo
-      if (mode != '') {
-        ctx.fillStyle = 'transparent';
-      } else {
-        ctx.fillStyle = 'black';
-      }
+      delete_menu('black','background')
       ctx.fillRect(0, 0, 800 ,500);
 
       // Rectangulo Single
-      if (mode != '') {
-        ctx.fillStyle = 'transparent';
-        ctx.strokeStyle = "transparent";
-      } else {
-        ctx.lineWidth = "4";
-        ctx.drawImage(paper, center[0] + 5 , center[1] + 40, 250 ,80);
-        ctx.drawImage(paper, center[0] - 250 , center[1] + 40, 250 ,80);
-      }
+      delete_menu('','rect');
       ctx.beginPath();
       ctx.rect(center[0] + 25, center[1] + 50, 200 ,50);
       // Rectangulo Multi
@@ -98,23 +105,15 @@ var inicio = {
       ctx.rect(center[0] - 225, center[1] + 50, 200 ,50);
 
       // Letras
-      if (mode != '') {
-        ctx.fillStyle = 'transparent';
-      } else {
-        ctx.fillStyle = grd;
-      }
+      delete_menu(grd,'text');
       ctx.textAlign = "center";
-      // Centro el texto en la mitad
 
+      // Centro el texto en la mitad
       ctx.font = "50px Zelda";
       ctx.fillText("The Legend of Zelda", center[0], center[1] - 70);
       ctx.fillText("Breath of the Pong", center[0], center[1] - 20);
 
-      if (mode != '') {
-        ctx.fillStyle = 'transparent';
-      } else {
-        ctx.fillStyle = 'black';
-      }
+      ctx.fillStyle = 'black'; // Al ser negras no las tengo que borrar
       ctx.font = "35px Zelda";
       ctx.fillText("Multi Player", center[0] - 135, center[1] + 85);
       ctx.fillText("Single Player", center[0] + 125, center[1] + 85);
