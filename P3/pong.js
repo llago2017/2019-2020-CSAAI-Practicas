@@ -71,19 +71,24 @@ var inicio = {
       }
       ctx.fillRect(0, 0, 800 ,500);
 
-      // Rectangulo
-      ctx.beginPath();
-      if (mode == 'single') {
+      // Rectangulo Single
+      if (mode != '') {
         ctx.fillStyle = 'transparent';
+        ctx.strokeStyle = "transparent";
       } else {
-        ctx.fillStyle = 'white';
+        ctx.lineWidth = "4";
+        ctx.fillStyle = 'rgba(218, 165, 32,0.2)';
       }
+      ctx.beginPath();
       ctx.rect(center[0] + 25, center[1] + 50, 200 ,50);
       ctx.stroke();
-      ctx.closePath();
+      ctx.fill();
+      // Rectangulo Multi
       ctx.beginPath();
       ctx.rect(center[0] - 225, center[1] + 50, 200 ,50);
       ctx.stroke();
+      ctx.fill();
+
       // Letras
       ctx.font = "35px Zelda";
       if (mode == 'single') {
