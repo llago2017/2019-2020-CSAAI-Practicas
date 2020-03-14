@@ -32,6 +32,13 @@ var rect = {
     width:200,
     height:50
 };
+
+var rect2 = {
+    x:center[0] - 225,
+    y:center[1] + 50,
+    width:200,
+    height:50
+};
 var mode = "";
 
 //Function to get the mouse position
@@ -64,7 +71,7 @@ var inicio = {
       },
     draw: function(){
       // Fondo
-      if (mode == 'single') {
+      if (mode != '') {
         ctx.fillStyle = 'transparent';
       } else {
         ctx.fillStyle = 'black';
@@ -91,7 +98,7 @@ var inicio = {
 
       // Letras
       ctx.font = "35px Zelda";
-      if (mode == 'single') {
+      if (mode != '') {
         ctx.fillStyle = 'transparent';
       } else {
         ctx.fillStyle = grd;
@@ -99,6 +106,7 @@ var inicio = {
       ctx.textAlign = "center";
       // Centro el texto en la mitad
       ctx.fillText("Single Player", center[0] + 125, center[1] + 85);
+      ctx.fillText("Multi Player", center[0] - 125, center[1] + 85);
 
       ctx.font = "50px Zelda";
       ctx.fillText("The Legend of Zelda", center[0], center[1] - 70);
@@ -110,6 +118,8 @@ var inicio = {
 
           if (isInside(mousePos,rect)) {
               mode ="single";
+          } else if (isInside(mousePos, rect2)) {
+              mode = 'multi';
           }
       }, false);
       if (mode != "") {
