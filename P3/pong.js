@@ -182,6 +182,21 @@ function input() {
         }
         break;
     }
+    if (mode == "multi") {
+      switch (ev.keyCode) {
+        case 87:
+          if (player2.y - player2.gravity > 0) { // Para que no salga del cuadro
+            player2.y -= player2.gravity; // la parte de arriba es (0,0)
+          }
+        break;
+        case 83:
+          if (player2.y + player2.gravity + player1.height < canvas.height) {
+            player2.y += player2.gravity;
+          }
+        break;
+      }
+
+    }
   }
 }
 
@@ -475,7 +490,10 @@ function main() {
     counter = 2;
     ball_mov();
     input(player1);
-    auto_p2();
+    if (mode == 'single') {
+      auto_p2();
+    }
+
   } else if (estado == 2) {
 
     countdown();
