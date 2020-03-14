@@ -21,13 +21,17 @@ var ganon = new Image;
 var hearts = new Image;
 var paper = new Image;
 var rupe = new Image;
+var navi = new Image;
 var active = false;
 var active2 = false;
+var select = 0;
+var on = true;
 var t = 0;
 var step = 0.01;
 var grd = ctx.createLinearGradient(0, 0, 750, 0);
 grd.addColorStop('0', "white");
 grd.addColorStop('1', "goldenrod");
+navi.src = 'navi.png';
 
 var rect = {
     x:center[0],
@@ -86,12 +90,30 @@ function delete_menu (old_color, object) {
   }
 }
 
+function blink_navi() {
+  if (on) {
+    var active_navi = ['navi2.png','navi1.png'];
+    navi.src = active_navi[select];
+    setTimeout(function() {
+      select = Math.floor(Math.random() * (1 - 0 + 1) ) + 0;
+      on = false;
+    }, 1000);
+
+  } else {
+    navi.src = 'navi.png';
+    setTimeout(function() {
+      on = true;
+    }, 1000);
+  }
+  ctx.drawImage(navi, 50 , 100, 100 ,100);
+}
+
 var inicio = {
     init: function(ctx) {
       this.ctx = ctx
       },
     draw: function(){
-      paper.src = 'paper2.png'
+      paper.src = 'paper2.png';
       // Fondo
       delete_menu('black','background')
       ctx.fillRect(0, 0, 800 ,500);
@@ -103,6 +125,11 @@ var inicio = {
       // Rectangulo Multi
       ctx.beginPath();
       ctx.rect(center[0] - 225, center[1] + 50, 200 ,50);
+      // Prueba
+      if (mode == '') {
+        blink_navi();
+      }
+
 
       // Letras
       delete_menu(grd,'text');
@@ -117,6 +144,7 @@ var inicio = {
       ctx.font = "35px Zelda";
       ctx.fillText("Multi Player", center[0] - 135, center[1] + 85);
       ctx.fillText("Single Player", center[0] + 125, center[1] + 85);
+
       //Binding the click event on the canvas
       canvas.addEventListener('click', function(evt) {
         console.log("Hola");
