@@ -177,6 +177,7 @@ var inicio = {
         mode = "single";
       } else if (isInside(mousePos, rect2)) {
         mode = 'multi';
+        player2.gravity = 10;
       }
     }, false);
     if (mode != "") {
@@ -294,7 +295,7 @@ var ball = new object_construct({
   y: (canvas.height / 2),
   width: 12,
   height: 12,
-  speed: 10,
+  speed: 5,
   gravity: 2
 });
 
@@ -330,7 +331,7 @@ function ball_mov() {
     if (ball.y + ball.height >= player1.y && ball.y <= player1.y + player1.height) {
       ball.x = (player1.x + ball.width);
       ball.speed *= (-1);
-      ball.gravity = Math.random() * 5;
+      ball.gravity = (Math.ceil((Math.random() - 0.5)) < 1 ? -1 : 1) * (Math.random() * (5 - 1) + 1);
       active = true;
       draw_object(player1);
 
@@ -342,6 +343,12 @@ function ball_mov() {
     if (ball.y + ball.height >= player2.y && ball.y <= player2.y + player2.height) {
       ball.x = (player2.x - ball.width);
       ball.speed *= (-1);
+      if (mode == 'single') {
+        ball.gravity = (Math.random() - 0.5) * 5;
+      } else if (mode == 'multi') {
+        ball.gravity = (Math.ceil((Math.random() - 0.5)) < 1 ? -1 : 1) * (Math.random() * (5 - 1) + 1);
+      }
+
       active2 = true;
       draw_object(player2);
     }
@@ -375,8 +382,7 @@ function ball_mov() {
     ball.gravity = 0;
 
     setTimeout(function() {
-      ball.gravity = Math.random();
-      ball.speed = Math.random() * 6 + 3;
+      ball.speed = 5;
     }, 2000);
 
   }
