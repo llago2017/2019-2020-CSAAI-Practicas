@@ -147,7 +147,10 @@ var inicio = {
     }
 
     // Ocarina
-    blink_navi('ocarina');
+    if (mode == '') {
+      blink_navi('ocarina');
+    }
+
 
 
 
