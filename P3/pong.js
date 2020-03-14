@@ -29,6 +29,7 @@ var select = 0;
 var on = true;
 var t = 0;
 var step = 0.01;
+var level = 0;
 var grd = ctx.createLinearGradient(0, 0, 750, 0);
 grd.addColorStop('0', "white");
 grd.addColorStop('1', "goldenrod");
@@ -200,7 +201,7 @@ document.addEventListener('keydown', function(ev) {
     }
   }
 
-  if (estado == 3 || estado == 4) {
+  if (estado == 3 || estado == 4 || estado == 5) {
     if (32 == ev.keyCode) {
       init();
       estado = 1;
@@ -369,8 +370,20 @@ function ball_mov() {
   // Fin del juego
 
   if (score1 == 3) {
-    estado = 4;
+    if (mode == 'single') {
+      ball.speed = 10;
+      player2.gravity = 4;
+      player1.gravity = 11;
+      level += 1;
+      estado = 5;
+    } else if (mode == 'multi') {
+
+      estado = 4;
+    }
   } else if (score2 == 3) {
+    if (level != 0) {
+      level = 0;
+    };
     estado = 3;
   }
 
@@ -382,7 +395,11 @@ function ball_mov() {
     ball.gravity = 0;
 
     setTimeout(function() {
-      ball.speed = 5;
+      if (level == 1) {
+        ball.speed = 10;
+      } else {
+        ball.speed = 5;
+      }
     }, 2000);
 
   }
@@ -467,7 +484,7 @@ function game_info(phrase) {
   ctx.textAlign = "center";
   // Centro el texto en la mitad
   ctx.fillText(phrase, center[0], center[1]);
-  if (estado == 3 || estado == 4) {
+  if (estado == 3 || estado == 4 || estado == 5) {
     init();
     ctx.clearRect(center[0], center[1] + 40, 20, 60);
     ctx.fillText('Press the spacebar to start', center[0], center[1] + 40);
@@ -500,6 +517,10 @@ function draw() {
 
   if (estado == 4) {
     phrase = "You win"
+    game_info(phrase);
+  }
+  if (estado == 5 ) {
+    phrase = "Prepare yourself for the next level"
     game_info(phrase);
   }
 
