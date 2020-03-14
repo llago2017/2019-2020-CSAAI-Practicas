@@ -22,6 +22,7 @@ var hearts = new Image;
 var paper = new Image;
 var rupe = new Image;
 var navi = new Image;
+var ocarina = new Image;
 var active = false;
 var active2 = false;
 var select = 0;
@@ -34,31 +35,31 @@ grd.addColorStop('1', "goldenrod");
 navi.src = 'navi.png';
 
 var rect = {
-    x:center[0],
-    y:center[1] + 50,
-    width:200,
-    height:50
+  x: center[0],
+  y: center[1] + 50,
+  width: 200,
+  height: 50
 };
 
 var rect2 = {
-    x:center[0] - 225,
-    y:center[1] + 50,
-    width:200,
-    height:50
+  x: center[0] - 225,
+  y: center[1] + 50,
+  width: 200,
+  height: 50
 };
 var mode = "";
 
 //Function to get the mouse position
 function getMousePos(canvas, event) {
-    var rect = canvas.getBoundingClientRect();
-    return {
-        x: event.clientX - rect.left,
-        y: event.clientY - rect.top
-    };
+  var rect = canvas.getBoundingClientRect();
+  return {
+    x: event.clientX - rect.left,
+    y: event.clientY - rect.top
+  };
 }
 //Function to check whether a point is inside a rectangle
-function isInside(pos, rect){
-    return pos.x > rect.x && pos.x < rect.x+rect.width && pos.y < rect.y+rect.height && pos.y > rect.y
+function isInside(pos, rect) {
+  return pos.x > rect.x && pos.x < rect.x + rect.width && pos.y < rect.y + rect.height && pos.y > rect.y
 }
 
 // Constructor de objetos
@@ -72,7 +73,7 @@ function object_construct(options) {
   this.gravity = options.gravity || 3;
 }
 
-function delete_menu (old_color, object) {
+function delete_menu(old_color, object) {
   if (mode != '') {
     ctx.fillStyle = 'transparent';
 
@@ -82,86 +83,105 @@ function delete_menu (old_color, object) {
 
   } else {
     if (object == 'rect') {
-      ctx.drawImage(paper, center[0] + 5 , center[1] + 40, 250 ,80);
-      ctx.drawImage(paper, center[0] - 250 , center[1] + 40, 250 ,80);
+      ctx.drawImage(paper, center[0] + 5, center[1] + 40, 250, 80);
+      ctx.drawImage(paper, center[0] - 250, center[1] + 40, 250, 80);
     } else {
       ctx.fillStyle = old_color;
     }
   }
 }
 
-function blink_navi() {
+function blink_navi(image) {
   if (on) {
-    var active_navi = ['navi2.png','navi1.png'];
-    navi.src = active_navi[select];
+    if (image == 'ocarina') {
+      ocarina.src = 'ocarina1.png'
+
+    } else {
+      var active_navi = ['navi2.png', 'navi1.png', 'navi3.png', 'navi4.png'];
+      navi.src = active_navi[select];
+    }
+
     setTimeout(function() {
-      select = Math.floor(Math.random() * (1 - 0 + 1) ) + 0;
+      select = Math.floor(Math.random() * (3 - 0 + 1)) + 0;
       on = false;
     }, 1000);
 
   } else {
-    navi.src = 'navi.png';
+    if (image == 'ocarina') {
+      ocarina.src = 'ocarina.png';
+    } else {
+      navi.src = 'navi.png';
+    }
     setTimeout(function() {
       on = true;
     }, 1000);
   }
-  ctx.drawImage(navi, 50 , 100, 100 ,100);
+  if (image == 'ocarina') {
+    ctx.drawImage(ocarina, 650, 120, 75, 75);
+  } else {
+    ctx.drawImage(navi, 50, 100, 100, 100);
+  }
+
 }
 
 var inicio = {
-    init: function(ctx) {
-      this.ctx = ctx
-      },
-    draw: function(){
-      paper.src = 'paper2.png';
-      // Fondo
-      delete_menu('black','background')
-      ctx.fillRect(0, 0, 800 ,500);
+  init: function(ctx) {
+    this.ctx = ctx
+  },
+  draw: function() {
+    paper.src = 'paper2.png';
+    // Fondo
+    delete_menu('black', 'background')
+    ctx.fillRect(0, 0, 800, 500);
 
-      // Rectangulo Single
-      delete_menu('','rect');
-      ctx.beginPath();
-      ctx.rect(center[0] + 25, center[1] + 50, 200 ,50);
-      // Rectangulo Multi
-      ctx.beginPath();
-      ctx.rect(center[0] - 225, center[1] + 50, 200 ,50);
-      // Prueba
-      if (mode == '') {
-        blink_navi();
+    // Rectangulo Single
+    delete_menu('', 'rect');
+    ctx.beginPath();
+    ctx.rect(center[0] + 25, center[1] + 50, 200, 50);
+    // Rectangulo Multi
+    ctx.beginPath();
+    ctx.rect(center[0] - 225, center[1] + 50, 200, 50);
+    // Navi
+    if (mode == '') {
+      blink_navi('navi');
+    }
+
+    // Ocarina
+    blink_navi('ocarina');
+
+
+
+    // Letras
+    delete_menu(grd, 'text');
+    ctx.textAlign = "center";
+
+    // Centro el texto en la mitad
+    ctx.font = "50px Zelda";
+    ctx.fillText("The Legend of Zelda", center[0], center[1] - 70);
+    ctx.fillText("Breath of the Pong", center[0], center[1] - 20);
+
+    ctx.fillStyle = 'black'; // Al ser negras no las tengo que borrar
+    ctx.font = "35px Zelda";
+    ctx.fillText("Multi Player", center[0] - 135, center[1] + 85);
+    ctx.fillText("Single Player", center[0] + 125, center[1] + 85);
+
+    //Binding the click event on the canvas
+    canvas.addEventListener('click', function(evt) {
+      console.log("Hola");
+      var mousePos = getMousePos(canvas, evt);
+
+      if (isInside(mousePos, rect)) {
+        mode = "single";
+      } else if (isInside(mousePos, rect2)) {
+        mode = 'multi';
       }
-
-
-      // Letras
-      delete_menu(grd,'text');
-      ctx.textAlign = "center";
-
-      // Centro el texto en la mitad
-      ctx.font = "50px Zelda";
-      ctx.fillText("The Legend of Zelda", center[0], center[1] - 70);
-      ctx.fillText("Breath of the Pong", center[0], center[1] - 20);
-
-      ctx.fillStyle = 'black'; // Al ser negras no las tengo que borrar
-      ctx.font = "35px Zelda";
-      ctx.fillText("Multi Player", center[0] - 135, center[1] + 85);
-      ctx.fillText("Single Player", center[0] + 125, center[1] + 85);
-
-      //Binding the click event on the canvas
-      canvas.addEventListener('click', function(evt) {
-        console.log("Hola");
-          var mousePos = getMousePos(canvas, evt);
-
-          if (isInside(mousePos,rect)) {
-              mode ="single";
-          } else if (isInside(mousePos, rect2)) {
-              mode = 'multi';
-          }
-      }, false);
-      if (mode != "") {
-        phrase = "Press the spacebar to start"
-        game_info(phrase);
-      }
-    },
-  }
+    }, false);
+    if (mode != "") {
+      phrase = "Press the spacebar to start"
+      game_info(phrase);
+    }
+  },
+}
 
 document.addEventListener('keydown', function(ev) {
   if (32 == ev.onkeydown) {
@@ -170,7 +190,7 @@ document.addEventListener('keydown', function(ev) {
   }
   console.log(ev.keyCode);
   if (estado == 0) {
-    if (32 == ev.keyCode){
+    if (32 == ev.keyCode) {
       estado = 1;
       init();
     }
@@ -222,12 +242,12 @@ function input() {
           if (player2.y - player2.gravity > 0) { // Para que no salga del cuadro
             player2.y -= player2.gravity; // la parte de arriba es (0,0)
           }
-        break;
+          break;
         case 83:
           if (player2.y + player2.gravity + player1.height < canvas.height) {
             player2.y += player2.gravity;
           }
-        break;
+          break;
       }
 
     }
@@ -410,9 +430,9 @@ function draw_object(object) {
       ctx.drawImage(hearts, object.x + 60, object.y, object.width, object.height);
     }
 
-  }  else if (object == ball){
+  } else if (object == ball) {
     rupe.src = 'rupe.png';
-    ctx.drawImage(rupe, object.x - 8 , object.y - 10, 25, 30);
+    ctx.drawImage(rupe, object.x - 8, object.y - 10, 25, 30);
   }
 
   // Separador
