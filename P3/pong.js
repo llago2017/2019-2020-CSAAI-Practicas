@@ -19,6 +19,8 @@ var counter = 2;
 var link = new Image;
 var ganon = new Image;
 var hearts = new Image;
+var paper = new Image;
+var rupe = new Image;
 var active = false;
 var active2 = false;
 var t = 0;
@@ -26,6 +28,7 @@ var step = 0.01;
 var grd = ctx.createLinearGradient(0, 0, 750, 0);
 grd.addColorStop('0', "white");
 grd.addColorStop('1', "goldenrod");
+
 var rect = {
     x:center[0],
     y:center[1] + 50,
@@ -70,6 +73,7 @@ var inicio = {
       this.ctx = ctx
       },
     draw: function(){
+      paper.src = 'paper2.png'
       // Fondo
       if (mode != '') {
         ctx.fillStyle = 'transparent';
@@ -84,20 +88,16 @@ var inicio = {
         ctx.strokeStyle = "transparent";
       } else {
         ctx.lineWidth = "4";
-        ctx.fillStyle = 'rgba(218, 165, 32,0.2)';
+        ctx.drawImage(paper, center[0] + 5 , center[1] + 40, 250 ,80);
+        ctx.drawImage(paper, center[0] - 250 , center[1] + 40, 250 ,80);
       }
       ctx.beginPath();
       ctx.rect(center[0] + 25, center[1] + 50, 200 ,50);
-      ctx.stroke();
-      ctx.fill();
       // Rectangulo Multi
       ctx.beginPath();
       ctx.rect(center[0] - 225, center[1] + 50, 200 ,50);
-      ctx.stroke();
-      ctx.fill();
 
       // Letras
-      ctx.font = "35px Zelda";
       if (mode != '') {
         ctx.fillStyle = 'transparent';
       } else {
@@ -105,12 +105,19 @@ var inicio = {
       }
       ctx.textAlign = "center";
       // Centro el texto en la mitad
-      ctx.fillText("Single Player", center[0] + 125, center[1] + 85);
-      ctx.fillText("Multi Player", center[0] - 125, center[1] + 85);
 
       ctx.font = "50px Zelda";
       ctx.fillText("The Legend of Zelda", center[0], center[1] - 70);
       ctx.fillText("Breath of the Pong", center[0], center[1] - 20);
+
+      if (mode != '') {
+        ctx.fillStyle = 'transparent';
+      } else {
+        ctx.fillStyle = 'black';
+      }
+      ctx.font = "35px Zelda";
+      ctx.fillText("Multi Player", center[0] - 135, center[1] + 85);
+      ctx.fillText("Single Player", center[0] + 125, center[1] + 85);
       //Binding the click event on the canvas
       canvas.addEventListener('click', function(evt) {
         console.log("Hola");
@@ -376,9 +383,9 @@ function draw_object(object) {
       ctx.drawImage(hearts, object.x + 60, object.y, object.width, object.height);
     }
 
-  }  else {
-    ctx.fillStyle = object.color;
-    ctx.fillRect(object.x, object.y, object.width, object.height);
+  }  else if (object == ball){
+    rupe.src = 'rupe.png';
+    ctx.drawImage(rupe, object.x - 8 , object.y - 10, 25, 30);
   }
 
   // Separador
