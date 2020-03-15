@@ -407,16 +407,29 @@ function ball_mov() {
 
 function draw_object(object) {
   if (object == player2) {
-    if (active2) {
-      ganon.src = 'active_dorf.png';
-      setTimeout(function() {
-        active2 = false;
-      }, 200);
+    if (level == 0) {
+      if (active2) {
+        ganon.src = 'ganonpixel.png';
+        setTimeout(function() {
+          active2 = false;
+        }, 200);
 
-    } else {
-      ganon.src = 'dorf.png';
+      } else {
+        ganon.src = 'ganonpixel1.png';
+      }
+    } else if (level == 1) {
+      if (active2) {
+        ganon.src = 'ghir1.png';
+        setTimeout(function() {
+          active2 = false;
+        }, 200);
+
+      } else {
+        ganon.src = 'ghir.png';
+      }
     }
-    ctx.drawImage(ganon, object.x - 25, object.y, 70, object.height);
+
+    ctx.drawImage(ganon, object.x - 50, object.y, 90, object.height);
   }
 
   if (object == player1) {
