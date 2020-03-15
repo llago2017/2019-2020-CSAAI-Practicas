@@ -28,9 +28,9 @@ var active = false;
 var active2 = false;
 var select = 0;
 var on = true;
-var t = 0;
-var step = 0.01;
 var level = 0;
+var x_move = 0;
+var level_speed = 7;
 var grd = ctx.createLinearGradient(0, 0, 750, 0);
 grd.addColorStop('0', "white");
 grd.addColorStop('1', "goldenrod");
@@ -169,7 +169,6 @@ var inicio = {
 
     //Binding the click event on the canvas
     canvas.addEventListener('click', function(evt) {
-      console.log("Hola");
       var mousePos = getMousePos(canvas, evt);
 
       if (isInside(mousePos, rect)) {
@@ -191,7 +190,7 @@ document.addEventListener('keydown', function(ev) {
     init();
     estado = 1;
   }
-  console.log(ev.keyCode);
+
   if (estado == 0) {
     if (32 == ev.keyCode) {
       estado = 1;
@@ -205,21 +204,14 @@ document.addEventListener('keydown', function(ev) {
       estado = 1;
     }
   }
-  code.push(ev.keyCode); // Almacena las teclas pulsadas
-  console.log(code);
   ev.preventDefault();
 });
 
 // Cuando una tecla deja de ser pulsada se elimina del array
 document.addEventListener('keyup', function(ev) {
-  if (32 == ev.onkeydown) {
-    init();
-    estado = 1;
+  if (38 == ev.keyCode || 40 == ev.keyCode) {
+    x_move = 0;
   }
-
-  var pos = code.indexOf(ev.keyCode);
-  code.splice(pos, 1);
-  console.log(code);
 });
 
 function input() {
@@ -228,6 +220,11 @@ function input() {
       case 38:
         if (player1.y - player1.gravity > 0) { // Para que no salga del cuadro
           player1.y -= player1.gravity; // la parte de arriba es (0,0)
+          x_move += 0.3;
+          if (x_move > 5) {
+            x_move = 5;
+          }
+
         }
         break;
       case 40:
@@ -236,6 +233,10 @@ function input() {
         con la parte de abajo */
         if (player1.y + player1.gravity + player2.height < canvas.height) {
           player1.y += player1.gravity;
+          x_move += 0.3;
+          if (x_move > 5) {
+            x_move = 5;
+          }
         }
         break;
     }
@@ -276,8 +277,9 @@ var player1 = new object_construct({
   y: canvas.height / 2 - 40,
   width: 12,
   height: 80,
-  gravity: 10
-})
+  gravity: 10,
+
+});
 
 var player2 = new object_construct({
   /*player paddle*/
@@ -329,7 +331,11 @@ function ball_mov() {
   if (ball.x <= player1.x + player1.width && ball.x + ball.width >= player1.x) {
     if (ball.y + ball.height >= player1.y && ball.y <= player1.y + player1.height) {
       ball.x = (player1.x + ball.width);
+      console.log("antigua --> " + ball.speed);
+      ball.speed -= x_move;
       ball.speed *= (-1);
+      console.log('nueva --> ' + ball.speed);
+
       ball.gravity = (Math.ceil((Math.random() - 0.5)) < 1 ? -1 : 1) * (Math.random() * (5 - 1) + 1);
       active = true;
       draw_object(player1);
@@ -343,6 +349,7 @@ function ball_mov() {
       ball.x = (player2.x - ball.width);
       ball.speed *= (-1);
       if (mode == 'single') {
+        ball.speed = -level_speed;
         ball.gravity = (Math.random() - 0.5) * 5;
       } else if (mode == 'multi') {
         ball.gravity = (Math.ceil((Math.random() - 0.5)) < 1 ? -1 : 1) * (Math.random() * (5 - 1) + 1);
@@ -369,16 +376,17 @@ function ball_mov() {
 
   if (score1 == 3) {
     if (mode == 'single') {
-      ball.speed = 10;
-      player2.gravity = 4;
+      level_speed = 10;
+      ball.speed = level_speed;
+      player2.gravity = 3;
       player1.gravity = 11;
       level += 1;
       estado = 5;
       if (level == 2) {
-        ball.speed = 12;
-        player2.gravity = 6;
+        level_speed = 12;
+        ball.speed = level_speed;
+        player2.gravity = 3;
         player1.gravity = 13;
-        level += 1;
         estado = 6;
       } else if (level == 3) {
         estado = 7;
@@ -388,10 +396,9 @@ function ball_mov() {
 
       estado = 4;
     }
-  } else if (score2 == 3) {
-    if (level != 0) {
-      level = 0;
-    };
+  }
+  if (score2 == 3) {
+    level_speed = 7;
     estado = 3;
   }
 
@@ -404,9 +411,11 @@ function ball_mov() {
 
     setTimeout(function() {
       if (level == 1) {
+        ball.speed = 9;
+      } else if (level == 2) {
         ball.speed = 10;
       } else {
-        ball.speed = 5;
+        ball.speed = 7;
       }
     }, 2000);
 
@@ -543,6 +552,7 @@ function draw() {
   if (estado == 3) {
     phrase = "Game Over"
     start_again = "Press the spacebar to start"
+    level = 0;
     game_info(phrase);
   }
 
@@ -560,6 +570,7 @@ function draw() {
   }
 
   if (estado == 7) {
+    level = 0;
     phrase = "Winner!!!"
     game_info(phrase);
 
