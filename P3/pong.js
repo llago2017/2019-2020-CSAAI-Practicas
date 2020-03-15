@@ -9,6 +9,7 @@ var estado = 0;
 // Estado 2 --> punto marcado, counter
 // Estado 3 --> game Over
 // Estado 4 --> win
+// Estado 5 --> nuevo nivel
 
 // creo un array con las teclas que pulso
 var code = [];
@@ -152,9 +153,6 @@ var inicio = {
       blink_navi('ocarina');
     }
 
-
-
-
     // Letras
     delete_menu(grd, 'text');
     ctx.textAlign = "center";
@@ -201,7 +199,7 @@ document.addEventListener('keydown', function(ev) {
     }
   }
 
-  if (estado == 3 || estado == 4 || estado == 5) {
+  if (estado == 3 || estado == 4 || estado == 5 || estado == 6) {
     if (32 == ev.keyCode) {
       init();
       estado = 1;
@@ -376,6 +374,16 @@ function ball_mov() {
       player1.gravity = 11;
       level += 1;
       estado = 5;
+      if (level == 2) {
+        ball.speed = 12;
+        player2.gravity = 6;
+        player1.gravity = 13;
+        level += 1;
+        estado = 6;
+      } else if (level == 3) {
+        estado = 7;
+      }
+
     } else if (mode == 'multi') {
 
       estado = 4;
@@ -427,9 +435,19 @@ function draw_object(object) {
       } else {
         ganon.src = 'ghir.png';
       }
+    } else if (level == 2) {
+        if (active2) {
+          ganon.src = 'cucco1.png';
+          setTimeout(function() {
+            active2 = false;
+          }, 200);
+
+        } else {
+          ganon.src = 'cucco.png';
+        }
     }
 
-    ctx.drawImage(ganon, object.x - 50, object.y, 90, object.height);
+    ctx.drawImage(ganon, object.x - 50, object.y, 80, object.height);
   }
 
   if (object == player1) {
@@ -497,7 +515,7 @@ function game_info(phrase) {
   ctx.textAlign = "center";
   // Centro el texto en la mitad
   ctx.fillText(phrase, center[0], center[1]);
-  if (estado == 3 || estado == 4 || estado == 5) {
+  if (estado == 3 || estado == 4 || estado == 5 || estado == 6) {
     init();
     ctx.clearRect(center[0], center[1] + 40, 20, 60);
     ctx.fillText('Press the spacebar to start', center[0], center[1] + 40);
@@ -535,6 +553,16 @@ function draw() {
   if (estado == 5 ) {
     phrase = "Prepare yourself for the next level"
     game_info(phrase);
+  }
+  if (estado == 6 ) {
+    phrase = "Final level"
+    game_info(phrase);
+  }
+
+  if (estado == 7) {
+    phrase = "Winner!!!"
+    game_info(phrase);
+
   }
 
 }
