@@ -24,9 +24,12 @@ var paper = new Image;
 var rupe = new Image;
 var navi = new Image;
 var ocarina = new Image;
+var end = new Image;
+var triforce = new Image;
 var active = false;
 var active2 = false;
 var select = 0;
+var rotate_i = 0;
 var on = true;
 var level = 0;
 var x_move = 0;
@@ -98,6 +101,9 @@ function blink_navi(image) {
     if (image == 'ocarina') {
       ocarina.src = 'ocarina1.png'
 
+    } else if (image == 'triforce') {
+      var rotate = ['triforce.png', 'triforce1.png'];
+        triforce.src = rotate[rotate_i];
     } else {
       var active_navi = ['navi2.png', 'navi1.png', 'navi3.png', 'navi4.png'];
       navi.src = active_navi[select];
@@ -105,13 +111,21 @@ function blink_navi(image) {
 
     setTimeout(function() {
       select = Math.floor(Math.random() * (3 - 0 + 1)) + 0;
+      if (rotate_i == 1) {
+        rotate_i = 0;
+      }
+      rotate_i += 1;
       on = false;
     }, 1000);
 
   } else {
     if (image == 'ocarina') {
       ocarina.src = 'ocarina.png';
-    } else {
+    }  else if (image == 'triforce') {
+      var rotate1 = ['triforce2.png','triforce3.png'];
+      triforce.src = rotate1[rotate_i];
+    }
+    else {
       navi.src = 'navi.png';
     }
     setTimeout(function() {
@@ -120,6 +134,8 @@ function blink_navi(image) {
   }
   if (image == 'ocarina') {
     ctx.drawImage(ocarina, 650, 120, 75, 75);
+  } else if (image == 'triforce') {
+    ctx.drawImage(triforce, center[0] - 100, center[1] - 100, 100,100);
   } else {
     ctx.drawImage(navi, 50, 100, 100, 100);
   }
@@ -532,6 +548,13 @@ function game_info(phrase) {
 
 }
 
+function end_screen() {
+  end.src = 'end_screen.jpg'
+  ctx.drawImage(end, 0, 0, canvas.width, canvas.height);
+  blink_navi('triforce');
+
+}
+
 function draw() {
   // Borro el canvas
   ctx.clearRect(0, 0, canvas.width, canvas.height);
@@ -571,8 +594,7 @@ function draw() {
 
   if (estado == 7) {
     level = 0;
-    phrase = "Winner!!!"
-    game_info(phrase);
+    end_screen();
 
   }
 
