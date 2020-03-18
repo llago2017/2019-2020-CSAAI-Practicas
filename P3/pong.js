@@ -102,8 +102,7 @@ function blink_navi(image) {
       ocarina.src = 'ocarina1.png'
 
     } else if (image == 'triforce') {
-      var rotate = ['triforce.png', 'triforce1.png'];
-        triforce.src = rotate[rotate_i];
+      triforce.src = 'triforce1.png';
     } else {
       var active_navi = ['navi2.png', 'navi1.png', 'navi3.png', 'navi4.png'];
       navi.src = active_navi[select];
@@ -111,10 +110,6 @@ function blink_navi(image) {
 
     setTimeout(function() {
       select = Math.floor(Math.random() * (3 - 0 + 1)) + 0;
-      if (rotate_i == 1) {
-        rotate_i = 0;
-      }
-      rotate_i += 1;
       on = false;
     }, 1000);
 
@@ -122,8 +117,7 @@ function blink_navi(image) {
     if (image == 'ocarina') {
       ocarina.src = 'ocarina.png';
     }  else if (image == 'triforce') {
-      var rotate1 = ['triforce2.png','triforce3.png'];
-      triforce.src = rotate1[rotate_i];
+      triforce.src = 'triforce.png';
     }
     else {
       navi.src = 'navi.png';
@@ -135,7 +129,7 @@ function blink_navi(image) {
   if (image == 'ocarina') {
     ctx.drawImage(ocarina, 650, 120, 75, 75);
   } else if (image == 'triforce') {
-    ctx.drawImage(triforce, center[0] - 100, center[1] - 100, 100,100);
+    ctx.drawImage(triforce, center[0] - 100, center[1] - 225, 200,200);
   } else {
     ctx.drawImage(navi, 50, 100, 100, 100);
   }
@@ -202,10 +196,6 @@ var inicio = {
 }
 
 document.addEventListener('keydown', function(ev) {
-  if (32 == ev.onkeydown) {
-    init();
-    estado = 1;
-  }
 
   if (estado == 0) {
     if (32 == ev.keyCode) {
@@ -218,6 +208,11 @@ document.addEventListener('keydown', function(ev) {
     if (32 == ev.keyCode) {
       init();
       estado = 1;
+    }
+  } else if (estado == 7) {
+    if (32 == ev.keyCode) {
+      init();
+      estado = 0;
     }
   }
   ev.preventDefault();
@@ -529,13 +524,17 @@ function draw_object(object) {
 }
 
 function game_info(phrase) {
-  // Rectangulo para tapar midline
-  ctx.clearRect(center[0] - 10, center[1] - 40, 20, 60);
   // Opciones del texto
   var grd = ctx.createLinearGradient(0, 0, 750, 0);
   grd.addColorStop('0', "white");
   grd.addColorStop('1', "goldenrod");
-  ctx.font = "35px Zelda";
+  if (estado == 7) {
+    ctx.font = "50px Zelda";
+  } else {
+    ctx.font = "35px Zelda";
+    // Rectangulo para tapar midline
+    ctx.clearRect(center[0] - 10, center[1] - 40, 20, 60);
+  }
   ctx.fillStyle = grd;
   ctx.textAlign = "center";
   // Centro el texto en la mitad
@@ -544,6 +543,9 @@ function game_info(phrase) {
     init();
     ctx.clearRect(center[0], center[1] + 40, 20, 60);
     ctx.fillText('Press the spacebar to start', center[0], center[1] + 40);
+  } else if (estado == 7) {
+    ctx.font = "35px Zelda";
+    ctx.fillText('Press the spacebar to return to the main menu', center[0], center[1] + 40);
   }
 
 }
@@ -552,7 +554,8 @@ function end_screen() {
   end.src = 'end_screen.jpg'
   ctx.drawImage(end, 0, 0, canvas.width, canvas.height);
   blink_navi('triforce');
-
+  phrase = 'The end';
+  game_info(phrase);
 }
 
 function draw() {
