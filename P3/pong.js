@@ -10,13 +10,20 @@ var estado = 0;
 // Estado 3 --> game Over
 // Estado 4 --> win
 // Estado 5 --> nuevo nivel
+// Estado 6 --> ultimo nivel
+// Estado 7 --> final
 
-// creo un array con las teclas que pulso
-var code = [];
 var center = [canvas.width / 2, canvas.height / 2];
 var score1 = 0;
 var score2 = 0;
 var counter = 2;
+// Data
+var mode = "";
+var level = 0;
+var x_move = 0;
+var level_speed = 7;
+
+// Images
 var link = new Image;
 var ganon = new Image;
 var hearts = new Image;
@@ -26,19 +33,20 @@ var navi = new Image;
 var ocarina = new Image;
 var end = new Image;
 var triforce = new Image;
+navi.src = 'navi.png';
+
+// Images animation
 var active = false;
 var active2 = false;
 var select = 0;
-var rotate_i = 0;
 var on = true;
-var level = 0;
-var x_move = 0;
-var level_speed = 7;
-var grd = ctx.createLinearGradient(0, 0, 750, 0);
-grd.addColorStop('0', "white");
-grd.addColorStop('1', "goldenrod");
-navi.src = 'navi.png';
 
+// Color grad
+var grd = ctx.createLinearGradient(0, 0, 750, 0);
+  grd.addColorStop('0', "white");
+  grd.addColorStop('1', "goldenrod");
+
+//Player and multiplayer buttons
 var rect = {
   x: center[0],
   y: center[1] + 50,
@@ -52,7 +60,7 @@ var rect2 = {
   width: 200,
   height: 50
 };
-var mode = "";
+
 
 //Function to get the mouse position
 function getMousePos(canvas, event) {
@@ -96,6 +104,7 @@ function delete_menu(old_color, object) {
   }
 }
 
+// Animate the images inside the canvas
 function blink_navi(image) {
   if (on) {
     if (image == 'ocarina') {
@@ -136,10 +145,8 @@ function blink_navi(image) {
 
 }
 
+// Draw init screen with a var
 var inicio = {
-  init: function(ctx) {
-    this.ctx = ctx
-  },
   draw: function() {
     paper.src = 'paper2.png';
     // Fondo
@@ -188,6 +195,7 @@ var inicio = {
         player2.gravity = 10;
       }
     }, false);
+    // Mode selected
     if (mode != "") {
       phrase = "Press the spacebar to start"
       game_info(phrase);
@@ -218,50 +226,54 @@ document.addEventListener('keydown', function(ev) {
   ev.preventDefault();
 });
 
-// Cuando una tecla deja de ser pulsada se elimina del array
+// Stop the speed of the ball
 document.addEventListener('keyup', function(ev) {
   if (38 == ev.keyCode || 40 == ev.keyCode) {
     x_move = 0;
   }
 });
 
+// Moving objects
+function moving(player, direction) {
+  if (direction == 'up') {
+    if (player.y - player.gravity > 0) { // Para que no salga del cuadro
+      player.y -= player.gravity; // la parte de arriba es (0,0)
+    }
+  } else if (direction == 'down') {
+    /* Para que no salga del cuadro, la parte de abajo viene dada por
+    la longitud del canvas, le sumo el height de la paleta para que choque
+    con la parte de abajo */
+    if (player.y + player.gravity + player.height < canvas.height) {
+      player.y += player.gravity;
+    }
+  }
+
+  if (player == player1 && mode == 'single') {
+    x_move += 0.3;  // Le añado velocidad
+    if (x_move > 5) { // Limite de velocidad
+      x_move = 5;
+    }
+  }
+
+}
+
 function input() {
   document.onkeydown = function(ev) {
     switch (ev.keyCode) {
       case 38:
-        if (player1.y - player1.gravity > 0) { // Para que no salga del cuadro
-          player1.y -= player1.gravity; // la parte de arriba es (0,0)
-          x_move += 0.3;
-          if (x_move > 5) {
-            x_move = 5;
-          }
-
-        }
+        moving(player1, 'up');
         break;
       case 40:
-        /* Para que no salga del cuadro, la parte de abajo viene dada por
-        la longitud del canvas, le sumo el height de la paleta para que choque
-        con la parte de abajo */
-        if (player1.y + player1.gravity + player2.height < canvas.height) {
-          player1.y += player1.gravity;
-          x_move += 0.3;
-          if (x_move > 5) {
-            x_move = 5;
-          }
-        }
+        moving(player1, 'down');
         break;
     }
     if (mode == "multi") {
       switch (ev.keyCode) {
         case 87:
-          if (player2.y - player2.gravity > 0) { // Para que no salga del cuadro
-            player2.y -= player2.gravity; // la parte de arriba es (0,0)
-          }
+          moving(player2, 'up');
           break;
         case 83:
-          if (player2.y + player2.gravity + player1.height < canvas.height) {
-            player2.y += player2.gravity;
-          }
+          moving(player2, 'down');
           break;
       }
 
@@ -272,13 +284,9 @@ function input() {
 function auto_p2() {
   // Movimiento autónomo del jugador 2
   if (ball.y < player2.y) {
-    if (player2.y - player2.gravity > 0) {
-      player2.y -= player2.gravity;
-    }
+    moving(player2, 'up');
   } else {
-    if (player2.y + player2.height + player2.gravity < canvas.height) {
-      player2.y += player2.gravity;
-    }
+    moving(player2, 'down');
   }
 }
 
@@ -385,17 +393,18 @@ function ball_mov() {
 
   // Fin del juego
 
-  if (score1 == 3) {
+  if (score1 > 2) {
     if (mode == 'single') {
       level_speed = 10;
-      ball.speed = level_speed;
+      // Inicio con menos velocidad
+      ball.speed = 7;
       player2.gravity = 3;
       player1.gravity = 11;
       level += 1;
       estado = 5;
       if (level == 2) {
         level_speed = 12;
-        ball.speed = level_speed;
+        ball.speed = 7;
         player2.gravity = 3;
         player1.gravity = 13;
         estado = 6;
@@ -417,19 +426,35 @@ function ball_mov() {
 
     ball.x = (canvas.width / 2 - 6);
     ball.y = (canvas.height / 2);
+    // Check the ball direction and change it
+    var sign = (Math.sign(ball.speed) == 1) ? -1:1;
     ball.speed = 0;
     ball.gravity = 0;
 
     setTimeout(function() {
-      if (level == 1) {
-        ball.speed = 9;
-      } else if (level == 2) {
-        ball.speed = 10;
-      } else {
-        ball.speed = 7;
-      }
+      ball.speed = 7*sign;
     }, 2000);
 
+  }
+}
+
+function change_hearts(score, object) {
+  if (object == heartp2) {
+    var a = 25
+    var b = 60
+  } else {
+    var a = 0
+    var b = 0;
+  }
+  if (score == 0) {
+    hearts.src = 'hearts.png';
+    ctx.drawImage(hearts, object.x, object.y, object.width, object.height);
+  } else if (score == 1) {
+    hearts.src = 'heart2.png';
+    ctx.drawImage(hearts, object.x + a, object.y, object.width, object.height);
+  } else if (score == 2) {
+    hearts.src = 'heart3.png';
+    ctx.drawImage(hearts, object.x + b, object.y, object.width, object.height);
   }
 }
 
@@ -484,28 +509,10 @@ function draw_object(object) {
     ctx.drawImage(link, object.x - 25, object.y, 70, object.height);
 
   } else if (object == heartp1) {
-    if (score2 == 0) {
-      hearts.src = 'hearts.png';
-      ctx.drawImage(hearts, object.x, object.y, object.width, object.height);
-    } else if (score2 == 1) {
-      hearts.src = 'heart2.png';
-      ctx.drawImage(hearts, object.x, object.y, object.width, object.height);
-    } else if (score2 == 2) {
-      hearts.src = 'heart3.png';
-      ctx.drawImage(hearts, object.x, object.y, object.width, object.height);
-    }
+    change_hearts(score2, heartp1);
 
   } else if (object == heartp2) {
-    if (score1 == 0) {
-      hearts.src = 'hearts.png';
-      ctx.drawImage(hearts, object.x, object.y, object.width, object.height);
-    } else if (score1 == 1) {
-      hearts.src = 'heart2.png';
-      ctx.drawImage(hearts, object.x + 25, object.y, object.width, object.height);
-    } else if (score1 == 2) {
-      hearts.src = 'heart3.png';
-      ctx.drawImage(hearts, object.x + 60, object.y, object.width, object.height);
-    }
+    change_hearts(score1, heartp2);
 
   } else if (object == ball) {
     rupe.src = 'rupe.png';
@@ -568,7 +575,6 @@ function draw() {
   draw_object(heartp2);
 
   if (estado == 0) {
-    inicio.init(ctx);
     inicio.draw();
   }
   if (estado == 1 || estado == 2) { // running
@@ -613,7 +619,6 @@ function resetPlayers() {
 function init() {
   score1 = 0;
   score2 = 0;
-  code = [];
   ball.x = center[0];
   ball.y = center[1];
   resetPlayers();
@@ -656,19 +661,14 @@ function main() {
     }
 
   } else if (estado == 2) {
-
     countdown();
-
     setTimeout(function() {
       estado = 1;
     }, 2000);
 
   }
   // Call drawScene again in the next browser repaint
-  var fps = 100;
-  setTimeout(function() {
     window.requestAnimationFrame(main);
-  }, 1000 / fps);
 
 }
 
