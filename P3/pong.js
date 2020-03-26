@@ -46,6 +46,13 @@ var grd = ctx.createLinearGradient(0, 0, 750, 0);
   grd.addColorStop('0', "white");
   grd.addColorStop('1', "goldenrod");
 
+// Sounds
+const sound_link = new Audio("link.wav");
+const sound_ghir = new Audio("Ghir.wav");
+const sound_rupe = new Audio('rupe.wav');
+const sound_ganon = new Audio("ganon.wav");
+const sound_cucco = new Audio("cucco.wav");
+
 //Player and multiplayer buttons
 var rect = {
   x: center[0],
@@ -340,6 +347,7 @@ function ball_mov() {
     // Movimiento de la pelota
     ball.y += ball.gravity;
     ball.x += ball.speed
+    play_sound(sound_rupe);
   } else {
     // En el caso de que no choque
     ball.x += ball.speed;
@@ -458,38 +466,32 @@ function change_hearts(score, object) {
   }
 }
 
+function play_sound(sound){
+  sound.currentTime = 0;
+  sound.play();
+}
+
+function hit_ball(active, static, sound){
+  if (active2) {
+    ganon.src = active;
+    play_sound(sound);
+    setTimeout(function() {
+      active2 = false;
+    }, 200);
+
+  } else {
+    ganon.src = static;
+  }
+}
+
 function draw_object(object) {
   if (object == player2) {
     if (level == 0) {
-      if (active2) {
-        ganon.src = 'ganonpixel.png';
-        setTimeout(function() {
-          active2 = false;
-        }, 200);
-
-      } else {
-        ganon.src = 'ganonpixel1.png';
-      }
+      hit_ball('ganonpixel.png','ganonpixel1.png',sound_ganon);
     } else if (level == 1) {
-      if (active2) {
-        ganon.src = 'ghir1.png';
-        setTimeout(function() {
-          active2 = false;
-        }, 200);
-
-      } else {
-        ganon.src = 'ghir.png';
-      }
+      hit_ball('ghir1.png','ghir.png',sound_ghir);
     } else if (level == 2) {
-        if (active2) {
-          ganon.src = 'cucco1.png';
-          setTimeout(function() {
-            active2 = false;
-          }, 200);
-
-        } else {
-          ganon.src = 'cucco.png';
-        }
+      hit_ball('cucco1.png','cucco.png',sound_cucco);
     }
 
     ctx.drawImage(ganon, object.x - 50, object.y, 80, object.height);
@@ -498,6 +500,7 @@ function draw_object(object) {
   if (object == player1) {
     if (active) {
       link.src = 'active.png';
+      play_sound(sound_link);
       setTimeout(function() {
         active = false;
       }, 200);
@@ -505,7 +508,6 @@ function draw_object(object) {
     } else {
       link.src = 'static.png';
     }
-
     ctx.drawImage(link, object.x - 25, object.y, 70, object.height);
 
   } else if (object == heartp1) {
