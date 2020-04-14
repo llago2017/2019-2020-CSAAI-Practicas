@@ -13,10 +13,10 @@ for (var i = 0; i < videos.length; i++) {
   videos[i].width = 265;
 }
 
-video0.height = 395;
+video0.height = 338;
 video0.width = 600;
 
-video0.poster = "https://github.com/myTeachingURJC/2019-2020-CSAAI/raw/master/L10/test.png"
+video0.poster = "https://i.pinimg.com/originals/ab/72/2d/ab722da9c57971c4b5ce9e98511ec58d.png"
 video1.src = "https://gsyc.urjc.es/jmplaza/csaai/realizador-fuente1.mp4"
 video2.src = "https://gsyc.urjc.es/jmplaza/csaai/realizador-fuente2.mp4"
 video3.src = "https://gsyc.urjc.es/jmplaza/csaai/realizador-fuente3.mp4"
@@ -25,29 +25,30 @@ video3.src = "https://gsyc.urjc.es/jmplaza/csaai/realizador-fuente3.mp4"
 //-- Obtener los botones
 const vid1 = document.getElementById("sel1")
 const vid2 = document.getElementById("sel2")
+const vid3 = document.getElementById("sel3")
+
+function selectvideo(vid) {
+  video0.src = vid.src;
+  video0.currentTime = vid.currentTime + 0.5;
+  video0.load();
+}
 
 
 function main() {
   //-- Función de retrollamada del botón de ver
   vid1.onclick = () => {
     console.log("Click!");
-    console.log(video1.currentTime);
-    video0.src = video1.src;
-    video0.currentTime = video1.currentTime;
-    video0.load();
+    selectvideo(video1);
   };
 
   //-- Funcion de retrollamada del boton de parar
   vid2.onclick = () => {
     console.log('Video 2 seleccionado');
-
-    video0.src = video2.src;
-    video0.currentTime = video2.currentTime;
-    video0.load();
-    //video1.pause();
-
-    //-- Quitar la fuente de video, para que se muestre la
-    //-- imagen definida en el atributo poster
-    //video1.src=null;
+    selectvideo(video2);
   }
+
+  vid3.onclick = () => {
+    console.log("Click!");
+    selectvideo(video3);
+  };
 }
