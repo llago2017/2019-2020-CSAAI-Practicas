@@ -31,6 +31,7 @@ const vid2 = document.getElementById("sel2")
 const vid3 = document.getElementById("sel3")
 const vid4 = document.getElementById("sel4")
 const loop = document.getElementById("loop")
+const auto = document.getElementById("auto")
 
 //Booleans
 var modeloop = false;
@@ -84,6 +85,20 @@ function main() {
       clearInterval(interval);
       modeloop = false
     }
+  }
 
+  auto.onclick = () => {
+    interval = setInterval(function() {
+      actualsource = video0.src;
+      sources = [video1.src, video2.src, video3.src] // Busco la fuente actual
+      index = sources.indexOf(actualsource);
+      next_src = index + 1
+      // defino el maximo de opciones
+      if (next_src == 3) {
+        next_src = 0;
+      }
+      video = [video1, video2, video3] // Elijo el video según la iteracion
+      selectvideo(video[next_src])
+    }, 3000);
   }
 }
