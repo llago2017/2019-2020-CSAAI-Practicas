@@ -52,6 +52,16 @@ function selectvideo(vid) {
   }
 }
 
+function active_button(active, button) {
+  if (active == 1) {
+  button.style.background = '#555555';
+  button.style.color = 'white';
+  }
+  else if (active == 0) {
+    button.style.background = 'white';
+    button.style.color = '#555555';
+  }
+}
 
 function main() {
   //-- Función de retrollamada del botón de ver
@@ -90,9 +100,11 @@ function main() {
       opcion = !modeloop;
       startloop = video0.currentTime;
       if (opcion) {
+        active_button(1,loop);
         interval = setInterval(function(){ video0.currentTime = startloop; }, 2000);
         modeloop = true;
       } else if (!opcion) {
+        active_button(0, loop);
         clearInterval(interval);
         modeloop = false
       }
@@ -103,6 +115,7 @@ function main() {
   auto.onclick = () => {
     selected = !modeauto
     if (selected) {
+      active_button(1, auto)
       interval_auto = setInterval(function() {
         actualsource = video0.src;
         sources = [video1.src, video2.src, video3.src] // Busco la fuente actual
@@ -117,6 +130,7 @@ function main() {
       }, 3000);
       modeauto = true;
     } else if (!selected) {
+      active_button(0, auto);
       clearInterval(interval_auto);
       modeauto = false
     }
