@@ -35,6 +35,7 @@ const auto = document.getElementById("auto")
 
 //Booleans
 var modeloop = false;
+var modeauto = false;
 
 function selectvideo(vid) {
   if (video0.src != null) {
@@ -56,49 +57,69 @@ function main() {
   //-- Función de retrollamada del botón de ver
   vid1.onclick = () => {
     console.log("Click!");
-    selectvideo(video1);
+    if (!modeauto) {
+      selectvideo(video1);
+    }
   };
 
   //-- Funcion de retrollamada del boton de parar
   vid2.onclick = () => {
     console.log('Video 2 seleccionado');
+    if (!modeauto) {
     selectvideo(video2);
+    }
   }
 
   vid3.onclick = () => {
     console.log("Click!");
-    selectvideo(video3);
+    if (!modeauto) {
+      selectvideo(video3);
+    }
   };
 
   vid4.onclick = () => {
     console.log("Click!");
-    selectvideo(video4);
+    if (!modeauto) {
+      selectvideo(video4);
+    }
+
   };
 
   loop.onclick = () => {
-  opcion = !modeloop;
-  startloop = video0.currentTime;
-    if (opcion) {
-      interval = setInterval(function(){ video0.currentTime = startloop; }, 2000);
-      modeloop = true;
-    } else if (!opcion) {
-      clearInterval(interval);
-      modeloop = false
+    if (!modeauto) {
+      opcion = !modeloop;
+      startloop = video0.currentTime;
+      if (opcion) {
+        interval = setInterval(function(){ video0.currentTime = startloop; }, 2000);
+        modeloop = true;
+      } else if (!opcion) {
+        clearInterval(interval);
+        modeloop = false
+      }
     }
+
   }
 
   auto.onclick = () => {
-    interval = setInterval(function() {
-      actualsource = video0.src;
-      sources = [video1.src, video2.src, video3.src] // Busco la fuente actual
-      index = sources.indexOf(actualsource);
-      next_src = index + 1
-      // defino el maximo de opciones
-      if (next_src == 3) {
-        next_src = 0;
-      }
-      video = [video1, video2, video3] // Elijo el video según la iteracion
-      selectvideo(video[next_src])
-    }, 3000);
+    selected = !modeauto
+    if (selected) {
+      interval_auto = setInterval(function() {
+        actualsource = video0.src;
+        sources = [video1.src, video2.src, video3.src] // Busco la fuente actual
+        index = sources.indexOf(actualsource);
+        next_src = index + 1
+        // defino el maximo de opciones
+        if (next_src == 3) {
+          next_src = 0;
+        }
+        video = [video1, video2, video3] // Elijo el video según la iteracion
+        selectvideo(video[next_src])
+      }, 3000);
+      modeauto = true;
+    } else if (!selected) {
+      clearInterval(interval_auto);
+      modeauto = false
+    }
+
   }
 }
