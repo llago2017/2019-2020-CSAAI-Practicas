@@ -8,6 +8,7 @@ const video3 = document.getElementById("video3")
 const video4 = document.getElementById("video4")
 
 let videos = document.getElementsByClassName("video")
+const poster = "https://i.pinimg.com/originals/ab/72/2d/ab722da9c57971c4b5ce9e98511ec58d.png"
 
 for (var i = 0; i < videos.length; i++) {
   videos[i].height = 150;
@@ -17,6 +18,7 @@ for (var i = 0; i < videos.length; i++) {
 video0.height = 338;
 video0.width = 600;
 
+video0.poster = poster;
 video1.src = "https://gsyc.urjc.es/jmplaza/csaai/realizador-fuente1.mp4"
 video2.src = "https://gsyc.urjc.es/jmplaza/csaai/realizador-fuente2.mp4"
 video3.src = "https://gsyc.urjc.es/jmplaza/csaai/realizador-fuente3.mp4"
@@ -28,12 +30,16 @@ const vid1 = document.getElementById("sel1")
 const vid2 = document.getElementById("sel2")
 const vid3 = document.getElementById("sel3")
 const vid4 = document.getElementById("sel4")
+const loop = document.getElementById("loop")
+
+//Booleans
+var modeloop = false;
 
 function selectvideo(vid) {
   if (video0.src != null) {
     video0.poster = "https://i.pinimg.com/originals/ab/72/2d/ab722da9c57971c4b5ce9e98511ec58d.png"
   }
-  
+
   if (vid == video4) {
     video0.src = null;
     video0.poster = vid.poster
@@ -67,4 +73,17 @@ function main() {
     console.log("Click!");
     selectvideo(video4);
   };
+
+  loop.onclick = () => {
+  opcion = !modeloop;
+  startloop = video0.currentTime;
+    if (opcion) {
+      interval = setInterval(function(){ video0.currentTime = startloop; }, 2000);
+      modeloop = true;
+    } else if (!opcion) {
+      clearInterval(interval);
+      modeloop = false
+    }
+
+  }
 }
