@@ -7,6 +7,7 @@ const ctx = canvas.getContext('2d');
 const colores = document.getElementById('colores')
 const gris = document.getElementById('gris')
 const especular = document.getElementById('especular')
+const vertical = document.getElementById('vertical')
 
 //-- Acceso al deslizador
 const deslizador_R = document.getElementById('deslizador_R');
@@ -97,11 +98,15 @@ function grey_scale() {
     ctx.putImageData(imgData, 0, 0);
 }
 
-function drawRotated(){
-  ctx.translate(img.width, 0);
-  ctx.scale(-1, 1);
+function drawRotated(select){
+  if (select == "horizontal") {
+    mode = [img.width,0,-1,1]
+  } else {
+    mode = [0,img.height, 1, -1]
+  }
+  ctx.translate(mode[0], mode[1]);
+  ctx.scale(mode[2], mode[3]);
   ctx.drawImage(img, 0, 0);
-  ctx.putImageData(imgData, 0, 0);
 }
 
 function main() {
@@ -125,7 +130,11 @@ function main() {
   }
 
   especular.onclick = () => {
-    drawRotated();
+    drawRotated("horizontal");
+  }
+
+  vertical.onclick = () => {
+    drawRotated('vertical');
   }
 }
 
