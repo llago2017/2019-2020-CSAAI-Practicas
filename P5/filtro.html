@@ -7,23 +7,27 @@
     <script src="filtro-1.js" defer></script>
   </head>
   <body onload="main()">
-    <div id="images">
-      <div id="original">
+    <div class="center">
+      <div class="imagenes">
         <p>Imagen original</p>
         <img src="logo.jpg" id="imagesrc">
       </div>
 
-      <div id="edit">
+      <div class="imagenes">
         <p>Imagen manipulada</p>
         <canvas id="canvas"></canvas>
       </div>
     </div>
 
-    <button class="mode" id="gris"> Grises </button>
-    <button class="mode" id="colores"> Colores </button>
+    <div class="buttons">
+      <button class="mode" id="gris"> Grises </button>
+      <button class="mode" id="colores"> Colores </button>
+      <button id="especular">Especular</button>
+    </div>
+
     <div id="deslizadores">
       <p>Establece el umbral de rojo:</p>
-      <input type="range" id="deslizador_R" min="0" max="255" value="255"/>
+      <input type="range" id="deslizador_R" class= "slider" min="0" max="255" value="255"/>
       <p id="range_R">00</p>
       <p>Establece el umbral de verde:</p>
       <input type="range" id="deslizador_G" min="0" max="255" value="255"/>
