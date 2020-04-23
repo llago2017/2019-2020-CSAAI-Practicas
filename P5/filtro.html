@@ -7,18 +7,31 @@
     <script src="filtro-1.js" defer></script>
   </head>
   <body onload="main()">
-    <p>Imagen original</p>
-    <img src="logo.jpg" id="imagesrc">
-    <p>Imagen manipulada</p>
-    <p>Establece el umbral de rojo:</p>
-    <input type="range" id="deslizador_R" min="0" max="255" value="255"/>
-    <p id="range_R">00</p>
-    <p>Establece el umbral de verde:</p>
-    <input type="range" id="deslizador_G" min="0" max="255" value="255"/>
-    <p id="range_G">00</p>
-    <p>Establece el umbral de azul:</p>
-    <input type="range" id="deslizador_B" min="0" max="255" value="255"/>
-    <p id="range_B">00</p>
-    <canvas id="canvas"></canvas>
+    <div id="images">
+      <div id="original">
+        <p>Imagen original</p>
+        <img src="logo.jpg" id="imagesrc">
+      </div>
+
+      <div id="edit">
+        <p>Imagen manipulada</p>
+        <canvas id="canvas"></canvas>
+      </div>
+    </div>
+
+    <button class="mode" id="gris"> Grises </button>
+    <button class="mode" id="colores"> Colores </button>
+    <div id="deslizadores">
+      <p>Establece el umbral de rojo:</p>
+      <input type="range" id="deslizador_R" min="0" max="255" value="255"/>
+      <p id="range_R">00</p>
+      <p>Establece el umbral de verde:</p>
+      <input type="range" id="deslizador_G" min="0" max="255" value="255"/>
+      <p id="range_G">00</p>
+      <p>Establece el umbral de azul:</p>
+      <input type="range" id="deslizador_B" min="0" max="255" value="255"/>
+      <p id="range_B">00</p>
+    </div>
+
   </body>
 </html>

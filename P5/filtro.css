@@ -1,3 +1,22 @@
+* {
+  box-sizing: border-box;
+}
+
 body {
   background-color: grey;
+}
+#images {
+  width: auto;
+  height: 250px;
+}
+#original{
+  float: left;
+}
+
+#edit{
+  float: right;
+}
+
+#deslizadores{
+  display: none;
 }

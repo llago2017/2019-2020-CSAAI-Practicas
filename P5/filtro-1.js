@@ -4,11 +4,14 @@ console.log("Ejecutando JS....")
 const canvas = document.getElementById('canvas');
 const img = document.getElementById('imagesrc');
 const ctx = canvas.getContext('2d');
+const colores = document.getElementById('colores')
+const gris = document.getElementById('gris')
 
 //-- Acceso al deslizador
 const deslizador_R = document.getElementById('deslizador_R');
 const deslizador_G = document.getElementById('deslizador_G');
 const deslizador_B = document.getElementById('deslizador_B');
+const deslizadores = document.getElementById("deslizadores");
 
 //-- Valor del deslizador
 const range_R= document.getElementById('range_R');
@@ -75,7 +78,34 @@ function modify_color() {
     ctx.putImageData(imgData, 0, 0);
 }
 
+function grey_scale() {
+  ctx.drawImage(img, 0,0);
+    var imgData = ctx.getImageData(0, 0, canvas.width, canvas.height);
+    var data = imgData.data
+
+    for (var i = 0; i < data.length; i+=4) {
+        var r = data[i];
+        var g = data[i+1];
+        var b = data[i+2];
+        var brillo = (3*r + 4*g + 1*b)/8
+
+        data[i] = brillo;
+        data[i+1] = brillo;
+        data[i+2] = brillo;
+    }
+    ctx.putImageData(imgData, 0, 0);
+}
+
+
 function main() {
+  colores.onclick = () => {
+    console.log('click');
+    deslizadores.style.display = 'block'
+  }
+  gris.onclick = () => {
+    deslizadores.style.display = 'none'
+    grey_scale();
+  }
 
   deslizador_R.oninput = () => {
       modify_color();
