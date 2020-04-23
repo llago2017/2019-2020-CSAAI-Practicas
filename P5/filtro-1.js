@@ -2,12 +2,15 @@ console.log("Ejecutando JS....")
 
 //-- Obtener elementos del DOM
 const canvas = document.getElementById('canvas');
-const img = document.getElementById('imagesrc');
+let imgs =  document.getElementsByClassName('images');
 const ctx = canvas.getContext('2d');
+
+// Botones
 const colores = document.getElementById('colores')
 const gris = document.getElementById('gris')
 const especular = document.getElementById('especular')
 const vertical = document.getElementById('vertical')
+const noise_button = document.getElementById('noise')
 
 //-- Acceso al deslizador
 const deslizador_R = document.getElementById('deslizador_R');
@@ -20,26 +23,20 @@ const range_R= document.getElementById('range_R');
 const range_G= document.getElementById('range_G');
 const range_B= document.getElementById('range_B');
 
-//-- Variables
-var change = false;
+var img = [];
 
-//-- Función de retrollamada de imagen cargada
-//-- La imagen no se carga instantaneamente, sino que
-//-- lleva un tiempo. Sólo podemos acceder a ella una vez
-//-- que esté totalmente cargada
-img.onload = function () {
-
-  //-- Se establece como tamaño del canvas el mismo
-  //-- que el de la imagen original
-  canvas.width = img.width;
-  canvas.height = img.height;
-
-  //-- Situar la imagen original en el canvas
-  //-- No se han hecho manipulaciones todavia
-  ctx.drawImage(img, 0,0);
-
-  console.log("Imagen lista...");
-};
+  for (var i = 0; i < imgs.length; i++) {
+    imgs[i].onclick = (ev) => {
+      console.log(ev.target);
+      img = ev.target;
+      canvas.width = img.width;
+      canvas.height = img.height;
+      ctx.drawImage(img, 0,0);
+      console.log('click')
+      img.style.border = '2px solid grey'
+    }
+    console.log("Imagen lista...");
+  }
 
 function modify_color() {
 
@@ -98,6 +95,23 @@ function grey_scale() {
     ctx.putImageData(imgData, 0, 0);
 }
 
+
+function noise() {
+  var imgData = ctx.getImageData(0, 0, canvas.width, canvas.height);
+  var data = imgData.data
+    for (var i = 0, n = data.length; i < n; i += 4) {
+       // Genero 3 tipos de colores aleatorios delimitados (para r g y b)
+       var randColor1 = 0.6 + Math.random() * 0.4;
+       var randColor2 = 0.6 + Math.random() * 0.4;
+       var randColor3 = 0.6 + Math.random() * 0.4;
+        // añado los colores a los datos
+        data[i] = data[i]*randColor1; // Rojo
+        data[i+1] = data[i+1]*randColor2; // Verde
+        data[i+2] = data[i+2]*randColor3; // Azul
+    }
+    ctx.putImageData(imgData, 0, 0);
+}
+
 function drawRotated(select){
   if (select == "horizontal") {
     mode = [img.width,0,-1,1]
@@ -135,6 +149,10 @@ function main() {
 
   vertical.onclick = () => {
     drawRotated('vertical');
+  }
+
+  noise_button.onclick = () => {
+    noise();
   }
 }
 
