@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="es" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>Filtro</title>
+    <link rel="stylesheet" href="filtro.css">
+    <script src="filtro-1.js" defer></script>
+  </head>
+  <body onload="main()">
+    <p>Imagen original</p>
+    <img src="logo.jpg" id="imagesrc">
+    <p>Imagen manipulada</p>
+    <p>Establece el umbral de rojo:</p>
+    <input type="range" id="deslizador_R" min="0" max="255" value="255"/>
+    <p id="range_R">00</p>
+    <p>Establece el umbral de verde:</p>
+    <input type="range" id="deslizador_G" min="0" max="255" value="255"/>
+    <p id="range_G">00</p>
+    <p>Establece el umbral de azul:</p>
+    <input type="range" id="deslizador_B" min="0" max="255" value="255"/>
+    <p id="range_B">00</p>
+    <canvas id="canvas"></canvas>
+  </body>
+</html>
