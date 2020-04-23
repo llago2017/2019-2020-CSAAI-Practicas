@@ -29,11 +29,17 @@ var img = [];
     imgs[i].onclick = (ev) => {
       console.log(ev.target);
       img = ev.target;
+      img.style.border = '0px'
       canvas.width = img.width;
       canvas.height = img.height;
       ctx.drawImage(img, 0,0);
       console.log('click')
-      img.style.border = '2px solid grey'
+      // Quito el borde de la imagen no seleccionada
+      if (imgs[0].style.border = '4px solid grey') {
+        imgs[0].style.border = '0px solid grey'
+        imgs[1].style.border = '0px solid grey'
+      }
+      img.style.border = '4px solid grey'
     }
     console.log("Imagen lista...");
   }
