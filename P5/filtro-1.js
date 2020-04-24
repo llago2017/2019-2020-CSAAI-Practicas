@@ -11,6 +11,7 @@ const gris = document.getElementById('gris')
 const especular = document.getElementById('especular')
 const vertical = document.getElementById('vertical')
 const noise_button = document.getElementById('noise')
+const invert = document.getElementById('invert')
 
 //-- Acceso al deslizador
 const deslizador_R = document.getElementById('deslizador_R');
@@ -118,6 +119,17 @@ function noise() {
     ctx.putImageData(imgData, 0, 0);
 }
 
+function invert_color() {
+  var imgData = ctx.getImageData(0, 0, canvas.width, canvas.height);
+  var data = imgData.data
+    for (var i = 0, n = data.length; i < n; i += 4) {
+        data[i] = 255 - data[i]
+        data[i+1] = 255 - data[i+1]
+        data[i+2] = 255 - data[i+2]
+    }
+    ctx.putImageData(imgData, 0, 0);
+}
+
 function drawRotated(select){
   if (select == "horizontal") {
     mode = [img.width,0,-1,1]
@@ -159,6 +171,10 @@ function main() {
 
   noise_button.onclick = () => {
     noise();
+  }
+
+  invert.onclick = () => {
+    invert_color();
   }
 }
 
