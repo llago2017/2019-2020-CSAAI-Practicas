@@ -7,18 +7,6 @@
     <script src="filtro-1.js" defer></script>
   </head>
   <body onload="main()">
-    <div class="center">
-      <div class="imagenes">
-        <p>Imagen original</p>
-        <img src="logo.jpg" id="imagesrc" class="images">
-        <img src="img2.jpg" class="images">
-      </div>
-
-      <div class="imagenes">
-        <p>Imagen manipulada</p>
-        <canvas id="canvas"></canvas>
-      </div>
-    </div>
 
     <div class="buttons">
       <button class="mode" id="gris"> Grises </button>
@@ -29,15 +17,34 @@
     </div>
 
     <div id="deslizadores">
-      <p>Establece el umbral de rojo:</p>
-      <input type="range" id="deslizador_R" class= "slider" min="0" max="255" value="255"/>
-      <p id="range_R">00</p>
-      <p>Establece el umbral de verde:</p>
-      <input type="range" id="deslizador_G" min="0" max="255" value="255"/>
-      <p id="range_G">00</p>
-      <p>Establece el umbral de azul:</p>
-      <input type="range" id="deslizador_B" min="0" max="255" value="255"/>
-      <p id="range_B">00</p>
+      <div class="des">
+        <label for="deslizador_R">Red &nbsp; &nbsp;</label>
+        <input name="deslizador_R" type="range" id="deslizador_R" min="0" max="255" value="255"/> <span id="range_R">0</span>
+      </div>
+
+      <div class="des">
+        <label for="deslizador_G">Green</label>
+        <input name="deslizador_G" type="range" id="deslizador_G" min="0" max="255" value="255"/>
+        <span id="range_G">0</span>
+      </div>
+
+      <div class="des">
+        <label for="deslizador_B">Blue &nbsp;</label>
+        <input name="deslizador_B" type="range" id="deslizador_B" min="0" max="255" value="255"/>
+        <span id="range_B">0</span>
+      </div>
+    </div>
+
+    <div class="center">
+      <div class="imagenes">
+        <p>Imagen manipulada</p>
+        <canvas id="canvas"></canvas>
+      </div>
+
+      <div class="imagenes" id="original">
+        <img src="logo.jpg" id="imagesrc" class="images">
+        <img src="img2.jpg" class="images">
+      </div>
     </div>
 
   </body>
