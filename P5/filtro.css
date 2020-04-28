@@ -4,6 +4,13 @@
 
 body {
   background-color: #151515;
+  font-family: 'Roboto';
+}
+p {
+  background: -webkit-linear-gradient(white, lightgrey);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  font-size: 25px;
 }
 
 .imagenes{
@@ -16,6 +23,8 @@ margin: 50px;
 
 #original{
   background-color: #212121;
+  text-align: left;
+  margin-left: 150px;
 }
 
 .center{
@@ -69,8 +78,8 @@ button:hover {
 .buttons{
   float: left;
   width: 150px;
-  height: 375px;
-  background-color: #2c2c2c
+  background-color: #2c2c2c;
+  margin-top: 50px;
 }
 
 #deslizador_R, #deslizador_G, #deslizador_B{

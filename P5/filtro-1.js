@@ -4,14 +4,7 @@ console.log("Ejecutando JS....")
 const canvas = document.getElementById('canvas');
 let imgs =  document.getElementsByClassName('images');
 const ctx = canvas.getContext('2d');
-
-// Botones
-const colores = document.getElementById('colores')
-const gris = document.getElementById('gris')
-const especular = document.getElementById('especular')
-const vertical = document.getElementById('vertical')
-const noise_button = document.getElementById('noise')
-const invert = document.getElementById('invert')
+let modes = document.getElementsByClassName('modes');
 
 //-- Acceso al deslizador
 const deslizador_R = document.getElementById('deslizador_R');
@@ -142,13 +135,31 @@ function drawRotated(select){
 }
 
 function main() {
-  colores.onclick = () => {
-    console.log('click');
-    deslizadores.style.display = 'block'
-  }
-  gris.onclick = () => {
-    deslizadores.style.display = 'none'
-    grey_scale();
+
+  for (var i = 0; i < modes.length; i++) {
+    modes[i].onclick  = (ev) => {
+      console.log(ev.target);
+      option = ev.target.innerHTML;
+      if (option == 'Grises') {
+        deslizadores.style.display = 'none'
+        grey_scale();
+      }
+      if (option == 'Colores') {
+        deslizadores.style.display = 'block'
+      }
+      if (option == 'Especular') {
+        drawRotated("horizontal");
+      }
+      if (option == 'Vertical') {
+        drawRotated('vertical');
+      }
+      if (option == 'Ruido') {
+        noise();
+      }
+      if (option == 'Invertir') {
+        invert_color();
+      }
+    }
   }
 
   deslizador_R.oninput = () => {
@@ -161,21 +172,7 @@ function main() {
     modify_color();
   }
 
-  especular.onclick = () => {
-    drawRotated("horizontal");
-  }
 
-  vertical.onclick = () => {
-    drawRotated('vertical');
-  }
-
-  noise_button.onclick = () => {
-    noise();
-  }
-
-  invert.onclick = () => {
-    invert_color();
-  }
 }
 
 console.log("Fin...");
