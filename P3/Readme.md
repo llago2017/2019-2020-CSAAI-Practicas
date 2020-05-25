@@ -5,3 +5,4 @@ Mejoras:
 - Introducción de sonidos.
 - Niveles de dificultal al ir completando pantallas.
 - Añadidas skin para cada nivel.
+- Cronómetro cada vez que se marca un punto
